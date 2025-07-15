@@ -1,9 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import './App.css';
 
 // 各セクションコンポーネント
@@ -238,60 +233,100 @@ const ContactSection: React.FC = () => {
   );
 };
 
-function App() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+// スワイプ機能の実装
+const SwipeContainer: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStartY, setTouchStartY] = useState(0);
+  const [touchEndY, setTouchEndY] = useState(0);
+
+  const slides = React.Children.toArray(children);
+  const totalSlides = slides.length;
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % totalSlides);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartY(e.targetTouches[0].clientY);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEndY(e.targetTouches[0].clientY);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartY || !touchEndY) return;
+    
+    const distance = touchStartY - touchEndY;
+    const isSignificantSwipe = Math.abs(distance) > 50;
+
+    if (isSignificantSwipe) {
+      if (distance > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    }
+  };
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    
+    if (e.deltaY > 0) {
+      nextSlide();
+    } else {
+      prevSlide();
+    }
+  };
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'ArrowDown') {
+      nextSlide();
+    } else if (e.key === 'ArrowUp') {
+      prevSlide();
+    }
+  };
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   return (
-    <div className="App">
-      <Swiper
-        direction="vertical"
-        slidesPerView={1}
-        spaceBetween={0}
-        mousewheel={{
-          enabled: true,
-          sensitivity: 0.5,
-          releaseOnEdges: true,
-          thresholdDelta: 50,
-          thresholdTime: 300,
+    <div 
+      className="swipe-container"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onWheel={handleWheel}
+    >
+      <div 
+        className="swipe-wrapper"
+        style={{
+          transform: `translateY(-${currentSlide * 100}vh)`,
+          transition: 'transform 0.6s ease'
         }}
-        keyboard={{
-          enabled: true,
-        }}
-        speed={600}
-        modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-        pagination={{
-          clickable: true,
-          renderBullet: function (index: number, className: string) {
-            return `<span class="${className}"></span>`;
-          },
-        }}
-        className="swiper-container"
       >
-        <SwiperSlide>
-          <MainVisualSection />
-        </SwiperSlide>
-        <SwiperSlide>
-          <AboutSection />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CourseSection />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ScheduleSection />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ContactSection />
-        </SwiperSlide>
-      </Swiper>
+        {slides.map((slide, index) => (
+          <div key={index} className="swipe-slide">
+            {slide}
+          </div>
+        ))}
+      </div>
+      
+      <div className="swipe-pagination">
+        {slides.map((_, index) => (
+          <span
+            key={index}
+            className={`swipe-pagination-bullet ${index === currentSlide ? 'active' : ''}`}
+            onClick={() => setCurrentSlide(index)}
+          />
+        ))}
+      </div>
       
       <div className="swipe-guide">
         <div className="swipe-icon">
@@ -299,6 +334,20 @@ function App() {
         </div>
         <p>スワイプで次へ</p>
       </div>
+    </div>
+  );
+};
+
+function App() {
+  return (
+    <div className="App">
+      <SwipeContainer>
+        <MainVisualSection />
+        <AboutSection />
+        <CourseSection />
+        <ScheduleSection />
+        <ContactSection />
+      </SwipeContainer>
     </div>
   );
 }
