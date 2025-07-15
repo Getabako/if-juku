@@ -1,0 +1,13 @@
+{
+  "id": 0,
+  "title": "新しい記事のタイトル",
+  "excerpt": "記事の要約（150文字程度）",
+  "content": "記事の本文をここに記載",
+  "featuredImage": "/2025/02/1.png",
+  "link": "https://if-juku.net/記事のURL",
+  "date": "2025-07-11",
+  "author": "投稿者名",
+  "categories": [
+    "カテゴリ名"
+  ]
+}

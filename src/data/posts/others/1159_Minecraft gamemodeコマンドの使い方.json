@@ -1,0 +1,14 @@
+{
+  "id": 1159,
+  "title": "Minecraft gamemodeコマンドの使い方",
+  "excerpt": "※Minecraftバージョン1.20.1のやり方です。チートの許可がオンである必要がありますMinecraftのgamemodeの使い方を紹介します。\n\nゲームモードコマンドはgamemodeなので「ガメモデ」と覚えましょう！\n\n/gamemodeの構文...",
+  "content": "※Minecraftバージョン1.20.1のやり方です。チートの許可がオンである必要がありますMinecraftのgamemodeの使い方を紹介します。\n\nゲームモードコマンドはgamemodeなので「ガメモデ」と覚えましょう！\n\n/gamemodeの構文 /gamemode　＜ゲームモード＞　ゲームモードの書き方 ・サバイバル　survival ・クリエイティブ　creative ・アドベンチャー　adventure ・スペクテイター　spectator\n\n①自分をクリエイティブからサバイバルにしてみよう！\n\n初めは自分をクリエイティブからサバイバルにしてみましょうコマンド構成は\n\n/gamemode survival @s\n\n早速やってみましょう！\n\n②全てのプレイヤーをサバイバルからクリエイティブにしてみましょう！\n\n次は全てのプレイヤーをサバイバルからクリエイティブにしてみましょうコマンド構成は\n\n/gamemode creative @a\n\nではやってみましょう！\n\n③自分をスペクテイターモードにしてみましょう！\n\n次は自分をスペクテイターモードにしてみましょうコマンド構成は\n\n/gamemode spectator @s\n\nそれではやってみましょう！\n\n④応用編 死亡直後にスペクテイターモードにするコマンド(少し難しい)\n\nミニゲームでよくある死亡直後にスペクテイターモードにするコマンドを説明します。まずはチャット欄に以下を入力し実行してください\n\n/scoreboard objectives add shi deathCount \"死亡検知\"\n\n次にコマンドブロックを以下の様に設置しコマンドを入力しましょう！コマンドブロックの入手方法は\n\n/give @p minecraft:command_block\n\nコマンドブロックの設置方法\n\nコマンドブロックに以下２つを入力してください1つめにリピート、無条件、常時実行 \n\ngamemode spectator @a[scores={shi=1..}]\n\n 2つめにチェーン、条件付き、常時実行\n\nscoreboard players set @a[scores={shi=1..}] shi 0\n\n最後にF3を押しながらF4を押してゲームモードを変えてみよう\n\nF3を押しながらF4を押すとゲームモードを変えれるのでやってみましょう！\n\n自分自身がゲームモードを切り換えるだけであればこの方法が一番簡単です。\n\n今回はこれで終わりです！ありがとうございました！",
+  "featuredImage": "/2023/08/image.png",
+  "link": "https://if-juku.net/2023/08/30/minecraft-gamemode%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%81%ae%e4%bd%bf%e3%81%84%e6%96%b9/",
+  "date": "2023-08-30",
+  "author": "akitaclark0731-01@gmail.com",
+  "categories": [
+    "Minecraft",
+    "Minecraft Java"
+  ]
+}

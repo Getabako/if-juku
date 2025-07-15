@@ -1,0 +1,13 @@
+{
+  "id": 954,
+  "title": "Minecraftで強力な雪玉爆弾を作ろう！",
+  "excerpt": "MinecraftでPVPゲームによくある。雪玉爆弾の作り方をここでは紹介します。\n\nステップ①...",
+  "content": "MinecraftでPVPゲームによくある。雪玉爆弾の作り方をここでは紹介します。\n\nステップ① 雪玉が着弾した場所を爆発させよう！\n\n状態としては雪玉が着弾した場所にクリーパーが召喚されて、召喚した瞬間に爆破する仕組みです。\n\nコマンドブロックをリピート、常時実行にし以下を入力します。\n\nexecute at @e[type=snowball] unless block ~ ~-1 ~ air run summon creeper ~ ~ ~ {ExplosionRadius:3,Fuse:0,Invulnerable:1}\n\nこれで完成です！雪玉爆弾を投げましょう！\n\nステップ②(応用編) 威力を変えてみよう！\n\n威力を変更する場合、以下の数字を変更します。\n\nexecute at @e[type=snowball] unless block ~ ~-1 ~ air run summon creeper ~ ~ ~ {ExplosionRadius:3,Fuse:0,Invulnerable:1}\n\n赤くしたExplosionRadiusの数字を、ここでは3にしていますが、この数字を大きくするほど威力が上がります。※大きくしすぎると動作が重くなる場合があります。\n\nExplosionRadiusの数字を変更する方法もありますが、召喚するクリーパーを帯電クリーパーにする方法もあります。※帯電クリーパーは通常のクリーパーに比べて爆破威力が2倍になります。帯電クリーパーにする場合、以下のコマンドを追加します。\n\nexecute at @e[type=snowball] unless block ~ ~-1 ~ air run summon creeper ~ ~ ~ {ExplosionRadius:3,Fuse:0,Invulnerable:1,powered:1b}\n\n赤くした[powered:1b]を追加すると帯電クリーパーになります。\n\nステップ③(応用編) 名前を変えてみよう！\n\n通常、雪玉爆弾で爆破に巻き込まれた場合「〇〇はクリーパーに爆破された」と表示されますが、このクリーパーの部分を好き名前に変更することができます。名前を変更する場合、以下のコマンドを追加します。\n\nexecute at @e[type=snowball] unless block ~ ~-1 ~ air run summon creeper ~ ~ ~ {CustomName:\"\\\"〇〇〇〇\\\"\",CustomNameVisible:1,ExplosionRadius:3,Fuse:0,Invulnerable:1}\n\n赤いコマンドの〇〇〇〇の部分に好きな名前を入力することで、変更することができます。例えば、「雪玉爆弾」にした場合、「〇〇は雪玉爆弾に爆破された」に変更されます。\n\n以上で完了です！好きな名前の雪玉爆弾を作ってPVPゲームで使ってみてはいかがでしょうか？",
+  "featuredImage": "/2025/02/1.png",
+  "link": "https://if-juku.net/2023/04/18/minecraft%e3%81%a7%e5%bc%b7%e5%8a%9b%e3%81%aa%e9%9b%aa%e7%8e%89%e7%88%86%e5%bc%be%e3%82%92%e4%bd%9c%e3%82%8d%e3%81%86%ef%bc%81/",
+  "date": "2023-04-18",
+  "author": "akitaclark0731-01@gmail.com",
+  "categories": [
+    "Minecraft"
+  ]
+}

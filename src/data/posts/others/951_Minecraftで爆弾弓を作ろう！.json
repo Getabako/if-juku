@@ -1,0 +1,13 @@
+{
+  "id": 951,
+  "title": "Minecraftで爆弾弓を作ろう！",
+  "excerpt": "Minecraftでミニゲームなどによくある。弓を打って矢が刺さった場所が爆発するコマンドをここでは説明します。\n\n※イメージ\n\nステップ①...",
+  "content": "Minecraftでミニゲームなどによくある。弓を打って矢が刺さった場所が爆発するコマンドをここでは説明します。\n\n※イメージ\n\nステップ① 矢が着弾した場所を爆発させる！\n\n状態としては矢が着弾した場所にクリーパーを召喚させて、召喚した瞬間に爆破させている仕組みです。\n\nコマンドブロックをリピート、常時実行にし以下を入力します。\n\nexecute as @e[type=minecraft:arrow,nbt={inGround:true}] at @s run summon creeper ~ ~{ExplosionRadius:3,Fuse:0,Invulnerable:1}\n\nコマンドブロックをチェーン、常時実行にし以下を入力します。\n\nexecute as @e[type=minecraft:arrow,nbt={inGround:true}] at @s run data merge entity @s {life:1200}\n\nこれで完成です！矢を打って爆発させましょう！\n\nステップ②(応用編) 少し改良してみよう！\n\n例えば、威力を上げたい場合、以下の数字を変更します。\n\nexecute as @e[type=minecraft:arrow,nbt={inGround:true}] at @s run summon creeper ~ ~{ExplosionRadius:3,Fuse:0,Invulnerable:1} \n\n赤くしたExplosionRadiusの数字を変更します。ここでは3にしていますが、数字を大きくするほど威力が増加します。※大きくしすぎると動作が重くなる場合があります。\n\n次に、クリーパーの名前を変更する場合。通常、爆発に巻き込まれた場合、「〇〇はクリーパーに爆破された」と出ますが、クリーパーではなく違う名前にする場合、以下を追加します。\n\nexecute as @e[type=minecraft:arrow,nbt={inGround:true}] at @s run summon creeper ~ ~{CustomName:\"\\\"〇〇〇〇\\\"\",CustomNameVisible:1,ExplosionRadius:3,Fuse:0,Invulnerable:1}\n\n赤いコマンドを追加します。〇〇〇〇の部分に好きな名前を入力します。例えば、「超爆破矢」にした場合、「〇〇は超爆破矢に爆破された」になります。\n\nこれにて完了です！爆破矢で戦って見てはいかがでしょうか？\n\nMinecraftで雪玉爆弾を作ろう！はこちら",
+  "featuredImage": "/2025/02/1.png",
+  "link": "https://if-juku.net/2023/04/18/minecraft%e3%81%a7%e7%88%86%e5%bc%be%e5%bc%93%e3%82%92%e4%bd%9c%e3%82%8d%e3%81%86%ef%bc%81/",
+  "date": "2023-04-18",
+  "author": "akitaclark0731-01@gmail.com",
+  "categories": [
+    "Minecraft"
+  ]
+}

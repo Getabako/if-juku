@@ -1,0 +1,13 @@
+{
+  "id": 1171,
+  "title": "Minecraft killコマンド使い方",
+  "excerpt": "Minecraftでよく使われる、killコマンドの説明です。\n\n※killコマンドイメージ\n\n①自分で自分を倒してみよう！\n\nまずは自分で自分を倒してみましょうコマンドの構成は\n\n/kill...",
+  "content": "Minecraftでよく使われる、killコマンドの説明です。\n\n※killコマンドイメージ\n\n①自分で自分を倒してみよう！\n\nまずは自分で自分を倒してみましょうコマンドの構成は\n\n/kill @s\n\n早速やってみましょう！\n\n②全てのエンティティを倒してみよう！\n\n次は全てのエンティティを倒してみましょうコマンドの構成はエンティティなので、MOBだけではなく防具立てや額縁なども全て消滅します。\n\n/kill @e\n\n早速やってみましょう！\n\n③指定したモブを倒してみよう！\n\n次は少し難しくなりますが指定したモブを倒してみましょう今回は豚を倒します。コマンドの構成は\n\n/kill @e[type=minecraft:pig]\n\n[type=minecraft:pig]この部分を変更して色々な敵を倒してみましょう！\n\n④落ちているアイテムだけをkillしてみよう！\n\n次は落ちているアイテムだけをキルしてみよう！ゴミがいっぱい出た時におすすめです。コマンドの構成は\n\n/kill @e[type=minecraft:item]\n\n⑤番外編\n\nkillコマンドに似ているdamegeコマンドあります基本的にはkillコマンドと似たような働きをしますが、不死のトーテムを持っている人や、クリエイティブモードの人には効かないコマンドとなります\n\n/damage @s 100\n\n今回はこれで終わりです！ありがとうございました！",
+  "featuredImage": "/2025/02/1.png",
+  "link": "https://if-juku.net/2023/08/30/minecraft-kill%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e4%bd%bf%e3%81%84%e6%96%b9/",
+  "date": "2023-08-29",
+  "author": "akitaclark0731-02@gmail.com",
+  "categories": [
+    "Minecraft Java"
+  ]
+}

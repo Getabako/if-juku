@@ -1,0 +1,21 @@
+{
+  "categories": {
+    "blog": {
+      "name": "blog",
+      "count": 6,
+      "latest_post": "2025-04-27"
+    },
+    "ai-lectures": {
+      "name": "ai-lectures",
+      "count": 1,
+      "latest_post": "2025-03-29"
+    },
+    "others": {
+      "name": "others",
+      "count": 46,
+      "latest_post": "2024-12-06"
+    }
+  },
+  "total_posts": 53,
+  "updated_at": "2025-07-11T20:31:05.540103"
+}

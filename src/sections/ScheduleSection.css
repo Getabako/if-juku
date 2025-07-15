@@ -1,0 +1,155 @@
+.schedule-section {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  position: relative;
+  overflow: hidden;
+}
+
+.schedule-bg {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #000428 0%, #004e92 100%);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.schedule-title-container {
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 2;
+}
+
+.schedule-title {
+  font-size: 42px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0;
+  padding: 15px 30px;
+  position: relative;
+  display: inline-block;
+  border: 2px solid rgba(0, 195, 255, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 20px rgba(0, 195, 255, 0.5);
+  border-radius: 5px;
+}
+
+.calendar-container {
+  width: 100%;
+  max-width: 1200px;
+  height: calc(100% - 120px);
+  position: relative;
+  background: rgba(0, 15, 30, 0.7);
+  box-shadow: 0 0 30px rgba(0, 150, 255, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.calendar-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.calendar-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+
+/* Cyber frame decorations */
+.cyber-frame {
+  position: relative;
+  border: 1px solid rgba(0, 195, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.cyber-frame::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #00f2ff, #0078ff, #5a00ff, #ff00c8, #ff002f);
+  z-index: -1;
+  animation: glowingBorder 10s linear infinite;
+  background-size: 400%;
+  border-radius: 10px;
+  filter: blur(10px);
+  opacity: 0.5;
+}
+
+.cyber-frame-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  z-index: 3;
+}
+
+.top-left {
+  top: 0;
+  left: 0;
+  border-top: 2px solid #00d4ff;
+  border-left: 2px solid #00d4ff;
+  border-top-left-radius: 5px;
+}
+
+.top-right {
+  top: 0;
+  right: 0;
+  border-top: 2px solid #00d4ff;
+  border-right: 2px solid #00d4ff;
+  border-top-right-radius: 5px;
+}
+
+.bottom-left {
+  bottom: 0;
+  left: 0;
+  border-bottom: 2px solid #00d4ff;
+  border-left: 2px solid #00d4ff;
+  border-bottom-left-radius: 5px;
+}
+
+.bottom-right {
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid #00d4ff;
+  border-right: 2px solid #00d4ff;
+  border-bottom-right-radius: 5px;
+}
+
+@keyframes glowingBorder {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .schedule-title {
+    font-size: 28px;
+    padding: 10px 20px;
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": 1300,
+  "title": "Minecraft effectコマンドの使い方(java1.20.1)",
+  "excerpt": "マイクラでサバイバルをしていて、ポーションを飲んだり、金のリンゴを食べたり、海底神殿に近づいたりなどをしたときにつくいろいろな効果のことをエフェクトと言います。そのエフェクトを自由につけたり消したり、ポーションよりももっと強力なレベルのものをつけたりすることができるのがeffectコマンドです。今回...",
+  "content": "マイクラでサバイバルをしていて、ポーションを飲んだり、金のリンゴを食べたり、海底神殿に近づいたりなどをしたときにつくいろいろな効果のことをエフェクトと言います。そのエフェクトを自由につけたり消したり、ポーションよりももっと強力なレベルのものをつけたりすることができるのがeffectコマンドです。今回はそれについて紹介します。\n\neffectの構文\n\neffectの構文は以下の通りです。順番に説明します。/effect ＜与えるか消すか＞＜対象＞＜エフェクトの種類＞＜効果時間＞＜効果レベル＞＜モヤモヤが出るか出ないか＞\n\n与えるか消すか\n\nエフェクトを対象に与えるならgive、エフェクトを対象から消すならclearを選びましょう。下のコマンドは自分についているエフェクトを全て消すものです。\n\n/effect clear @s\n\nclearを選び＜対象＞のあとに＜エフェクトの種類＞を書くとその効果だけを消すことができます。下のコマンドの場合、毒の効果だけが消えます。\n\n/effect clear @s minecraft:poison\n\nエフェクトは33種類\n\n移動速度上昇 speed\n\n移動速度低下 slowness\n\n採掘速度上昇 haste\n\n採掘速度低下 mining_fatigue \n\n攻撃力上昇 strength  \n\n即時回復 instant_health  \n\n即時ダメージ instant_damage  \n\n跳躍力上昇 jump_boost  \n\n吐き気 nausea  \n\n再生能力 regeneration  \n\n耐性 resistance  \n\n火炎耐性 fire_resistance  \n\n水中呼吸 water_breathing  \n\n透明化 invisibility  \n\n盲目 blindness  \n\n暗視 night_vision  \n\n空腹 hunger  \n\n弱体化 weakness  \n\n毒 poison  \n\n衰弱 wither  \n\n体力増強 health_boost  \n\n衝撃吸収 absorption  \n\n満腹度回復 saturation  \n\n発光 glowing  \n\n浮遊 levitation  \n\n幸運 luck  \n\n不運 unluck  \n\n落下速度低下 slow_falling  \n\nコンジットパワー conduit_power  \n\nイルカの好意 dolphins_grace  \n\n不吉な予感 bad_omen  \n\n村の英雄 hero_of_the_village  \n\n暗闇 darkness\n\n効果時間・効果レベル\n\n効果時間は1と書けば1秒というように秒単位で指定します。infiniteと書けば無限秒、つまり効果が時間で切れなくなります。効果レベルは0～255の中で選び、0と書けばレベル1、1と書けばレベル2というように「書いた数＋1」レベルが設定されます。持っているエフェクトと同じものを付与するとき、効果レベルが高ければ上書きされます。だから、持っている効果のレベルを下げる場合は一度、その効果を消す必要があります。\n\nモヤモヤが出るか出ないか\n\nエフェクトが付与されたときに出るモヤモヤはパーティクルと呼ばれるものの内の1つです。ポーションのパーティクルを表示したければfalse、非表示にしたければtrueを選びましょう。\n\n/effect give @s minecraft:invisibility 10 0 true\n\n上のコマンドは1レベルの透明化を10秒、ポーションパーティクル非表示で付与するコマンドです。つまり、完全透明です。モヤモヤが見えないことで他のプレイヤーからはどこにいるか全く分からなくなります。\n\n/effect give @e[type=minecraft:creeper] minecraft:invisibility infinite 0 true\n\n応用として、上のコマンドでワールドにいるクリーパーを全て完全透明にできます。音しか聞こえないので爆発を回避するのはかなり難しいです。",
+  "featuredImage": "/2023/09/スクリーンショット-2023-09-01-192056-1024x576.png",
+  "link": "https://if-juku.net/2023/09/01/minecraft-effect%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e3%81%ae%e4%bd%bf%e3%81%84%e6%96%b9java1-20-1/",
+  "date": "2023-09-01",
+  "author": "akitaclark0731-03@gmail.com",
+  "categories": [
+    "Minecraft",
+    "Minecraft Java"
+  ]
+}

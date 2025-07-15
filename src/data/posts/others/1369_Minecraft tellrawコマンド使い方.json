@@ -1,0 +1,14 @@
+{
+  "id": 1369,
+  "title": "Minecraft tellrawコマンド使い方",
+  "excerpt": "Minecraftでミニゲーム開始時などにチャット欄に表示される文の出し方を解説します。\n\n①全員にHalloと表示してみよう！\n\nまずはHalloと表示してみましょう！コマンドの構文は以下の通りです。\n\n/tellraw @a...",
+  "content": "Minecraftでミニゲーム開始時などにチャット欄に表示される文の出し方を解説します。\n\n①全員にHalloと表示してみよう！\n\nまずはHalloと表示してみましょう！コマンドの構文は以下の通りです。\n\n/tellraw @a {\"text\":\"Hallo\"}\n\n早速やってみましょう！\n\n②自分だけにこんにちはと表示してみよう！\n\n次にこんにちはと表示してみましょう！コマンドの構文は以下の通りです\n\n/tellraw @a {\"text\":\"\\u3053\\u3093\\u306b\\u3061\\u306f\"}\n\n早速やってみましょう！\n\n③文字に色を付けてみよう！\n\n次に表示する文字に色を付けてみましょう、先ほどと同じこんにちはの文字を緑色にしてみましょう！コマンドの構文は以下の通りです。文字の後に\"color\":\"色\"を入れる感じです。\n\n/tellraw @a {\"text\":\"\\u3053\\u3093\\u306b\\u3061\\u306f\",\"color\":\"green\"}\n\n④文字を太くして斜めにしてみよう！\n\n最後に文字を太くして斜めにしてみよう！コマンドの構文は以下の通りです。文字の後に太くするときは\"bold\":true,斜めにするときは\"italic\":true,を入力します。\n\n/tellraw @a [\"\",{\"text\":\"if\\u587e\\u306f\",\"bold\":true,\"italic\":true,\"color\":\"gold\"},{\"text\":\"\\u6700\\u9ad8\",\"bold\":true,\"italic\":true,\"color\":\"aqua\"},{\"text\":\"\\u306e\\u587e\\u3060\\uff01\",\"bold\":true,\"italic\":true,\"color\":\"gold\"}]",
+  "featuredImage": "/2023/09/image-2.png",
+  "link": "https://if-juku.net/2023/09/05/minecraft-tellraw%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e4%bd%bf%e3%81%84%e6%96%b9/",
+  "date": "2023-09-05",
+  "author": "akitaclark0731-03@gmail.com",
+  "categories": [
+    "Minecraft",
+    "Minecraft Java"
+  ]
+}

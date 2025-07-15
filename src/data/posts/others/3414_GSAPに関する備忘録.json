@@ -1,0 +1,13 @@
+{
+  "id": 3414,
+  "title": "GSAPに関する備忘録",
+  "excerpt": "環境構築(WordPressの場合)\n\nhttps://gsap.comのGet GSAPよりダウンロードし、\"WordPressのテーマ名\"/jsに保存する。※jsフォルダが無い場合は作成する。\n\n以下スクリプトをfunction.phpに追記し、GSAPを適用\n\nfunction...",
+  "content": "環境構築(WordPressの場合)\n\nhttps://gsap.comのGet GSAPよりダウンロードし、\"WordPressのテーマ名\"/jsに保存する。※jsフォルダが無い場合は作成する。\n\n以下スクリプトをfunction.phpに追記し、GSAPを適用\n\nfunction add_gsap_to_wordpress() {\n    // GSAPのパスを指定\n    wp_register_script('gsap', get_template_directory_uri() . '/js/gsap.min.js', array(), '3.0.0', true);\n\n    // GSAPをキューに追加\n    wp_enqueue_script('gsap');\n}\n\nadd_action('wp_enqueue_scripts', 'add_gsap_to_wordpress');\n\nfunction add_custom_gsap_animation() {\n    // まずは、GSAPがすでにキューに入れられているか確認\n    if (wp_script_is('gsap', 'enqueued')) {\n        $animation_script = \"\n            document.addEventListener('DOMContentLoaded', function() {\n                gsap.to('#animatedElement', {duration: 2, x: 1000});\n            });\n        \";\n        wp_add_inline_script('gsap', $animation_script);\n    }\n}\nadd_action('wp_enqueue_scripts', 'add_custom_gsap_animation');\n\n動作テスト\n\n以下のコードを適当なページにカスタムhtmlで貼り付け\n\n以後のアニメーション操作用にcustom-gsap-animation.jsを作成\n\n// 作成した四角を横に移動させる\ndocument.addEventListener('DOMContentLoaded', function() {\n    gsap.to('#animatedElement', { duration: 2, x: 1000 });\n});\n\nSection1\nSection2\nSection3\n\n        li: 1\n        li: 2\n        li: 3 \n\nSection4\nSection5",
+  "featuredImage": "/2025/02/1.png",
+  "link": "https://if-juku.net/2024/04/25/gsap%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8b%e5%82%99%e5%bf%98%e9%8c%b2/",
+  "date": "2024-04-25",
+  "author": "getabako",
+  "categories": [
+    "講座"
+  ]
+}

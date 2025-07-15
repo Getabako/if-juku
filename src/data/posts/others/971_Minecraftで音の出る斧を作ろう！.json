@@ -1,0 +1,13 @@
+{
+  "id": 971,
+  "title": "Minecraftで音の出る斧を作ろう！",
+  "excerpt": "Minecraftで実況者がやっているゲームに出て来る、倒したら斧が壊れ、音の出る斧の作り方を説明しますこれはJava 1.19.2で作成しました。\n\nステップ① 一撃斧を作ろう！\n\nコマンドブロックをインパルスに設定し、以下のコマンドを入力します。そして実行します\n\n/give @p...",
+  "content": "Minecraftで実況者がやっているゲームに出て来る、倒したら斧が壊れ、音の出る斧の作り方を説明しますこれはJava 1.19.2で作成しました。\n\nステップ① 一撃斧を作ろう！\n\nコマンドブロックをインパルスに設定し、以下のコマンドを入力します。そして実行します\n\n/give @p minecraft:stone_axe{display:{Name:\"\\\"一撃斧\\\"\"},Damage:181,AttributeModifiers:[{AttributeName:\"generic.attack_damage\",Amount:100000000,Operation:0,Slot:\"mainhand\",UUID:[I;-930985716,-912426781,-192241814,92077947]},{AttributeName:\"generic.attack_speed\",Amount:100000000,Operation:0,Slot:\"mainhand\",UUID:[I;-884642523,-664884890,853963324,291011902]}]}\n\nステップ② スコアボードを作成しよう！\n\nコマンドブロックをインパルスに設定し、以下のコマンドを入力します。そして実行します\n\nscoreboard objectives add hakai_ono minecraft.broken:minecraft.stone_axe\n\nコマンドブロックをインパルスに設定し、以下のコマンドを入力します。そして実行します\n\nscoreboard objectives add kill_ono playerKillCount\n\nステップ③ 音を出そう！\n\nコマンドブロックをリピート,常時実行に設定し、以下のコマンドを入力します。\n\nscoreboard players set @a[scores={hakai_ono=1..}] hakai_ono 0\n\nコマンドブロックをリピート,常時実行に設定し、以下のコマンドを入力します。\n\nscoreboard players set @a[scores={kill_ono=1..}] kill_ono 0\n\nコマンドブロックをリピート,常時実行に設定し、以下のコマンドを入力します。\n\nexecute at @a[scores={kill_ono=1}] at @a[scores={hakai_ono=1}] run playsound minecraft:item.totem.use master @a ~ ~ ~ 5 0.5\n\n以上で完成です！",
+  "featuredImage": "/2025/02/1.png",
+  "link": "https://if-juku.net/2023/05/19/minecraft%e3%81%a7%e9%9f%b3%e3%81%ae%e5%87%ba%e3%82%8b%e6%96%a7%e3%82%92%e4%bd%9c%e3%82%8d%e3%81%86%ef%bc%81/",
+  "date": "2023-05-19",
+  "author": "akitaclark0731-01@gmail.com",
+  "categories": [
+    "Minecraft"
+  ]
+}

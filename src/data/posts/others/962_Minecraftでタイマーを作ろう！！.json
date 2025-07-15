@@ -1,0 +1,13 @@
+{
+  "id": 962,
+  "title": "Minecraftでタイマーを作ろう！！",
+  "excerpt": "Minecraftでアスレチックなどにある、タイマーの作り方を説明します！これはJava 1.19.2で作成しました。\n\n※イメージ\n\nステップ① オブジェクトを作成しよう！\n\nコマンドブロックを入手する\n\n/give @p...",
+  "content": "Minecraftでアスレチックなどにある、タイマーの作り方を説明します！これはJava 1.19.2で作成しました。\n\n※イメージ\n\nステップ① オブジェクトを作成しよう！\n\nコマンドブロックを入手する\n\n/give @p minecraft:command_block\n\nコマンドブロックをインパルスに設定し、以下のコマンドを入力します。\n\nscoreboard objectives add cu1 dummy \"ティック\"\n\nコマンドブロックをインパルスに設定し、以下のコマンドを入力します。\n\nscoreboard objectives add cu2 dummy \"秒\"\n\nそして実行します。これで完了です\n\nステップ② タイマー本体を作ろう！\n\nコマンドブロックをリピート,常時実行に設定し、以下のコマンドを入力します。\n\nscoreboard players add @a[tag=!stop] cu1 1\n\n①コマンドブロックをリピート,常時実行に設定し、以下のコマンドを入力します。\n\ntag @a[scores={cu1=20..}] add byou\n\n②コマンドブロックをチェーン,常時実行,条件付きに設定し①に繋げて設置し、以下のコマンドを入力します。\n\nscoreboard players remove @a[tag=byou,scores={cu1=20..}] cu1 20\n\n③コマンドブロックをチェーン,常時実行,条件付きに設定し②に繋げて設置し、以下のコマンドを入力します。\n\nscoreboard players add @a[tag=byou] cu2 1\n\n④コマンドブロックをチェーン,常時実行,条件付きに設定し③に繋げて設置し、以下のコマンドを入力します。\n\ntag @a remove byou\n\nステップ③ タイマーをStartさせるコマンドを作成しよう！\n\n※これはアスレチックなどのスタート地点に設置します。\n\n①コマンドブロックをインパルスに設定し、以下のコマンドを入力します。\n\ntag @a remove stop\n\n②コマンドブロックをチェーン,常時実行,条件付きに設定し①に繋げて設置し、以下のコマンドを入力します。\n\nscoreboard players set @a cu1 0\n\n③コマンドブロックをチェーン,常時実行,条件付きに設定し②に繋げて設置し、以下のコマンドを入力します。\n\nscoreboard players set @a cu2 0\n\n④コマンドブロックをチェーン,常時実行,条件付きに設定し③に繋げて設置し、以下のコマンドを入力します。\n\nscoreboard objectives setdisplay sidebar cu2\n\nステップ④ タイマーをStopさせるコマンドを作成しよう！\n\n※これはアスレチックなどのゴール地点に設置します。\n\nコマンドブロックをインパルスに設定し、以下のコマンドを入力します。\n\ntag @p add stop\n\nこれで全て完了です！タイマーを使っていろんなゲームを作ろう！！！",
+  "featuredImage": "/2023/05/image.png",
+  "link": "https://if-juku.net/2023/05/09/minecraft%e3%81%a7%e3%82%bf%e3%82%a4%e3%83%9e%e3%83%bc%e3%82%92%e4%bd%9c%e3%82%8d%e3%81%86%ef%bc%81%ef%bc%81/",
+  "date": "2023-05-09",
+  "author": "akitaclark0731-01@gmail.com",
+  "categories": [
+    "Minecraft"
+  ]
+}

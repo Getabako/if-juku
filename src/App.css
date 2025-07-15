@@ -1,38 +1,184 @@
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 .App {
-  text-align: center;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Swiper styles */
+.mySwiper {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.swiper-slide {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Pagination styles */
+.swiper-pagination {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto !important;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  z-index: 10;
 }
 
-.App-link {
-  color: #61dafb;
+.swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  display: block;
+  margin: 8px 0 !important;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 1;
 }
 
-@keyframes App-logo-spin {
+.swiper-pagination-bullet-active {
+  background: #fff;
+  opacity: 1;
+}
+
+/* Responsive utilities */
+.pc-only {
+  display: block;
+}
+
+.sp-only {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .pc-only {
+    display: none;
+  }
+  
+  .sp-only {
+    display: block;
+  }
+}
+
+/* Common section styles */
+.section-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-title {
+  font-size: 42px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0;
+  padding: 15px 30px;
+  position: relative;
+  display: inline-block;
+  border: 2px solid rgba(0, 195, 255, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 20px rgba(0, 195, 255, 0.5);
+  border-radius: 5px;
+}
+
+.twinkling-text {
+  animation: textShadow 1.6s infinite;
+}
+
+@keyframes textShadow {
+  0% {
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.1), 0 0 11px rgba(255, 255, 255, 0.1), 0 0 19px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px #5e91f2, 0 0 40px #5e91f2;
+  }
+  100% {
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.1), 0 0 11px rgba(255, 255, 255, 0.1), 0 0 19px rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Background effects */
+.stars-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.stars-layer1,
+.stars-layer2,
+.stars-layer3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                    radial-gradient(2px 2px at 40px 70px, #eee, transparent),
+                    radial-gradient(1px 1px at 50px 90px, #eee, transparent);
+  background-size: 200px 200px;
+  animation: animateStars linear infinite;
+}
+
+.stars-layer1 {
+  animation-duration: 50s;
+}
+
+.stars-layer2 {
+  animation-duration: 100s;
+  opacity: 0.8;
+}
+
+.stars-layer3 {
+  animation-duration: 150s;
+  opacity: 0.6;
+}
+
+@keyframes animateStars {
   from {
-    transform: rotate(0deg);
+    transform: translateY(0);
   }
   to {
-    transform: rotate(360deg);
+    transform: translateY(-2000px);
   }
+}
+
+/* Hide pagination for PowerUp sections after the first one */
+.swiper-slide-active.powerup-section-after-first ~ .swiper-wrapper ~ .swiper-pagination {
+  display: none !important;
+}
+
+/* Alternative approach using container query */
+.mySwiper:has(.swiper-slide-active.powerup-section-after-first) .swiper-pagination {
+  display: none !important;
 }
