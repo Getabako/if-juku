@@ -59,7 +59,7 @@ const QuestCard = styled(motion.div)`
   background: rgba(26, 26, 26, 0.9);
   border: 2px solid ${theme.colors.primary.main};
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 1rem;
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -93,19 +93,19 @@ const QuestCard = styled(motion.div)`
   }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    padding: 1rem;
+    padding: 0.8rem;
   }
 `;
 
 const QuestImage = styled.img`
   width: 100%;
-  height: 200px;
+  height: 150px;
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 1rem;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    height: 150px;
+    height: 120px;
   }
 `;
 
@@ -148,8 +148,8 @@ const Modal = styled(motion.div)`
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(5px);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   z-index: ${theme.zIndex.modal};
   padding: 2rem;
 `;
@@ -165,6 +165,7 @@ const ModalContent = styled(motion.div)`
   overflow-y: auto;
   position: relative;
   box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
+  transform: ${props => `translate(${props.x}px, ${props.y}px)`};
 `;
 
 const CloseButton = styled.button`
@@ -207,49 +208,50 @@ const ModalDescription = styled.p`
 
 const ChallengeForBeginner = () => {
   const [selectedQuest, setSelectedQuest] = useState(null);
+  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
 
   const quests = [
     {
       id: 1,
       title: "Quest 1",
       image: "/2025/04/quest1.png",
-      shortDesc: "基礎的なプログラミング学習",
-      fullDesc: "プログラミングの基本概念を学び、初歩的なコードを書けるようになります。変数、条件分岐、繰り返し処理などの基本要素を習得します。"
+      shortDesc: "動画編集にチャレンジ",
+      fullDesc: "動画編集ソフトを使って、自分だけのオリジナル動画を作成します。カット、エフェクト、BGMの追加など、基本的な動画編集技術を習得します。"
     },
     {
       id: 2,
       title: "Quest 2",
       image: "/2025/04/quest2.png",
-      shortDesc: "アルゴリズムとデータ構造",
-      fullDesc: "効率的なプログラムを書くためのアルゴリズムとデータ構造を学習します。ソート、検索、配列、リストなどの基本的な概念を理解します。"
+      shortDesc: "マインクラフトで建築",
+      fullDesc: "マインクラフトを使って創造力を発揮し、自分だけの建築物を作成します。基本的な建築技術から応用まで、楽しく学習できます。"
     },
     {
       id: 3,
       title: "Quest 3",
       image: "/2025/04/quest3.png",
-      shortDesc: "Web開発の基礎",
-      fullDesc: "HTML、CSS、JavaScriptを使用してWebページを作成します。フロントエンドとバックエンドの基本的な概念を学習します。"
+      shortDesc: "プログラミング基礎",
+      fullDesc: "ビジュアルプログラミングから始めて、プログラミングの基本概念を学習します。ゲーム感覚で楽しく論理的思考を身につけます。"
     },
     {
       id: 4,
       title: "Quest 4",
       image: "/2025/04/quest4.png",
-      shortDesc: "データベースとAPI",
-      fullDesc: "データベースの基本的な操作とAPIの使用方法を学びます。SQLの基本構文とRESTful APIの概念を理解します。"
+      shortDesc: "デジタルアート制作",
+      fullDesc: "デジタルツールを使って、イラストやアート作品を制作します。創造性を発揮しながら、デジタル技術を習得できます。"
     },
     {
       id: 5,
       title: "Quest 5",
       image: "/2025/04/quest5.png",
-      shortDesc: "AI・機械学習入門",
-      fullDesc: "人工知能と機械学習の基本概念を学習します。Pythonを使用して簡単なAIモデルを作成し、データ分析の基礎を習得します。"
+      shortDesc: "3Dモデリング体験",
+      fullDesc: "3Dモデリングソフトを使って、立体的な作品を作成します。空間認識能力を養いながら、新しい表現方法を学びます。"
     },
     {
       id: 6,
       title: "Quest 6",
       image: "/2025/04/quest6.png",
-      shortDesc: "プロジェクト完成",
-      fullDesc: "これまでに学習した知識を活用して、実際のプロジェクトを完成させます。チームワークと問題解決能力を発揮する総合的な課題です。"
+      shortDesc: "総合プロジェクト",
+      fullDesc: "これまでに学習した技術を組み合わせて、オリジナルの作品を完成させます。企画から完成まで、一連の制作プロセスを体験します。"
     }
   ];
 
@@ -294,7 +296,14 @@ const ChallengeForBeginner = () => {
                 variants={itemVariants}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setSelectedQuest(quest)}
+                onClick={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  setModalPosition({
+                    x: Math.max(0, Math.min(rect.left, window.innerWidth - 600)),
+                    y: Math.max(0, Math.min(rect.top, window.innerHeight - 400))
+                  });
+                  setSelectedQuest(quest);
+                }}
                 className="cyber-frame"
               >
                 <QuestImage src={quest.image} alt={quest.title} />
@@ -320,6 +329,8 @@ const ChallengeForBeginner = () => {
               exit={{ scale: 0.8, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
               className="cyber-frame"
+              x={modalPosition.x}
+              y={modalPosition.y}
             >
               <CloseButton onClick={() => setSelectedQuest(null)}>×</CloseButton>
               <ModalTitle>{selectedQuest.title}</ModalTitle>

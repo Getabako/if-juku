@@ -209,8 +209,8 @@ const Modal = styled(motion.div)`
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(5px);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   z-index: ${theme.zIndex.modal};
   padding: 2rem;
 `;
@@ -226,6 +226,7 @@ const ModalContent = styled(motion.div)`
   overflow-y: auto;
   position: relative;
   box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
+  transform: ${props => `translate(${props.x}px, ${props.y}px)`};
 `;
 
 const CloseButton = styled.button`
@@ -268,6 +269,7 @@ const ModalDescription = styled.p`
 
 const Services = () => {
   const [selectedService, setSelectedService] = useState(null);
+  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
 
   const services = [
     {
@@ -365,7 +367,14 @@ const Services = () => {
                 variants={itemVariants}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setSelectedService(service)}
+                onClick={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  setModalPosition({
+                    x: Math.max(0, Math.min(rect.left, window.innerWidth - 600)),
+                    y: Math.max(0, Math.min(rect.top, window.innerHeight - 400))
+                  });
+                  setSelectedService(service);
+                }}
                 className="cyber-frame"
               >
                 <ServiceIcon>
@@ -393,6 +402,8 @@ const Services = () => {
               exit={{ scale: 0.8, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
               className="cyber-frame"
+              x={modalPosition.x}
+              y={modalPosition.y}
             >
               <CloseButton onClick={() => setSelectedService(null)}>×</CloseButton>
               <ModalTitle>{selectedService.title}</ModalTitle>

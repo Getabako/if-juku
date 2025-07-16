@@ -28,6 +28,19 @@ const ContentWrapper = styled.div`
   gap: 2rem;
 `;
 
+const TwoColumnLayout = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  width: 100%;
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+`;
+
 const SectionTitle = styled(motion.h2)`
   font-size: 3rem;
   font-weight: bold;
@@ -185,13 +198,14 @@ const Challenge = () => {
             if(チャレンジ)
           </SectionTitle>
           
-          <ChallengeImage
-            variants={itemVariants}
-            src={isMobile ? "/2025/04/名称未設定のデザイン-34.png" : "/2025/04/能動的に学ぶ.png"}
-            alt="if(チャレンジ) - 能動的に学ぶ力を身につける"
-          />
-          
-          <MessageContainer variants={itemVariants}>
+          <TwoColumnLayout>
+            <ChallengeImage
+              variants={itemVariants}
+              src={isMobile ? "/2025/04/名称未設定のデザイン-34.png" : "/2025/04/能動的に学ぶ.png"}
+              alt="if(チャレンジ) - 能動的に学ぶ力を身につける"
+            />
+            
+            <MessageContainer variants={itemVariants}>
             <MessageTitle>能動的に学ぶ力を身につける</MessageTitle>
             <MessageText>
               企業からの案件を割り振って、実際に報酬を得ながら実践的なスキルを習得します。
@@ -203,7 +217,8 @@ const Challenge = () => {
             <JobRequestButton onClick={handleJobRequest}>
               if(塾)の塾生に仕事を依頼する
             </JobRequestButton>
-          </MessageContainer>
+            </MessageContainer>
+          </TwoColumnLayout>
         </motion.div>
       </ContentWrapper>
     </ChallengeContainer>
