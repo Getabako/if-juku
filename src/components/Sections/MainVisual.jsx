@@ -36,7 +36,7 @@ const VideoBackground = styled.video`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: ${theme.zIndex.background};
+  z-index: 1;
   
   /* 動画が読み込まれない場合の対応 */
   &::-webkit-media-controls {
@@ -49,20 +49,6 @@ const VideoBackground = styled.video`
   /* 動画の品質とパフォーマンスの最適化 */
   image-rendering: -webkit-optimize-contrast;
   image-rendering: optimize-contrast;
-  
-  /* 動画の読み込み中の処理 */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-      radial-gradient(circle at 30% 40%, rgba(0, 255, 255, 0.2) 0%, transparent 50%),
-      radial-gradient(circle at 70% 60%, rgba(0, 255, 0, 0.1) 0%, transparent 50%);
-    z-index: -1;
-  }
 `;
 
 const VideoOverlay = styled.div`
@@ -71,8 +57,9 @@ const VideoOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  pointer-events: none;
 `;
 
 const ContentWrapper = styled.div`
