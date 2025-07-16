@@ -34,3 +34,5 @@ yarn-error.log*
 
 # Text files
 *.txt
+# Video files
+public/*.mp4
