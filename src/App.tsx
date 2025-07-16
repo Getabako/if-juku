@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Mousewheel, Pagination } from 'swiper/modules';
+import { Mousewheel, Pagination, Keyboard } from 'swiper/modules';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { theme } from './styles/theme';
 import { useSwiper } from './hooks/useSwiper';
@@ -61,13 +61,17 @@ const App: React.FC = () => {
     slidesPerView: 1,
     spaceBetween: 0,
     mousewheel: true,
+    keyboard: {
+      enabled: true,
+      onlyInViewport: true,
+    },
     pagination: {
       el: '.swiper-pagination',
       clickable: true,
     },
     allowTouchMove: true,
     speed: 600,
-    modules: [Mousewheel, Pagination],
+    modules: [Mousewheel, Pagination, Keyboard],
     onSlideChange: handleSlideChange,
   };
 
