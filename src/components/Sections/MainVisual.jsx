@@ -70,17 +70,52 @@ const ContentWrapper = styled.div`
   padding: 2rem;
 `;
 
-const MainTitle = styled.h1`
-  font-size: 3rem;
-  font-weight: bold;
+const MainLogo = styled.img`
+  height: 120px;
+  width: auto;
   margin-bottom: 1rem;
-  color: ${theme.colors.primary.main};
-  text-shadow: ${theme.colors.glow.blue};
-  font-family: ${theme.fonts.secondary};
-  animation: twinkle 2s infinite;
+  filter: drop-shadow(${theme.colors.glow.blue});
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: radial-gradient(circle at center, rgba(0, 255, 255, 0.4) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: aura-pulse 2s ease-in-out infinite;
+    z-index: -1;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: radial-gradient(circle at center, rgba(0, 255, 255, 0.3) 0%, transparent 60%);
+    border-radius: 50%;
+    animation: aura-pulse 2s ease-in-out infinite 0.5s;
+    z-index: -1;
+  }
+  
+  @keyframes aura-pulse {
+    0%, 100% { 
+      transform: scale(1); 
+      opacity: 0.6; 
+    }
+    50% { 
+      transform: scale(1.2); 
+      opacity: 1; 
+    }
+  }
 
   @media (max-width: ${theme.breakpoints.mobile}) {
-    font-size: 2rem;
+    height: 80px;
   }
 `;
 
@@ -230,7 +265,10 @@ const MainVisual = () => {
       </VideoBackground>
       <VideoOverlay />
       <ContentWrapper>
-        <MainTitle className="twinkling-text">if(塾)</MainTitle>
+        <MainLogo 
+          src="/2025/04/logo.png"
+          alt="if(塾)"
+        />
         <SubTitle>
           AIと起業を学ぶ、オンラインプログラミング塾<br />
           遠隔・全国対応で、好きなことを学びながら稼げる力を育成
