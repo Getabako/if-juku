@@ -28,17 +28,15 @@ const NavWrapper = styled.div`
   margin: 0 auto;
 `;
 
-const Logo = styled.div`
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: ${theme.colors.primary.main};
-  text-shadow: ${theme.colors.glow.blue};
-  font-family: ${theme.fonts.secondary};
+const Logo = styled.img`
+  height: 40px;
+  width: auto;
   cursor: pointer;
   transition: all ${theme.animations.duration.normal};
+  filter: drop-shadow(${theme.colors.glow.blue});
 
   &:hover {
-    text-shadow: 0 0 30px ${theme.colors.primary.main};
+    filter: drop-shadow(0 0 30px ${theme.colors.primary.main});
     transform: scale(1.05);
   }
 `;
@@ -170,9 +168,11 @@ const CyberNav = () => {
   return (
     <NavContainer>
       <NavWrapper>
-        <Logo onClick={() => handleScrollTo('#main-visual')}>
-          if(塾)
-        </Logo>
+        <Logo 
+          src="/2025/04/logo.png"
+          alt="if(塾)"
+          onClick={() => handleScrollTo('#main-visual')}
+        />
         <NavMenu>
           {menuItems.map((item, index) => (
             <NavItem

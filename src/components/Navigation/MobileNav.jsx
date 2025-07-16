@@ -25,11 +25,11 @@ const MobileHeader = styled.div`
   align-items: center;
 `;
 
-const MobileLogo = styled.div`
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: ${theme.colors.primary.main};
-  text-shadow: 0 0 10px ${theme.colors.primary.main};
+const MobileLogo = styled.img`
+  height: 32px;
+  width: auto;
+  cursor: pointer;
+  filter: drop-shadow(0 0 10px ${theme.colors.primary.main});
 `;
 
 const HamburgerButton = styled.button`
@@ -179,7 +179,11 @@ const MobileNav = () => {
   return (
     <MobileNavContainer>
       <MobileHeader>
-        <MobileLogo>if(塾)</MobileLogo>
+        <MobileLogo 
+          src="/2025/04/logo.png"
+          alt="if(塾)"
+          onClick={() => handleScrollTo('#main-visual')}
+        />
         <HamburgerButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? '✕' : '☰'}
         </HamburgerButton>
