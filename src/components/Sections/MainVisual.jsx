@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 import { theme } from '../../styles/theme';
@@ -11,7 +11,22 @@ const MainVisualContainer = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: ${theme.colors.background.primary};
+  background: linear-gradient(135deg, ${theme.colors.background.primary}, ${theme.colors.background.secondary});
+  
+  /* 動画が読み込まれない場合の代替背景 */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(0, 255, 0, 0.2) 0%, transparent 50%),
+      linear-gradient(135deg, ${theme.colors.background.primary}, ${theme.colors.background.secondary});
+    z-index: -1;
+  }
 `;
 
 const VideoBackground = styled.video`
@@ -22,6 +37,32 @@ const VideoBackground = styled.video`
   height: 100%;
   object-fit: cover;
   z-index: ${theme.zIndex.background};
+  
+  /* 動画が読み込まれない場合の対応 */
+  &::-webkit-media-controls {
+    display: none;
+  }
+  
+  /* 動画の読み込みエラー時の背景 */
+  background: linear-gradient(135deg, ${theme.colors.background.primary}, ${theme.colors.background.secondary});
+  
+  /* 動画の品質とパフォーマンスの最適化 */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: optimize-contrast;
+  
+  /* 動画の読み込み中の処理 */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 30% 40%, rgba(0, 255, 255, 0.2) 0%, transparent 50%),
+      radial-gradient(circle at 70% 60%, rgba(0, 255, 0, 0.1) 0%, transparent 50%);
+    z-index: -1;
+  }
 `;
 
 const VideoOverlay = styled.div`
@@ -125,6 +166,7 @@ const ScrollArrow = styled.div`
 
 const MainVisual = () => {
   const isMobile = useMediaQuery({ maxWidth: theme.breakpoints.mobile });
+  const videoRef = useRef(null);
 
   const handleCTAClick = () => {
     const contactElement = document.getElementById('contact');
@@ -133,15 +175,45 @@ const MainVisual = () => {
     }
   };
 
+  const handleVideoError = (e) => {
+    console.error('Video loading error:', e);
+    // 動画の読み込みエラー時の処理
+    e.target.style.display = 'none';
+  };
+
+  const handleVideoLoad = (e) => {
+    console.log('Video loaded successfully');
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      // 動画の自動再生を強制的に試行
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          console.error('Autoplay failed:', error);
+        });
+      }
+    }
+  }, [isMobile]);
+
   return (
     <MainVisualContainer id="main-visual">
       <VideoBackground
+        ref={videoRef}
         src={isMobile ? "/2025/04/ifmvsp-1.mp4" : "/2025/04/ifmv2.mp4"}
         autoPlay
         loop
         muted
         playsInline
-      />
+        preload="auto"
+        onError={handleVideoError}
+        onLoadedData={handleVideoLoad}
+      >
+        <source src={isMobile ? "/2025/04/ifmvsp-1.mp4" : "/2025/04/ifmv2.mp4"} type="video/mp4" />
+        Your browser does not support the video tag.
+      </VideoBackground>
       <VideoOverlay />
       <ContentWrapper>
         <MainTitle className="twinkling-text">if(塾)</MainTitle>
