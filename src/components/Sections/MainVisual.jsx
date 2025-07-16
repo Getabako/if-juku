@@ -188,7 +188,7 @@ const MainVisual = () => {
 
   useEffect(() => {
     const video = videoRef.current;
-    const videoPath = isMobile ? "/ifmvsp-1.mp4" : "/ifmv2.mp4";
+    const videoPath = isMobile ? "/2025/04/ifmvsp-1.mp4" : "/2025/04/ifmv2.mp4";
     console.log('Video element:', video);
     console.log('Video src:', videoPath);
     console.log('PUBLIC_URL:', process.env.PUBLIC_URL);
@@ -215,7 +215,7 @@ const MainVisual = () => {
     <MainVisualContainer id="main-visual">
       <VideoBackground
         ref={videoRef}
-        src={isMobile ? "/ifmvsp-1.mp4" : "/ifmv2.mp4"}
+        src={isMobile ? "/2025/04/ifmvsp-1.mp4" : "/2025/04/ifmv2.mp4"}
         autoPlay
         loop
         muted
@@ -225,7 +225,7 @@ const MainVisual = () => {
         onLoadedData={handleVideoLoad}
         onCanPlay={handleVideoCanPlay}
       >
-        <source src={isMobile ? "/ifmvsp-1.mp4" : "/ifmv2.mp4"} type="video/mp4" />
+        <source src={isMobile ? "/2025/04/ifmvsp-1.mp4" : "/2025/04/ifmv2.mp4"} type="video/mp4" />
         Your browser does not support the video tag.
       </VideoBackground>
       <VideoOverlay />
@@ -244,7 +244,7 @@ const MainVisual = () => {
             <div>Video Loaded: {videoLoaded ? 'Yes' : 'No'}</div>
             <div>Video Error: {videoError ? 'Yes' : 'No'}</div>
             <div>Device: {isMobile ? 'Mobile' : 'PC'}</div>
-            <div>Video Path: {isMobile ? "/ifmvsp-1.mp4" : "/ifmv2.mp4"}</div>
+            <div>Video Path: {isMobile ? "/2025/04/ifmvsp-1.mp4" : "/2025/04/ifmv2.mp4"}</div>
           </div>
         )}
       </ContentWrapper>
