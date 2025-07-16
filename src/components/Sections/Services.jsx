@@ -208,6 +208,9 @@ const Modal = styled(motion.div)`
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: ${theme.zIndex.modal};
   padding: 2rem;
 `;
@@ -221,11 +224,8 @@ const ModalContent = styled(motion.div)`
   width: 100%;
   max-height: 80vh;
   overflow-y: auto;
-  position: absolute;
+  position: relative;
   box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
-  left: ${props => `${props.x}px`};
-  top: ${props => `${props.y}px`};
-  transform: translate(-50%, -50%);
 `;
 
 const CloseButton = styled.button`
@@ -368,8 +368,8 @@ const Services = () => {
                 whileTap={{ scale: 0.95 }}
                 onClick={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
-                  const centerX = rect.left + rect.width / 2;
-                  const centerY = rect.top + rect.height / 2;
+                  const centerX = rect.left + rect.width / 2 - window.innerWidth / 2;
+                  const centerY = rect.top + rect.height / 2 - window.innerHeight / 2;
                   setModalPosition({
                     x: centerX,
                     y: centerY
@@ -398,13 +398,11 @@ const Services = () => {
             onClick={() => setSelectedService(null)}
           >
             <ModalContent
-              initial={{ scale: 0.1, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.1, opacity: 0 }}
+              initial={{ scale: 0.1, opacity: 0, x: modalPosition.x, y: modalPosition.y }}
+              animate={{ scale: 1, opacity: 1, x: 0, y: 0 }}
+              exit={{ scale: 0.1, opacity: 0, x: modalPosition.x, y: modalPosition.y }}
               onClick={(e) => e.stopPropagation()}
               className="cyber-frame"
-              x={modalPosition.x}
-              y={modalPosition.y}
             >
               <CloseButton onClick={() => setSelectedService(null)}>×</CloseButton>
               <ModalTitle>{selectedService.title}</ModalTitle>
