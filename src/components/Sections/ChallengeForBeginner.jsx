@@ -147,9 +147,6 @@ const Modal = styled(motion.div)`
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(5px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: ${theme.zIndex.modal};
   padding: 2rem;
 `;
@@ -163,9 +160,11 @@ const ModalContent = styled(motion.div)`
   width: 100%;
   max-height: 80vh;
   overflow-y: auto;
-  position: relative;
+  position: absolute;
   box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
-  transform-origin: ${props => `${props.originX}px ${props.originY}px`};
+  left: ${props => `${props.x}px`};
+  top: ${props => `${props.y}px`};
+  transform: translate(-50%, -50%);
 `;
 
 const CloseButton = styled.button`
@@ -331,8 +330,8 @@ const ChallengeForBeginner = () => {
               exit={{ scale: 0.1, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
               className="cyber-frame"
-              originX={modalPosition.x}
-              originY={modalPosition.y}
+              x={modalPosition.x}
+              y={modalPosition.y}
             >
               <CloseButton onClick={() => setSelectedQuest(null)}>×</CloseButton>
               <ModalTitle>{selectedQuest.title}</ModalTitle>
