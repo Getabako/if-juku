@@ -15,40 +15,70 @@ html, body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  touch-action: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .App {
   width: 100%;
   height: 100vh;
-}
-
-/* スワイプコンテナ */
-.swipe-container {
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
   position: relative;
+  overflow: hidden;
 }
 
-.swipe-wrapper {
+/* TikTok風スワイプコンテナ */
+.tiktok-swipe-container {
   width: 100%;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  touch-action: none;
 }
 
-.swipe-slide {
+.tiktok-swipe-wrapper {
   width: 100%;
   height: 100vh;
+  position: relative;
+  will-change: transform;
+}
+
+.tiktok-swipe-slide {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
   overflow: hidden;
 }
 
+.tiktok-swipe-slide:nth-child(1) {
+  transform: translateY(0vh);
+}
+
+.tiktok-swipe-slide:nth-child(2) {
+  transform: translateY(100vh);
+}
+
+.tiktok-swipe-slide:nth-child(3) {
+  transform: translateY(200vh);
+}
+
+.tiktok-swipe-slide:nth-child(4) {
+  transform: translateY(300vh);
+}
+
+.tiktok-swipe-slide:nth-child(5) {
+  transform: translateY(400vh);
+}
+
 /* ページネーション */
-.swipe-pagination {
+.tiktok-pagination {
   position: fixed;
   right: 20px;
   top: 50%;
@@ -57,22 +87,54 @@ html, body {
   flex-direction: column;
   align-items: center;
   z-index: 1000;
+  gap: 8px;
 }
 
-.swipe-pagination-bullet {
-  width: 10px;
-  height: 10px;
-  display: block;
-  margin: 8px 0;
-  background: rgba(255, 255, 255, 0.5);
+.tiktok-pagination-bullet {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  outline: none;
 }
 
-.swipe-pagination-bullet.active {
+.tiktok-pagination-bullet:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.1);
+}
+
+.tiktok-pagination-bullet.active {
   background: #fff;
-  transform: scale(1.2);
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.tiktok-pagination-bullet.active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulseRing 2s infinite;
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.8);
+    opacity: 0;
+  }
 }
 
 /* PC/SP切り替え */
@@ -112,6 +174,7 @@ html, body {
   position: absolute;
   top: 0;
   left: 0;
+  z-index: -1;
 }
 
 /* 新しいコンセプトセクション */
@@ -221,12 +284,15 @@ html, body {
   color: #fff;
   border-radius: 25px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   font-weight: bold;
   backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   gap: 8px;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .tab-button:hover {
@@ -260,7 +326,7 @@ html, body {
   width: 100%;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transform: translateY(20px);
 }
 
@@ -449,12 +515,14 @@ html, body {
   width: 100%;
   height: 100%;
   padding: 20px;
+  pointer-events: auto;
 }
 
 .calendar-wrapper iframe {
   width: 100%;
   height: 100%;
   border-radius: 10px;
+  pointer-events: auto;
 }
 
 .particles-container {
@@ -591,8 +659,11 @@ html, body {
   font-weight: bold;
   font-size: 1.1rem;
   backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   overflow: hidden;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .neon-banner:hover {
@@ -622,8 +693,8 @@ html, body {
   transform: translateX(100%);
 }
 
-/* スワイプガイド */
-.swipe-guide {
+/* TikTok風スワイプガイド */
+.tiktok-swipe-guide {
   position: fixed;
   bottom: 30px;
   left: 50%;
@@ -635,11 +706,12 @@ html, body {
   color: #fff;
   font-size: 0.9rem;
   z-index: 100;
-  opacity: 0.7;
+  opacity: 0.8;
   transition: opacity 0.3s ease;
+  animation: fadeInOut 4s ease-in-out infinite;
 }
 
-.swipe-icon {
+.tiktok-swipe-icon {
   position: relative;
   width: 30px;
   height: 50px;
@@ -649,28 +721,39 @@ html, body {
   align-items: flex-start;
   justify-content: center;
   padding-top: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
 }
 
-.swipe-icon span {
+.tiktok-swipe-icon span {
   width: 4px;
   height: 8px;
   background: #fff;
   border-radius: 2px;
-  animation: swipeAnimation 2s ease-in-out infinite;
+  animation: smoothSwipeAnimation 2s ease-in-out infinite;
 }
 
-@keyframes swipeAnimation {
+@keyframes smoothSwipeAnimation {
   0% {
     transform: translateY(0);
     opacity: 1;
   }
   50% {
-    transform: translateY(15px);
-    opacity: 0.5;
+    transform: translateY(18px);
+    opacity: 0.3;
   }
   100% {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+
+@keyframes fadeInOut {
+  0%, 80% {
+    opacity: 0.8;
+  }
+  90%, 100% {
+    opacity: 0.3;
   }
 }
 
@@ -705,6 +788,15 @@ html, body {
   .calendar-container {
     height: 500px;
   }
+  
+  .tiktok-pagination {
+    right: 15px;
+  }
+  
+  .tiktok-pagination-bullet {
+    width: 10px;
+    height: 10px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -727,4 +819,30 @@ html, body {
   .calendar-container {
     height: 400px;
   }
+  
+  .tiktok-pagination {
+    right: 10px;
+  }
+  
+  .tiktok-pagination-bullet {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+/* パフォーマンス最適化 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 3D ハードウェア加速 */
+.tiktok-swipe-wrapper,
+.tiktok-swipe-slide {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  perspective: 1000px;
 }

@@ -1,7 +1,7 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import { Swiper } from 'swiper/types';
 
-export const useSwiper = () => {
+export const useSwiper = (totalSlides: number) => {
   const swiperRef = useRef<Swiper | null>(null);
 
   const slideToSection = (sectionId: string) => {
@@ -20,6 +20,11 @@ export const useSwiper = () => {
       swiperRef.current.slideTo(targetIndex, 800);
     }
   };
+
+  const handleSlideChange = useCallback((swiper: Swiper) => {
+    // This function is called when the slide changes
+    // Can be used for tracking or other side effects
+  }, []);
 
   useEffect(() => {
     const handleLinkClick = (e: Event) => {
@@ -45,5 +50,5 @@ export const useSwiper = () => {
     };
   }, []);
 
-  return { swiperRef, slideToSection };
+  return { swiperRef, slideToSection, handleSlideChange };
 };

@@ -1,0 +1,207 @@
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { useMediaQuery } from 'react-responsive';
+import { theme } from '../../styles/theme';
+
+const NavContainer = styled.nav`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: ${theme.zIndex.navigation};
+  background: ${theme.colors.background.secondary};
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid ${theme.colors.primary.main};
+  box-shadow: ${theme.colors.glow.blue};
+  padding: 1rem 2rem;
+
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    display: none;
+  }
+`;
+
+const NavWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const Logo = styled.div`
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: ${theme.colors.primary.main};
+  text-shadow: ${theme.colors.glow.blue};
+  font-family: ${theme.fonts.secondary};
+  cursor: pointer;
+  transition: all ${theme.animations.duration.normal};
+
+  &:hover {
+    text-shadow: 0 0 30px ${theme.colors.primary.main};
+    transform: scale(1.05);
+  }
+`;
+
+const NavMenu = styled.ul`
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 2rem;
+`;
+
+const NavItem = styled.li`
+  position: relative;
+`;
+
+const NavLink = styled.a`
+  color: ${theme.colors.text.primary};
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: all ${theme.animations.duration.normal};
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: ${theme.fonts.primary};
+
+  &:hover {
+    color: ${theme.colors.primary.main};
+    border-color: ${theme.colors.primary.main};
+    box-shadow: ${theme.colors.glow.blue};
+    text-shadow: ${theme.colors.glow.blue};
+  }
+`;
+
+const DropdownMenu = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: ${theme.colors.background.secondary};
+  border: 1px solid ${theme.colors.primary.main};
+  border-radius: 4px;
+  min-width: 200px;
+  opacity: ${props => props.isOpen ? 1 : 0};
+  visibility: ${props => props.isOpen ? 'visible' : 'hidden'};
+  transform: translateY(${props => props.isOpen ? '0' : '-10px'});
+  transition: all ${theme.animations.duration.normal};
+  z-index: 1000;
+  margin-top: 0.5rem;
+  box-shadow: ${theme.colors.glow.blue};
+`;
+
+const DropdownItem = styled.a`
+  display: block;
+  padding: 0.75rem 1rem;
+  color: ${theme.colors.text.secondary};
+  text-decoration: none;
+  transition: all ${theme.animations.duration.normal};
+  border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+  font-family: ${theme.fonts.primary};
+  cursor: pointer;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: rgba(0, 255, 255, 0.1);
+    color: ${theme.colors.primary.main};
+    padding-left: 1.5rem;
+    text-shadow: ${theme.colors.glow.blue};
+  }
+`;
+
+const CyberNav = () => {
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const isPc = useMediaQuery({ minWidth: theme.breakpoints.pc });
+
+  if (!isPc) return null;
+
+  const menuItems = [
+    {
+      label: "if(塾)について",
+      href: "#about",
+      submenu: [
+        { label: "コース紹介", href: "#courses" },
+        { label: "授業スケジュール", href: "#schedule" },
+        { label: "サービス内容", href: "#services" },
+        { label: "if(チャレンジ)", href: "#challenge" },
+        { label: "if(チャレンジ)forビギナー", href: "#challenge-beginner" },
+        { label: "if(塾)が取り組む課題", href: "#issues" },
+        { label: "入塾までの流れ", href: "#flow" }
+      ]
+    },
+    {
+      label: "運営メンバー",
+      href: "#members"
+    },
+    {
+      label: "学習コンテンツ",
+      href: "#contents",
+      submenu: [
+        { label: "オンライン教材", href: "#materials" },
+        { label: "お知らせ", href: "#news" },
+        { label: "YouTube", href: "#youtube" }
+      ]
+    },
+    {
+      label: "よくある質問",
+      href: "#faq"
+    },
+    {
+      label: "お問い合わせ",
+      href: "#contact"
+    }
+  ];
+
+  const handleScrollTo = (href) => {
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <NavContainer>
+      <NavWrapper>
+        <Logo onClick={() => handleScrollTo('#main-visual')}>
+          if(塾)
+        </Logo>
+        <NavMenu>
+          {menuItems.map((item, index) => (
+            <NavItem
+              key={index}
+              onMouseEnter={() => setActiveDropdown(item.submenu ? index : null)}
+              onMouseLeave={() => setActiveDropdown(null)}
+            >
+              <NavLink onClick={() => handleScrollTo(item.href)}>
+                {item.label}
+                {item.submenu && <span>▼</span>}
+              </NavLink>
+              {item.submenu && (
+                <DropdownMenu isOpen={activeDropdown === index}>
+                  {item.submenu.map((subItem, subIndex) => (
+                    <DropdownItem
+                      key={subIndex}
+                      onClick={() => handleScrollTo(subItem.href)}
+                    >
+                      {subItem.label}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              )}
+            </NavItem>
+          ))}
+        </NavMenu>
+      </NavWrapper>
+    </NavContainer>
+  );
+};
+
+export default CyberNav;
