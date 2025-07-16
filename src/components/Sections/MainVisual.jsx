@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 import { theme } from '../../styles/theme';
@@ -167,6 +167,8 @@ const ScrollArrow = styled.div`
 const MainVisual = () => {
   const isMobile = useMediaQuery({ maxWidth: theme.breakpoints.mobile });
   const videoRef = useRef(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
 
   const handleCTAClick = () => {
     const contactElement = document.getElementById('contact');
@@ -177,17 +179,41 @@ const MainVisual = () => {
 
   const handleVideoError = (e) => {
     console.error('Video loading error:', e);
-    // 動画の読み込みエラー時の処理
-    e.target.style.display = 'none';
+    console.error('Video src:', e.target.src);
+    console.error('Video error code:', e.target.error?.code);
+    console.error('Video error message:', e.target.error?.message);
+    setVideoError(true);
+    setVideoLoaded(false);
   };
 
   const handleVideoLoad = (e) => {
     console.log('Video loaded successfully');
+    console.log('Video src:', e.target.src);
+    console.log('Video duration:', e.target.duration);
+    setVideoLoaded(true);
+    setVideoError(false);
+  };
+
+  const handleVideoCanPlay = (e) => {
+    console.log('Video can play');
+    setVideoLoaded(true);
   };
 
   useEffect(() => {
     const video = videoRef.current;
+    const videoPath = isMobile ? `${process.env.PUBLIC_URL}/2025/04/ifmvsp-1.mp4` : `${process.env.PUBLIC_URL}/2025/04/ifmv2.mp4`;
+    console.log('Video element:', video);
+    console.log('Video src:', videoPath);
+    console.log('PUBLIC_URL:', process.env.PUBLIC_URL);
+    
     if (video) {
+      // 動画の読み込み状況をチェック
+      video.addEventListener('loadstart', () => console.log('Video loading started'));
+      video.addEventListener('loadedmetadata', () => console.log('Video metadata loaded'));
+      video.addEventListener('loadeddata', () => console.log('Video data loaded'));
+      video.addEventListener('canplay', () => console.log('Video can play'));
+      video.addEventListener('canplaythrough', () => console.log('Video can play through'));
+      
       // 動画の自動再生を強制的に試行
       const playPromise = video.play();
       if (playPromise !== undefined) {
@@ -202,7 +228,7 @@ const MainVisual = () => {
     <MainVisualContainer id="main-visual">
       <VideoBackground
         ref={videoRef}
-        src={isMobile ? "/2025/04/ifmvsp-1.mp4" : "/2025/04/ifmv2.mp4"}
+        src={isMobile ? `${process.env.PUBLIC_URL}/2025/04/ifmvsp-1.mp4` : `${process.env.PUBLIC_URL}/2025/04/ifmv2.mp4`}
         autoPlay
         loop
         muted
@@ -210,8 +236,9 @@ const MainVisual = () => {
         preload="auto"
         onError={handleVideoError}
         onLoadedData={handleVideoLoad}
+        onCanPlay={handleVideoCanPlay}
       >
-        <source src={isMobile ? "/2025/04/ifmvsp-1.mp4" : "/2025/04/ifmv2.mp4"} type="video/mp4" />
+        <source src={isMobile ? `${process.env.PUBLIC_URL}/2025/04/ifmvsp-1.mp4` : `${process.env.PUBLIC_URL}/2025/04/ifmv2.mp4`} type="video/mp4" />
         Your browser does not support the video tag.
       </VideoBackground>
       <VideoOverlay />
@@ -224,6 +251,15 @@ const MainVisual = () => {
         <CTAButton onClick={handleCTAClick} className="glitch-effect">
           無料体験授業を申し込む
         </CTAButton>
+        {/* デバッグ情報 - 本番環境では削除 */}
+        {process.env.NODE_ENV === 'development' && (
+          <div style={{ position: 'absolute', top: '10px', right: '10px', color: 'white', fontSize: '12px', backgroundColor: 'rgba(0,0,0,0.7)', padding: '10px', borderRadius: '5px' }}>
+            <div>Video Loaded: {videoLoaded ? 'Yes' : 'No'}</div>
+            <div>Video Error: {videoError ? 'Yes' : 'No'}</div>
+            <div>Device: {isMobile ? 'Mobile' : 'PC'}</div>
+            <div>Video Path: {isMobile ? `${process.env.PUBLIC_URL}/2025/04/ifmvsp-1.mp4` : `${process.env.PUBLIC_URL}/2025/04/ifmv2.mp4`}</div>
+          </div>
+        )}
       </ContentWrapper>
       <ScrollIndicator>
         <span>SCROLL</span>
