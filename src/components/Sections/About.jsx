@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { useMediaQuery } from 'react-responsive';
 import { theme } from '../../styles/theme';
 
 const AboutContainer = styled.section`
@@ -68,9 +69,13 @@ const GridPattern = styled.div`
 const ContentWrapper = styled.div`
   position: relative;
   z-index: 1;
-  max-width: 800px;
+  width: 100%;
   padding: 2rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
 const SectionTitle = styled(motion.h2)`
@@ -87,109 +92,23 @@ const SectionTitle = styled(motion.h2)`
   }
 `;
 
-const SectionContent = styled(motion.div)`
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: ${theme.colors.text.primary};
-  margin-bottom: 2rem;
-  font-family: ${theme.fonts.primary};
+const AboutImage = styled(motion.img)`
+  max-width: 100%;
+  max-height: 70vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  filter: drop-shadow(${theme.colors.glow.blue});
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    font-size: 1rem;
-    line-height: 1.6;
+    max-height: 60vh;
   }
-`;
-
-const FeatureGrid = styled(motion.div)`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-`;
-
-const FeatureCard = styled(motion.div)`
-  background: rgba(26, 26, 26, 0.8);
-  border: 2px solid ${theme.colors.primary.main};
-  border-radius: 8px;
-  padding: 1.5rem;
-  position: relative;
-  overflow: hidden;
-  transition: all ${theme.animations.duration.normal};
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, 
-      ${theme.colors.primary.main}, 
-      transparent,
-      ${theme.colors.secondary.main}
-    );
-    z-index: -1;
-    opacity: 0;
-    transition: opacity ${theme.animations.duration.normal};
-  }
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
-    
-    &::before {
-      opacity: 1;
-    }
-  }
-`;
-
-const FeatureIcon = styled.div`
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: ${theme.colors.secondary.main};
-`;
-
-const FeatureTitle = styled.h3`
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  color: ${theme.colors.primary.main};
-  font-family: ${theme.fonts.secondary};
-`;
-
-const FeatureDescription = styled.p`
-  font-size: 0.9rem;
-  color: ${theme.colors.text.secondary};
-  line-height: 1.5;
 `;
 
 const About = () => {
-  const features = [
-    {
-      icon: "🚀",
-      title: "最先端のAI教育",
-      description: "最新のAI技術を活用した革新的な学習体験"
-    },
-    {
-      icon: "💡",
-      title: "起業家精神の育成",
-      description: "実践的なビジネススキルと起業マインドを習得"
-    },
-    {
-      icon: "🌐",
-      title: "オンライン完結",
-      description: "全国どこからでも参加可能な完全オンライン授業"
-    },
-    {
-      icon: "👨‍💻",
-      title: "実践的プログラミング",
-      description: "マインクラフトを使った楽しいプログラミング学習"
-    }
-  ];
+  const isMobile = useMediaQuery({ maxWidth: theme.breakpoints.mobile });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -229,33 +148,11 @@ const About = () => {
             if(塾)について
           </SectionTitle>
           
-          <SectionContent variants={itemVariants}>
-            <p>
-              if(塾)は、AIと起業を学ぶオンラインプログラミング塾です。
-              マインクラフトやAIを活用した創造的な学習環境で、
-              子どもたちの可能性を最大限に引き出します。
-            </p>
-            <p style={{ marginTop: '1rem' }}>
-              遊びながら学び、学びながら稼ぐ。
-              新しい時代に必要なスキルを身につけ、
-              自分の夢を実現する力を育てます。
-            </p>
-          </SectionContent>
-          
-          <FeatureGrid variants={containerVariants}>
-            {features.map((feature, index) => (
-              <FeatureCard
-                key={index}
-                variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
-                className="cyber-frame"
-              >
-                <FeatureIcon>{feature.icon}</FeatureIcon>
-                <FeatureTitle>{feature.title}</FeatureTitle>
-                <FeatureDescription>{feature.description}</FeatureDescription>
-              </FeatureCard>
-            ))}
-          </FeatureGrid>
+          <AboutImage
+            variants={itemVariants}
+            src={isMobile ? "/2025/04/if塾概要sp-1.png" : "/2025/04/if塾横スクロールPC.png"}
+            alt="if(塾)について"
+          />
         </motion.div>
       </ContentWrapper>
     </AboutContainer>
