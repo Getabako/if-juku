@@ -14,47 +14,13 @@ const BeginnerContainer = styled.section`
   background: ${theme.colors.background.primary};
 `;
 
-const StarsBackground = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 0;
-  
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: white;
-    border-radius: 50%;
-    box-shadow: 
-      ${Array(50).fill(0).map(() => 
-        `${Math.random() * 100}vw ${Math.random() * 100}vh 0 white`
-      ).join(',')};
-    animation: twinkle-star 3s infinite;
-  }
-  
-  &::after {
-    width: 1px;
-    height: 1px;
-    animation-duration: 4s;
-    animation-delay: 1s;
-  }
-  
-  @keyframes twinkle-star {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-`;
-
 const ContentWrapper = styled.div`
   position: relative;
   z-index: 1;
   max-width: 1200px;
   width: 100%;
   padding: 2rem;
+  text-align: center;
 `;
 
 const SectionTitle = styled(motion.h2)`
@@ -63,20 +29,25 @@ const SectionTitle = styled(motion.h2)`
   text-align: center;
   margin-bottom: 3rem;
   color: ${theme.colors.primary.main};
-  text-shadow: ${theme.colors.glow.blue};
+  text-shadow: 
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000,
+    ${theme.colors.glow.blue};
   font-family: ${theme.fonts.secondary};
   animation: twinkle 2s infinite;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 2rem;
-    margin-bottom: 2rem;
   }
 `;
 
-const QuestsGrid = styled(motion.div)`
+const QuestGrid = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
+  margin-bottom: 3rem;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     grid-template-columns: repeat(2, 1fr);
@@ -86,7 +57,7 @@ const QuestsGrid = styled(motion.div)`
 
 const QuestCard = styled(motion.div)`
   background: rgba(26, 26, 26, 0.9);
-  border: 2px solid ${props => props.isRecruiting ? theme.colors.secondary.main : theme.colors.primary.main};
+  border: 2px solid ${theme.colors.primary.main};
   border-radius: 12px;
   padding: 1.5rem;
   cursor: pointer;
@@ -95,26 +66,30 @@ const QuestCard = styled(motion.div)`
   transition: all ${theme.animations.duration.normal};
   backdrop-filter: blur(10px);
   
-  ${props => props.isRecruiting && `
-    animation: pulse-border 2s infinite;
-    
-    @keyframes pulse-border {
-      0%, 100% { 
-        border-color: ${theme.colors.secondary.main};
-        box-shadow: 0 0 20px ${theme.colors.secondary.main};
-      }
-      50% { 
-        border-color: ${theme.colors.secondary.light};
-        box-shadow: 0 0 30px ${theme.colors.secondary.main};
-      }
-    }
-  `}
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      transparent 40%,
+      rgba(0, 255, 255, 0.1) 50%,
+      transparent 60%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+  }
   
   &:hover {
     transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 10px 30px ${props => 
-      props.isRecruiting ? `rgba(0, 255, 0, 0.3)` : `rgba(0, 255, 255, 0.3)`
-    };
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+    
+    &::before {
+      transform: translateX(100%);
+    }
   }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
@@ -122,57 +97,45 @@ const QuestCard = styled(motion.div)`
   }
 `;
 
-const QuestIcon = styled.div`
-  width: 100px;
-  height: 100px;
-  margin: 0 auto 1rem;
-  position: relative;
-  
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
+const QuestImage = styled.img`
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    width: 70px;
-    height: 70px;
+    height: 150px;
   }
 `;
 
 const QuestTitle = styled.h3`
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: ${theme.colors.primary.main};
   text-align: center;
   margin-bottom: 0.5rem;
   font-family: ${theme.fonts.secondary};
+  text-shadow: 
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000,
+    ${theme.colors.glow.blue};
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 1rem;
   }
 `;
 
-const QuestStatus = styled.div`
-  background: ${props => props.isRecruiting ? 
-    `linear-gradient(45deg, ${theme.colors.secondary.main}, ${theme.colors.secondary.dark})` : 
-    `linear-gradient(45deg, ${theme.colors.primary.main}, ${theme.colors.primary.dark})`
-  };
-  color: ${theme.colors.background.primary};
-  padding: 0.3rem 1rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 0.5rem;
-`;
-
-const QuestTool = styled.p`
+const QuestDescription = styled.p`
   font-size: 0.9rem;
   color: ${theme.colors.text.secondary};
   text-align: center;
+  line-height: 1.5;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 0.8rem;
+    display: none;
   }
 `;
 
@@ -196,8 +159,10 @@ const ModalContent = styled(motion.div)`
   border: 2px solid ${theme.colors.primary.main};
   border-radius: 12px;
   padding: 2rem;
-  max-width: 500px;
+  max-width: 600px;
   width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
   position: relative;
   box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
 `;
@@ -234,17 +199,10 @@ const ModalTitle = styled.h3`
   text-shadow: ${theme.colors.glow.blue};
 `;
 
-const ModalDescription = styled.div`
+const ModalDescription = styled.p`
   color: ${theme.colors.text.primary};
   line-height: 1.8;
-  
-  p {
-    margin-bottom: 1rem;
-  }
-  
-  strong {
-    color: ${theme.colors.secondary.main};
-  }
+  margin-bottom: 1rem;
 `;
 
 const ChallengeForBeginner = () => {
@@ -253,63 +211,45 @@ const ChallengeForBeginner = () => {
   const quests = [
     {
       id: 1,
-      title: "Minecraft建築",
-      icon: "/2025/03/quest2.png",
-      status: "募集中",
-      tool: "Minecraft",
-      isRecruiting: true,
-      description: "マインクラフトで創造的な建築物を作成します。基本的なブロックの配置から、複雑な建築技法まで学べます。",
-      details: "報酬: 1,000円〜5,000円/作品"
+      title: "Quest 1",
+      image: "/2025/04/quest1.png",
+      shortDesc: "基礎的なプログラミング学習",
+      fullDesc: "プログラミングの基本概念を学び、初歩的なコードを書けるようになります。変数、条件分岐、繰り返し処理などの基本要素を習得します。"
     },
     {
       id: 2,
-      title: "動画編集",
-      icon: "/2025/03/quest1.png",
-      status: "募集中",
-      tool: "DavinchResolve",
-      isRecruiting: true,
-      description: "YouTubeやSNS向けの動画編集スキルを身につけます。カット編集、エフェクト、BGM挿入など。",
-      details: "報酬: 2,000円〜10,000円/動画"
+      title: "Quest 2",
+      image: "/2025/04/quest2.png",
+      shortDesc: "アルゴリズムとデータ構造",
+      fullDesc: "効率的なプログラムを書くためのアルゴリズムとデータ構造を学習します。ソート、検索、配列、リストなどの基本的な概念を理解します。"
     },
     {
       id: 3,
-      title: "Web開発",
-      icon: "/2025/03/quest3.png",
-      status: "募集中",
-      tool: "WordPress",
-      isRecruiting: true,
-      description: "WordPressを使ったWebサイト制作。HTMLやCSSの基礎も学びながら実践的なサイトを作ります。",
-      details: "報酬: 5,000円〜30,000円/サイト"
+      title: "Quest 3",
+      image: "/2025/04/quest3.png",
+      shortDesc: "Web開発の基礎",
+      fullDesc: "HTML、CSS、JavaScriptを使用してWebページを作成します。フロントエンドとバックエンドの基本的な概念を学習します。"
     },
     {
       id: 4,
-      title: "SNS投稿",
-      icon: "/2025/03/quest4.png",
-      status: "募集中",
-      tool: "Instagram / Canva",
-      isRecruiting: true,
-      description: "SNSマーケティングの基礎を学び、魅力的な投稿を作成します。デザインツールの使い方も習得。",
-      details: "報酬: 500円〜2,000円/投稿"
+      title: "Quest 4",
+      image: "/2025/04/quest4.png",
+      shortDesc: "データベースとAPI",
+      fullDesc: "データベースの基本的な操作とAPIの使用方法を学びます。SQLの基本構文とRESTful APIの概念を理解します。"
     },
     {
       id: 5,
-      title: "イラスト",
-      icon: "/2025/03/quest5.png",
-      status: "募集中",
-      tool: "ClipStudio",
-      isRecruiting: true,
-      description: "デジタルイラストの描き方を学びます。キャラクターデザインから背景まで幅広く対応。",
-      details: "報酬: 3,000円〜20,000円/作品"
+      title: "Quest 5",
+      image: "/2025/04/quest5.png",
+      shortDesc: "AI・機械学習入門",
+      fullDesc: "人工知能と機械学習の基本概念を学習します。Pythonを使用して簡単なAIモデルを作成し、データ分析の基礎を習得します。"
     },
     {
       id: 6,
-      title: "AI開発",
-      icon: "/2025/03/quest6.png",
-      status: "募集中",
-      tool: "ChatGPT / Gemini",
-      isRecruiting: true,
-      description: "最新のAIツールを使った開発やプロンプトエンジニアリング。AIを活用した業務効率化も学べます。",
-      details: "報酬: 3,000円〜15,000円/案件"
+      title: "Quest 6",
+      image: "/2025/04/quest6.png",
+      shortDesc: "プロジェクト完成",
+      fullDesc: "これまでに学習した知識を活用して、実際のプロジェクトを完成させます。チームワークと問題解決能力を発揮する総合的な課題です。"
     }
   ];
 
@@ -324,10 +264,10 @@ const ChallengeForBeginner = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
-      scale: 1,
+      y: 0,
       transition: {
         duration: 0.5
       }
@@ -336,8 +276,6 @@ const ChallengeForBeginner = () => {
 
   return (
     <BeginnerContainer id="challenge-beginner">
-      <StarsBackground />
-      
       <ContentWrapper>
         <motion.div
           initial="hidden"
@@ -349,7 +287,7 @@ const ChallengeForBeginner = () => {
             if(チャレンジ)forビギナー
           </SectionTitle>
           
-          <QuestsGrid variants={containerVariants}>
+          <QuestGrid variants={containerVariants}>
             {quests.map((quest) => (
               <QuestCard
                 key={quest.id}
@@ -357,20 +295,14 @@ const ChallengeForBeginner = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedQuest(quest)}
-                isRecruiting={quest.isRecruiting}
                 className="cyber-frame"
               >
-                <QuestIcon>
-                  <img src={quest.icon} alt={quest.title} />
-                </QuestIcon>
+                <QuestImage src={quest.image} alt={quest.title} />
                 <QuestTitle>{quest.title}</QuestTitle>
-                <QuestStatus isRecruiting={quest.isRecruiting}>
-                  {quest.status}
-                </QuestStatus>
-                <QuestTool>ツール: {quest.tool}</QuestTool>
+                <QuestDescription>{quest.shortDesc}</QuestDescription>
               </QuestCard>
             ))}
-          </QuestsGrid>
+          </QuestGrid>
         </motion.div>
       </ContentWrapper>
       
@@ -391,11 +323,7 @@ const ChallengeForBeginner = () => {
             >
               <CloseButton onClick={() => setSelectedQuest(null)}>×</CloseButton>
               <ModalTitle>{selectedQuest.title}</ModalTitle>
-              <ModalDescription>
-                <p>{selectedQuest.description}</p>
-                <p><strong>使用ツール:</strong> {selectedQuest.tool}</p>
-                <p><strong>{selectedQuest.details}</strong></p>
-              </ModalDescription>
+              <ModalDescription>{selectedQuest.fullDesc}</ModalDescription>
             </ModalContent>
           </Modal>
         )}

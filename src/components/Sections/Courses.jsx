@@ -156,7 +156,12 @@ const CourseTitle = styled.h3`
   font-size: 2rem;
   color: ${theme.colors.primary.main};
   font-family: ${theme.fonts.secondary};
-  text-shadow: ${theme.colors.glow.blue};
+  text-shadow: 
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000,
+    ${theme.colors.glow.blue};
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 1.5rem;
