@@ -34,10 +34,56 @@ const Logo = styled.img`
   cursor: pointer;
   transition: all ${theme.animations.duration.normal};
   filter: drop-shadow(${theme.colors.glow.blue});
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: radial-gradient(circle at center, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: aura-pulse 2s ease-in-out infinite;
+    z-index: -1;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: radial-gradient(circle at center, rgba(0, 255, 255, 0.2) 0%, transparent 60%);
+    border-radius: 50%;
+    animation: aura-pulse 2s ease-in-out infinite 0.5s;
+    z-index: -1;
+  }
 
   &:hover {
     filter: drop-shadow(0 0 30px ${theme.colors.primary.main});
     transform: scale(1.05);
+    
+    &::before {
+      background: radial-gradient(circle at center, rgba(0, 255, 255, 0.5) 0%, transparent 70%);
+    }
+    
+    &::after {
+      background: radial-gradient(circle at center, rgba(0, 255, 255, 0.3) 0%, transparent 60%);
+    }
+  }
+  
+  @keyframes aura-pulse {
+    0%, 100% { 
+      transform: scale(1); 
+      opacity: 0.5; 
+    }
+    50% { 
+      transform: scale(1.1); 
+      opacity: 1; 
+    }
   }
 `;
 

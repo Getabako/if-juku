@@ -148,8 +148,8 @@ const Modal = styled(motion.div)`
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(5px);
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   z-index: ${theme.zIndex.modal};
   padding: 2rem;
 `;
@@ -165,7 +165,7 @@ const ModalContent = styled(motion.div)`
   overflow-y: auto;
   position: relative;
   box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
-  transform: ${props => `translate(${props.x}px, ${props.y}px)`};
+  transform-origin: ${props => `${props.originX}px ${props.originY}px`};
 `;
 
 const CloseButton = styled.button`
@@ -298,9 +298,11 @@ const ChallengeForBeginner = () => {
                 whileTap={{ scale: 0.95 }}
                 onClick={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
+                  const centerX = rect.left + rect.width / 2;
+                  const centerY = rect.top + rect.height / 2;
                   setModalPosition({
-                    x: Math.max(0, Math.min(rect.left, window.innerWidth - 600)),
-                    y: Math.max(0, Math.min(rect.top, window.innerHeight - 400))
+                    x: centerX,
+                    y: centerY
                   });
                   setSelectedQuest(quest);
                 }}
@@ -324,13 +326,13 @@ const ChallengeForBeginner = () => {
             onClick={() => setSelectedQuest(null)}
           >
             <ModalContent
-              initial={{ scale: 0.8, opacity: 0 }}
+              initial={{ scale: 0.1, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
+              exit={{ scale: 0.1, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
               className="cyber-frame"
-              x={modalPosition.x}
-              y={modalPosition.y}
+              originX={modalPosition.x}
+              originY={modalPosition.y}
             >
               <CloseButton onClick={() => setSelectedQuest(null)}>×</CloseButton>
               <ModalTitle>{selectedQuest.title}</ModalTitle>

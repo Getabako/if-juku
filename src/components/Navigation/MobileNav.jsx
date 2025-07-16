@@ -30,6 +30,44 @@ const MobileLogo = styled.img`
   width: auto;
   cursor: pointer;
   filter: drop-shadow(0 0 10px ${theme.colors.primary.main});
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    background: radial-gradient(circle at center, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: aura-pulse 2s ease-in-out infinite;
+    z-index: -1;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    background: radial-gradient(circle at center, rgba(0, 255, 255, 0.2) 0%, transparent 60%);
+    border-radius: 50%;
+    animation: aura-pulse 2s ease-in-out infinite 0.5s;
+    z-index: -1;
+  }
+  
+  @keyframes aura-pulse {
+    0%, 100% { 
+      transform: scale(1); 
+      opacity: 0.5; 
+    }
+    50% { 
+      transform: scale(1.1); 
+      opacity: 1; 
+    }
+  }
 `;
 
 const HamburgerButton = styled.button`
