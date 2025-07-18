@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { theme } from '../../styles/theme';
@@ -9,9 +9,8 @@ const FAQContainer = styled.section`
   height: 100vh;
   overflow: hidden;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${theme.colors.background.primary};
+  flex-direction: column;
+  background: linear-gradient(135deg, #1a1a3a 0%, #2a2a5a 50%, #3a3a7a 100%);
 `;
 
 const QuestionMarkBackground = styled.div`
@@ -50,195 +49,196 @@ const QuestionMarkBackground = styled.div`
   }
 `;
 
-const ContentWrapper = styled.div`
-  position: relative;
-  z-index: 1;
-  max-width: 1200px;
-  width: 100%;
-  padding: 2rem;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  
-  /* カスタムスクロールバー */
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  &::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
-  }
-  
-  &::-webkit-scrollbar-thumb {
-    background: ${theme.colors.primary.main};
-    border-radius: 4px;
-    
-    &:hover {
-      background: ${theme.colors.primary.light};
-    }
-  }
-`;
-
 const SectionTitle = styled(motion.h2)`
   font-size: 3rem;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 3rem;
+  margin: 2rem 0;
   color: ${theme.colors.primary.main};
   text-shadow: ${theme.colors.glow.blue};
   font-family: ${theme.fonts.secondary};
   animation: twinkle 2s infinite;
+  z-index: 1;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 2rem;
-    margin-bottom: 2rem;
+    margin: 1rem 0;
   }
 `;
 
-const FAQLayout = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 200px 1fr;
-  gap: 2rem;
-  align-items: flex-start;
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-`;
-
-const FAQColumn = styled.div`
+const GameArea = styled.div`
+  position: relative;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  z-index: 1;
 `;
 
-const CharacterSection = styled.div`
+const CharacterArea = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+`;
+
+const CharacterContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: sticky;
-  top: 2rem;
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    position: static;
-    margin-bottom: 2rem;
-  }
 `;
 
 const CharacterImage = styled(motion.img)`
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   object-fit: contain;
-  transition: all ${theme.animations.duration.normal};
+  filter: drop-shadow(0 0 20px ${theme.colors.primary.main});
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
   }
 `;
 
-const FAQItem = styled(motion.div)`
-  background: rgba(26, 26, 26, 0.9);
+const CharacterName = styled.div`
+  background: rgba(0, 0, 0, 0.8);
+  color: ${theme.colors.primary.main};
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
   border: 2px solid ${theme.colors.primary.main};
-  border-radius: 12px;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  transition: all ${theme.animations.duration.normal};
+  text-shadow: ${theme.colors.glow.blue};
+`;
+
+const QuestionButtons = styled.div`
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 300px;
   
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.3);
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    position: static;
+    transform: none;
+    max-width: 100%;
+    margin: 2rem 0;
   }
 `;
 
 const QuestionButton = styled(motion.button)`
-  width: 100%;
-  background: transparent;
-  border: none;
-  padding: 1.5rem;
-  text-align: left;
-  cursor: pointer;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid ${theme.colors.primary.main};
   color: ${theme.colors.text.primary};
-  font-size: 1rem;
-  font-family: ${theme.fonts.primary};
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  position: relative;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all ${theme.animations.duration.normal};
+  backdrop-filter: blur(10px);
   
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: ${theme.colors.primary.main};
-    opacity: 0;
-    transition: opacity ${theme.animations.duration.normal};
+  &:hover {
+    background: rgba(0, 255, 255, 0.1);
+    transform: translateX(5px);
+    box-shadow: 0 0 15px ${theme.colors.primary.main};
   }
   
-  &:hover::before {
-    opacity: 1;
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
+    font-size: 0.8rem;
+    padding: 0.8rem;
+  }
+`;
+
+const MessageWindow = styled(motion.div)`
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 800px;
+  height: 200px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 3px solid ${theme.colors.primary.main};
+  border-radius: 15px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 30px ${theme.colors.primary.main};
+  z-index: 10;
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    width: 95%;
+    height: 150px;
     padding: 1rem;
+    bottom: 1rem;
+  }
+`;
+
+const MessageText = styled.div`
+  color: ${theme.colors.text.primary};
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-family: ${theme.fonts.primary};
+  height: 100%;
+  overflow-y: auto;
+  
+  /* カスタムスクロールバー */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: ${theme.colors.primary.main};
+    border-radius: 3px;
+  }
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 0.9rem;
   }
 `;
 
-const QuestionIcon = styled.div`
-  background: linear-gradient(45deg, ${theme.colors.primary.main}, ${theme.colors.primary.dark});
-  color: ${theme.colors.background.primary};
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  font-weight: bold;
-  flex-shrink: 0;
-`;
-
-const QuestionText = styled.div`
-  flex: 1;
-  font-weight: 500;
-`;
-
-const ToggleIcon = styled(motion.div)`
+const ContinuePrompt = styled(motion.div)`
+  position: absolute;
+  bottom: 0.5rem;
+  right: 1rem;
   color: ${theme.colors.primary.main};
-  font-size: 1.2rem;
-  font-weight: bold;
-  flex-shrink: 0;
-`;
-
-const AnswerContainer = styled(motion.div)`
-  overflow: hidden;
-`;
-
-const AnswerContent = styled.div`
-  padding: 0 1.5rem 1.5rem;
-  color: ${theme.colors.text.secondary};
-  line-height: 1.6;
-  font-size: 0.9rem;
-  border-top: 1px solid rgba(0, 255, 255, 0.2);
+  font-size: 0.8rem;
+  animation: blink 1s infinite;
   
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    padding: 0 1rem 1rem;
-    font-size: 0.8rem;
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
   }
 `;
 
 const FAQ = () => {
-  const [openItems, setOpenItems] = useState({});
-  const [characterState, setCharacterState] = useState('closed');
+  const [currentMessage, setCurrentMessage] = useState('');
+  const [displayedText, setDisplayedText] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const [showContinue, setShowContinue] = useState(false);
+  const [isTalking, setIsTalking] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const leftFAQs = [
+  const faqs = [
     {
       id: 1,
       question: "どこで開催されますか？",
@@ -253,10 +253,7 @@ const FAQ = () => {
       id: 3,
       question: "PCのみでしょうか？",
       answer: "申し訳ありませんが、様々なものを作るためにはPC版Minecraftが必要です。お子様がやりたいことを実現できるPCについては、塾長たくみが選び方からサポートしますので、お気軽にご相談ください。"
-    }
-  ];
-
-  const rightFAQs = [
+    },
     {
       id: 4,
       question: "体験に必要なものは？",
@@ -274,164 +271,133 @@ const FAQ = () => {
     }
   ];
 
-  const toggleFAQ = (id) => {
-    setOpenItems(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
+  // 口パクアニメーション用の画像切り替え
+  useEffect(() => {
+    let interval;
+    if (isTalking) {
+      interval = setInterval(() => {
+        setCurrentImageIndex(prev => prev === 0 ? 1 : 0);
+      }, 200); // 200msごとに切り替え
+    } else {
+      setCurrentImageIndex(0); // 話していない時は口を閉じた状態
+    }
     
-    // キャラクターの状態を更新
-    const hasOpenItems = Object.values({ ...openItems, [id]: !openItems[id] }).some(Boolean);
-    setCharacterState(hasOpenItems ? 'open' : 'closed');
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isTalking]);
+
+  // タイピングアニメーション
+  useEffect(() => {
+    if (!currentMessage || !isTyping) return;
+
+    let index = 0;
+    setDisplayedText('');
+    setIsTalking(true);
+    
+    const typingInterval = setInterval(() => {
+      if (index < currentMessage.length) {
+        setDisplayedText(prev => prev + currentMessage[index]);
+        index++;
+      } else {
+        clearInterval(typingInterval);
+        setIsTyping(false);
+        setIsTalking(false);
+        setShowContinue(true);
+      }
+    }, 50); // 50msごとに1文字追加
+
+    return () => clearInterval(typingInterval);
+  }, [currentMessage, isTyping]);
+
+  const handleQuestionClick = (faq) => {
+    if (isTyping) return; // タイピング中は無効
+    
+    setShowContinue(false);
+    setCurrentMessage(faq.answer);
+    setIsTyping(true);
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
+  const handleContinue = () => {
+    setShowContinue(false);
+    setCurrentMessage('');
+    setDisplayedText('');
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5
-      }
-    }
-  };
-
-  const answerVariants = {
-    closed: {
-      height: 0,
-      opacity: 0,
-      transition: {
-        duration: 0.3,
-        ease: "easeInOut"
-      }
-    },
-    open: {
-      height: "auto",
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-        ease: "easeInOut"
-      }
-    }
+  const getCharacterImage = () => {
+    const baseImage = currentImageIndex === 0 ? '/2025/02/getabako0.png' : '/2025/02/getabako1.png';
+    return baseImage;
   };
 
   return (
     <FAQContainer id="faq">
       <QuestionMarkBackground />
       
-      <ContentWrapper>
-        <SectionTitle
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="twinkling-text"
-        >
-          よくある質問
-        </SectionTitle>
-        
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={containerVariants}
-        >
-          <FAQLayout>
-            {/* 左側のFAQ */}
-            <FAQColumn>
-              {leftFAQs.map((faq) => (
-                <FAQItem key={faq.id} variants={itemVariants} className="cyber-frame">
-                  <QuestionButton
-                    onClick={() => toggleFAQ(faq.id)}
-                    whileHover={{ backgroundColor: 'rgba(0, 255, 255, 0.1)' }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <QuestionIcon>Q</QuestionIcon>
-                    <QuestionText>{faq.question}</QuestionText>
-                    <ToggleIcon
-                      animate={{ rotate: openItems[faq.id] ? 180 : 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      ▼
-                    </ToggleIcon>
-                  </QuestionButton>
-                  
-                  <AnimatePresence>
-                    {openItems[faq.id] && (
-                      <AnswerContainer
-                        variants={answerVariants}
-                        initial="closed"
-                        animate="open"
-                        exit="closed"
-                      >
-                        <AnswerContent>
-                          <strong>A:</strong> {faq.answer}
-                        </AnswerContent>
-                      </AnswerContainer>
-                    )}
-                  </AnimatePresence>
-                </FAQItem>
-              ))}
-            </FAQColumn>
+      <SectionTitle
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="twinkling-text"
+      >
+        よくある質問
+      </SectionTitle>
+
+      <GameArea>
+        <QuestionButtons>
+          {faqs.map((faq) => (
+            <QuestionButton
+              key={faq.id}
+              onClick={() => handleQuestionClick(faq)}
+              disabled={isTyping}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {faq.question}
+            </QuestionButton>
+          ))}
+        </QuestionButtons>
+
+        <CharacterArea>
+          <CharacterContainer>
+            <CharacterImage
+              src={getCharacterImage()}
+              alt="getabako"
+              animate={{ 
+                scale: isTalking ? [1, 1.05, 1] : 1 
+              }}
+              transition={{ 
+                duration: 0.3,
+                repeat: isTalking ? Infinity : 0 
+              }}
+            />
+            <CharacterName>げたばこ</CharacterName>
+          </CharacterContainer>
+        </CharacterArea>
+      </GameArea>
+
+      <AnimatePresence>
+        {currentMessage && (
+          <MessageWindow
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <MessageText>
+              {displayedText}
+            </MessageText>
             
-            {/* 中央のキャラクター */}
-            <CharacterSection>
-              <CharacterImage
-                src={characterState === 'open' ? "/2025/02/getabako1.png" : "/2025/02/getabako0.png"}
-                alt="FAQ キャラクター"
-                animate={{ scale: characterState === 'open' ? 1.1 : 1 }}
-                transition={{ duration: 0.3 }}
-              />
-            </CharacterSection>
-            
-            {/* 右側のFAQ */}
-            <FAQColumn>
-              {rightFAQs.map((faq) => (
-                <FAQItem key={faq.id} variants={itemVariants} className="cyber-frame">
-                  <QuestionButton
-                    onClick={() => toggleFAQ(faq.id)}
-                    whileHover={{ backgroundColor: 'rgba(0, 255, 255, 0.1)' }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <QuestionIcon>Q</QuestionIcon>
-                    <QuestionText>{faq.question}</QuestionText>
-                    <ToggleIcon
-                      animate={{ rotate: openItems[faq.id] ? 180 : 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      ▼
-                    </ToggleIcon>
-                  </QuestionButton>
-                  
-                  <AnimatePresence>
-                    {openItems[faq.id] && (
-                      <AnswerContainer
-                        variants={answerVariants}
-                        initial="closed"
-                        animate="open"
-                        exit="closed"
-                      >
-                        <AnswerContent>
-                          <strong>A:</strong> {faq.answer}
-                        </AnswerContent>
-                      </AnswerContainer>
-                    )}
-                  </AnimatePresence>
-                </FAQItem>
-              ))}
-            </FAQColumn>
-          </FAQLayout>
-        </motion.div>
-      </ContentWrapper>
+            {showContinue && (
+              <ContinuePrompt
+                onClick={handleContinue}
+                style={{ cursor: 'pointer' }}
+              >
+                ▼ クリックして続ける
+              </ContinuePrompt>
+            )}
+          </MessageWindow>
+        )}
+      </AnimatePresence>
     </FAQContainer>
   );
 };
