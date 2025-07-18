@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import type { Post } from '../utils/postLoader';
 import './BlogPost.css';
 
@@ -93,12 +93,38 @@ const BlogPost: React.FC = () => {
     );
   }
 
+  // 画像URLを変換する関数
+  const convertImageUrl = (url: string | null | undefined): string | null => {
+    if (!url) return null;
+    
+    // WordPressのURLから年月とファイル名を抽出
+    const match = url.match(/\/(\d{4})\/(\d{2})\/([^\/]+)$/);
+    if (match) {
+      const [, year, month, filename] = match;
+      return `/${year}/${month}/${filename}`;
+    }
+    
+    // 既に相対パスの場合はそのまま返す
+    if (url.startsWith('/')) {
+      return url;
+    }
+    
+    return url;
+  };
+
+  // コンテンツ内の画像URLを変換
+  const convertContentImages = (content: string): string => {
+    if (!content) return '';
+    
+    // img src属性のURLを変換
+    return content.replace(/https?:\/\/[^\/]+\/wp-content\/uploads\/(\d{4})\/(\d{2})\/([^"'\s]+)/g, '/$1/$2/$3');
+  };
+
   return (
     <div className="blog-post-container">
       <div className="blog-post-header">
-        <button onClick={() => navigate(-1)} className="back-button">
-          ← 戻る
-        </button>
+        <Link to="/" className="back-to-home">← ホームに戻る</Link>
+        <Link to="/blog" className="back-to-list">← 記事一覧に戻る</Link>
       </div>
       
       <article className="blog-post">
@@ -117,9 +143,9 @@ const BlogPost: React.FC = () => {
           </div>
         </header>
 
-        {post.featuredImage && (
+        {post.featuredImage && convertImageUrl(post.featuredImage) && (
           <div className="blog-post-image">
-            <img src={post.featuredImage} alt={post.title} />
+            <img src={convertImageUrl(post.featuredImage)!} alt={post.title} />
           </div>
         )}
 
@@ -129,7 +155,7 @@ const BlogPost: React.FC = () => {
           </div>
           
           <div className="blog-post-body">
-            <pre>{post.content}</pre>
+            <div dangerouslySetInnerHTML={{ __html: convertContentImages(post.content) }} />
           </div>
         </div>
       </article>

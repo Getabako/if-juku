@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { theme } from '../../styles/theme';
 
 const NewsContainer = styled.section`
@@ -270,7 +271,29 @@ const PlaceholderText = styled.div`
 `;
 
 const News = () => {
-  const [visibleCount, setVisibleCount] = useState(6);
+  const navigate = useNavigate();
+  const [visibleCount, setVisibleCount] = useState(3);
+  const [newsPosts, setNewsPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadNewsPosts = async () => {
+      try {
+        // newsカテゴリーのインデックスを読み込み
+        const indexModule = await import('../../data/posts/news/index.json');
+        const posts = indexModule.default.posts;
+        
+        // 最新の投稿を取得（日付順にソート済み）
+        setNewsPosts(posts);
+      } catch (error) {
+        console.error('Error loading news posts:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadNewsPosts();
+  }, []);
 
   // プレースホルダーデータ（実際のデータがない場合の表示用）
   const placeholderNews = [
@@ -325,7 +348,29 @@ const News = () => {
   ];
 
   const handleShowMore = () => {
-    setVisibleCount(prev => prev + 3);
+    navigate('/blog/news');
+  };
+
+  const handleCardClick = (postId) => {
+    navigate(`/post/${postId}`);
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ja-JP', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric'
+    });
+  };
+
+  const getCategoryIcon = (title) => {
+    if (title.includes('採択') || title.includes('優勝')) return '🏆';
+    if (title.includes('イベント') || title.includes('開催')) return '✨';
+    if (title.includes('紹介') || title.includes('取材')) return '📺';
+    if (title.includes('募集') || title.includes('参加')) return '📢';
+    return '📢';
   };
 
   const containerVariants = {
@@ -363,10 +408,11 @@ const News = () => {
           お知らせ
         </SectionTitle>
         
-        <PlaceholderText>
-          📢 最新のお知らせを準備中です<br />
-          実際のWordPressデータと連携して最新情報を表示します
-        </PlaceholderText>
+        {loading && (
+          <PlaceholderText>
+            📢 最新のお知らせを読み込み中...
+          </PlaceholderText>
+        )}
         
         <motion.div
           initial="hidden"
@@ -375,35 +421,58 @@ const News = () => {
           variants={containerVariants}
         >
           <NewsGrid variants={containerVariants}>
-            {placeholderNews.slice(0, visibleCount).map((news) => (
-              <NewsCard
-                key={news.id}
-                variants={itemVariants}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="cyber-frame"
-              >
-                <NewsHeader>
-                  <NewsIcon>{news.icon}</NewsIcon>
-                  <NewsInfo>
-                    <NewsCategory>{news.category}</NewsCategory>
-                    <NewsDate>{news.date}</NewsDate>
-                  </NewsInfo>
-                </NewsHeader>
-                <NewsTitle>{news.title}</NewsTitle>
-                <NewsExcerpt>{news.excerpt}</NewsExcerpt>
-              </NewsCard>
-            ))}
+            {newsPosts.length > 0 ? (
+              newsPosts.slice(0, visibleCount).map((post) => (
+                <NewsCard
+                  key={post.id}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="cyber-frame"
+                  onClick={() => handleCardClick(post.id)}
+                >
+                  <NewsHeader>
+                    <NewsIcon>{getCategoryIcon(post.title)}</NewsIcon>
+                    <NewsInfo>
+                      <NewsCategory>お知らせ</NewsCategory>
+                      <NewsDate>{formatDate(post.date)}</NewsDate>
+                    </NewsInfo>
+                  </NewsHeader>
+                  <NewsTitle>{post.title}</NewsTitle>
+                  <NewsExcerpt>{post.excerpt}</NewsExcerpt>
+                </NewsCard>
+              ))
+            ) : (
+              !loading && placeholderNews.slice(0, visibleCount).map((news) => (
+                <NewsCard
+                  key={news.id}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="cyber-frame"
+                >
+                  <NewsHeader>
+                    <NewsIcon>{news.icon}</NewsIcon>
+                    <NewsInfo>
+                      <NewsCategory>{news.category}</NewsCategory>
+                      <NewsDate>{news.date}</NewsDate>
+                    </NewsInfo>
+                  </NewsHeader>
+                  <NewsTitle>{news.title}</NewsTitle>
+                  <NewsExcerpt>{news.excerpt}</NewsExcerpt>
+                </NewsCard>
+              ))
+            )}
           </NewsGrid>
           
-          {visibleCount < placeholderNews.length && (
+          {(newsPosts.length > visibleCount || (!loading && newsPosts.length === 0)) && (
             <ShowMoreButton
               onClick={handleShowMore}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="glitch-effect"
             >
-              もっと見る
+              お知らせをもっと見る
             </ShowMoreButton>
           )}
         </motion.div>

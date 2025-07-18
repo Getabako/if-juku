@@ -1,0 +1,14 @@
+{
+  "id": 1350,
+  "title": "Minecraft gameruleコマンド一覧と使い方(JE1.20.1)",
+  "excerpt": "Minecraftでよく使われるgameruleコマンドの一覧と使い方について説明します。※Minecraft 1.20.1でのやり方です。統合版ではありません ①落下ダメージをなくそう！ まずは落下ダメージを無効化してみましょう！コマンドの構文は以下の通りです。 /gamerule fallDamage false ミニゲームで落下ダメージを無くしたい時などに使ってみましょう！ ②コマンドログを...",
+  "content": "Minecraftでよく使われるgameruleコマンドの一覧と使い方について説明します。※Minecraft 1.20.1でのやり方です。統合版ではありません ①落下ダメージをなくそう！ まずは落下ダメージを無効化してみましょう！コマンドの構文は以下の通りです。 /gamerule fallDamage false ミニゲームで落下ダメージを無くしたい時などに使ってみましょう！ ②コマンドログを消してみよう！ 次にコマンドブロックでコマンドを実行した時に表示されるコマンドログを消してみましょう！コマンドの構文は以下の通りです。 /gamerule commandBlockOutput false ③ウィザーの爆発でブロックを破壊されないようにしよう！ ウィザーの爆発でブロックを破壊されないようにしてみよう！クリーパーなどの爆発でも破壊されなくなります。コマンドの構文は以下の通りです。 /gamerule mobGriefing false gameruleコマンド一覧表（JE1.20.1） gamerule名 内容 初期値firedamage火のダメージを受けるかどうかtruefalldamage落下ダメージを受けるかどうかtruekeepInventory死んだ時にアイテムをばらまかなくなるfalselogAdminCommandsサーバーの管理ログの表示・非表示truemobGriefingクリーパーなどの爆発でブロックが破壊されるかtruenaturalRegeneration満腹の時に自然回復できるかどうかtruepvp他のプレイヤーを攻撃できるかtruerandomTickSpeed植物の生長スピードなど3reducedDebugInfoデバック情報の表示・非表示falsesendCommandFeedbackプレイヤーが実行したコマンドログをチャット欄に表示するかどうかtrueshowDeathMessages死亡メッセージの表示・非表示truespawnRadius初期スタート地点のリスポーン範囲10spectatorsGenerateChunksスペクテイターモードでチャンクを生成するかどうかtrueannounceAdvancements進捗の達成をチャット欄に表示・非表示truecommandBlocksEnabledコマンドブロックが使用できるかtruedisableElytraMovementChecエリトラの速度チェックをするかfalsecommandBlockOutputコマンドブロックの実行ログ表示・非表示truedoDaylightCycle時間を進めるかtruedoEntityDropsエンティティを破壊したときにドロップするかtruedoFireTick火が燃え広がるかtruedoLimitedCrafting解放されていないレシピのクラフトを禁止するfalsedoMobLootモブがアイテムや経験値をドロップするかtruedoMobSpawningモブが自然にスポーンするかtruedoTileDropsブロックを破壊した時にドロップするかtruedoWeatherCycle天気が自然に変わるかtruedrowningdamage溺れてる時ダメージを受けるかtruemaxCommandChainLengthチェーンコマンドブロックがチェーンする回数65536maxEntityCrammingプライヤー,モブが重ねられる数24spectatorsGenerateChunksスペクテイター時チャンクを生成するかtrue 今回はこれで終わりです！ありがとうございました！",
+  "featuredImage": null,
+  "link": "https://if-juku.net/2023/09/05/minecraft-gamerule%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e4%b8%80%e8%a6%a7%e3%81%a8%e4%bd%bf%e3%81%84%e6%96%b9je1-20-1/",
+  "date": "2023-09-05",
+  "author": "akitaclark0731-03@gmail.com",
+  "categories": [
+    "Minecraft",
+    "Minecraft Java"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": 912,
+  "title": "Minecraftでジップラインを作ろう！",
+  "excerpt": "FPSゲームなどによくある、ジップラインをMinecraftで作りたいと思います。ここでは簡単なジップラインの作り方を説明します。 ※完成イメージ ステップ① コマンドブロックを設置しよう！ コマンドブロックの構成は以下の通りです。左からリピート、開けて左からリピート+6つのチェーンです。 ステップ② オブジェクトを作成しよう！ まずはT or /を押してチャット欄に以下を入力します。 /scor...",
+  "content": "FPSゲームなどによくある、ジップラインをMinecraftで作りたいと思います。ここでは簡単なジップラインの作り方を説明します。 ※完成イメージ ステップ① コマンドブロックを設置しよう！ コマンドブロックの構成は以下の通りです。左からリピート、開けて左からリピート+6つのチェーンです。 ステップ② オブジェクトを作成しよう！ まずはT or /を押してチャット欄に以下を入力します。 /scoreboard objectives add sif minecraft.custom:minecraft.sneak_time ステップ③ コマンドブロックにコマンドを入力しよう！ 一つ目のリピートブロックに以下を入力します。 execute unless block ~ ~2 ~ minecraft:oak_febce run scoreboard players set @s sif 1 二つ目のリピートブロックに以下を入力します。 execute as @a[scores={sif=0}] at @s if block ~ ~1 ~ minecraft:oak_fence run effect give @s minecraft:levitation 1 10 true 三つ目のチェーンブロックに以下を入力します。 execute as @a[scores={sif=1..}] at @s if block ~ ~1 ~ minecraft:oak_fence run effect give @s minecraft:slow_falling 1 1 true 四つ目のチェーンブロックに以下を入力します。 execute as @a[scores={sif=1..}] at @s if block ~ ~1 ~ minecraft:oak_fence run effect give @s minecraft:levitation 1 10 true 五つ目のチェーンブロックに以下を入力します。 execute as @a[scores={sif=0}] at @s if block ~ ~1 ~ minecraft:oak_fence run effect clear @s minecraft:slow_falling 六つ目のチェーンブロックに以下を入力します。 execute as @a at @s unless block ~ ~1 ~ minecraft:oak_fence run effect clear @s minecraft:levitation 七つ目のチェーンブロックに以下を入力します。 execute as @a at @s unless block ~ ~1 ~ minecraft:oak_fence run effect clear @s minecraft:slow_falling 八つ目のチェーンブロックに以下を入力します。 scoreboard players set @a sif 0 ステップ④ 実際に動かしてみよう！ そしてオークのフェンスを積み上げたら完成です！近づいてジップラインを体験しよう！",
+  "featuredImage": "/2023/04/Minecraft_-1.19.2-2023_04_13-17_14_00-1024x538.png",
+  "link": "https://if-juku.net/2023/04/07/minecraft%e3%81%a7%e3%82%b8%e3%83%83%e3%83%97%e3%83%a9%e3%82%a4%e3%83%b3%e3%82%92%e4%bd%9c%e3%82%8d%e3%81%86%ef%bc%81/",
+  "date": "2023-04-07",
+  "author": "akitaclark0731-01@gmail.com",
+  "categories": [
+    "Minecraft"
+  ]
+}

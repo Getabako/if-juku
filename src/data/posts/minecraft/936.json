@@ -1,0 +1,13 @@
+{
+  "id": 936,
+  "title": "Minecraftで超簡単なPVPゲームを作ろう！",
+  "excerpt": "Minecraftで誰でも出来る、超簡単なPVPゲームのコマンドを説明します。このゲームでは開始時に「試合開始」、ゲーム終了時に「試合終了」と表示させる方法と、ゲーム開始時のアイテム配布や効果の付与方法などを紹介します。 ※イメージ ステップ① タイトルを表示させよう！ まずはコマンドブロックを以下の様に設置しましょう 次に、メインに「試合開始」、サブに「GameStart」と表示させる場合、コマ...",
+  "content": "Minecraftで誰でも出来る、超簡単なPVPゲームのコマンドを説明します。このゲームでは開始時に「試合開始」、ゲーム終了時に「試合終了」と表示させる方法と、ゲーム開始時のアイテム配布や効果の付与方法などを紹介します。 ※イメージ ステップ① タイトルを表示させよう！ まずはコマンドブロックを以下の様に設置しましょう 次に、メインに「試合開始」、サブに「GameStart」と表示させる場合、コマンドブロックに以下を入力します。 1つ目のコマンドブロック /title @a times 20 100 20 2つ目のコマンドブロック /title @a subtitle {\"text\":\"GameStart\",\"bold\":true,\"color\":\"yellow\"} 3つ目のコマンドブロック /title @a title {\"text\":\"\\u8a66\\u5408\\u958b\\u59cb\",\"bold\":true,\"color\":\"aqua\"} 次に、先ほどのコマンドブロックに繋げて、一撃武器の配布を作ります。 4つ目のコマンドブロック（一撃弓） /give @a minecraft:bow{display:{Name:\"\\\"一撃弓\\\"\"},Unbreakable:1,Enchantments:[{id:power,lvl:300},{id:infinity,lvl:1}]} 5つ目のコマンドブロック（一撃剣） /give @a minecraft:iron_sword{display:{Name:\"\\\"一撃剣\\\"\",Lore:[\"\\\"一発で壊れる\\\"\"]},Damage:250,AttributeModifiers:[{AttributeName:\"generic.attack_damage\",Amount:1000000000,Operation:0,Slot:\"mainhand\",UUID:[I;43990777,-88289545,-298193298,574570630]},{AttributeName:\"generic.attack_speed\",Amount:1000000000,Operation:0,Slot:\"mainhand\",UUID:[I;328084400,-883197102,-649105181,533321833]}]} 6つ目のコマンドブロック /give @a minecraft:arrow 1 次に、先ほどのコマンドブロックに繋げて、効果を付けます。 7つ目のコマンドブロック /effect @a minecraft:nightvison 1000000 1 true 8つ目のコマンドブロック /effect @a minecraft:saturation 10000000 255 true 次に、ゲームモードをサバイバルにします。 /gamemode survival @a 次に死亡した際に、スペクテイターモードにするコマンドを作ります まずはチャット欄かコマンドブロックに以下を入力します。 /scoreboard objectives add death deathCount 次にコマンドブロックをリピートにて以下を入力します。 /gamemode spectator @a[scores={death=1}] 1つ目のチェーンブロックに以下を入力します。（サブタイトルでGameEnd） /execute as @a[scores={death=1}] run title @s subtitle {\"text\":\"GameEnd\",\"bold\":true,\"color\":\"dark_red} 2つ目のチェーンブロックに以下を入力します。（タイトルで試合終了） /execute as @a[scores={death=1}] run title @s title {\"text\":\"\\u8a66\\u5408\\u7d42\\u4e86\",\"bold\":true,\"color\":\"gold\"} 3つ目のチェーンブロックに以下を入力します /scoreboard players reset @a death これにて完了です。早速、遊んでみましょう！！",
+  "featuredImage": "/2023/04/Minecraft_-1.19.2-マルチプレイ（サードパーティーのサーバー）-2023_04_16-14_40_01-1024x538.png",
+  "link": "https://if-juku.net/2023/04/17/minecraft%e3%81%a7%e8%b6%85%e7%b0%a1%e5%8d%98%e3%81%aapvp%e3%82%b2%e3%83%bc%e3%83%a0%e3%82%92%e4%bd%9c%e3%82%8d%e3%81%86%ef%bc%81/",
+  "date": "2023-04-17",
+  "author": "akitaclark0731-01@gmail.com",
+  "categories": [
+    "Minecraft"
+  ]
+}

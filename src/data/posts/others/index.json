@@ -2,328 +2,53 @@
   "category": "others",
   "posts": [
     {
-      "id": 4246,
-      "title": "中学特別支援学級から国立大学へ行けた話",
-      "filename": "4246.json",
-      "date": "2024-12-06",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 4299,
-      "title": "藤野英人様をお招きし秋田県とEO North Japan様と共に投資の勉強会を開催しました",
-      "filename": "4299.json",
-      "date": "2024-10-27",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
       "id": 4078,
       "title": "怖い話を書いてみた",
-      "filename": "4078.json",
       "date": "2024-10-23",
-      "author": "getabako"
+      "excerpt": "自分が体験した怖い話を綴りたくなったので書いてみます。 話の概要 これは、今から12、3年前、私が大学院生から社会人一年目にかけて体験した出来事です。当時住んでいたアパートでの話になります。 アパートに住むまでの経緯 大学を卒業し、大学院進学を控えていた私は、学業に集中したくて大学の近くで物件を探していました。私は大学生の頃からサークルの代表を務めていて、大学の近くの後輩の家でしょっちゅう飲み会を...",
+      "filename": "4078.json"
     },
     {
-      "id": 4295,
-      "title": "if(塾)と塾頭と所属eスポーツプレイヤーY君がノースアジア大学で開催されたストリートファイター6のeスポーツ大会に出場し優勝しました！",
-      "filename": "4295.json",
-      "date": "2024-10-17",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 4287,
-      "title": "TDK寮「TSUGUBA」のイベントに参加して、多くの方にif(塾)のマイクラを体験していただきました！",
-      "filename": "4287.json",
-      "date": "2024-10-07",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 4291,
-      "title": "なるテック様と横手市にてイベントに参加しました！",
-      "filename": "4291.json",
-      "date": "2024-09-16",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 4283,
-      "title": "if(塾)がエキマイクで紹介されました！",
-      "filename": "4283.json",
-      "date": "2024-09-03",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 3915,
-      "title": "if(塾)の取り組みをCNAし〜なチャンにて紹介して頂きました",
-      "filename": "3915.json",
-      "date": "2024-07-29",
-      "author": "getabako"
-    },
-    {
-      "id": 3878,
-      "title": "発達障害の塾長のこれまで",
-      "filename": "3878.json",
-      "date": "2024-07-24",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 3882,
-      "title": "今の私の夢（塾長編）",
-      "filename": "3882.json",
-      "date": "2024-07-24",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 3613,
-      "title": "先生の夢って何ですか？",
-      "filename": "3613.json",
-      "date": "2024-06-01",
-      "author": "getabako"
-    },
-    {
-      "id": 3549,
-      "title": "ifアスレチックヒント動画",
-      "filename": "3549.json",
-      "date": "2024-05-24",
-      "author": "akitaclark0731-01@gmail.com"
+      "id": 3020,
+      "title": "Minecraft if鬼ごっこの作り方③(Minecraft java 1.20.1)",
+      "date": "2024-05-07",
+      "excerpt": "if鬼ごっこの作り方②のほうでは鬼と逃走者をチームとタグで管理するのをしましたが、今回は逃走者が鬼に捕まった時の処理と人数を数える処理を紹介していきます。 firsta.mcfunction 「firsta.mcfunction」の中に以下のコマンドを追加します。 scoreboard objectives add gaming1 dummy \"\" scoreboard objectives ad...",
+      "filename": "3020.json"
     },
     {
       "id": 3414,
       "title": "GSAPに関する備忘録",
-      "filename": "3414.json",
       "date": "2024-04-25",
-      "author": "getabako"
+      "excerpt": "環境構築(WordPressの場合) https://gsap.comのGet GSAPよりダウンロードし、\"WordPressのテーマ名\"/jsに保存する。※jsフォルダが無い場合は作成する。 以下スクリプトをfunction.phpに追記し、GSAPを適用 function add_gsap_to_wordpress() { // GSAPのパスを指定 wp_register_script('...",
+      "filename": "3414.json"
     },
     {
-      "id": 3359,
-      "title": "タイガーエンジェルに採択されました",
-      "filename": "3359.json",
-      "date": "2024-03-08",
-      "author": "getabako"
-    },
-    {
-      "id": 3351,
-      "title": "if(塾)の取り組みをnews every.にて紹介して頂きました",
-      "filename": "3351.json",
+      "id": 2705,
+      "title": "スコアボード,下書き",
       "date": "2024-03-06",
-      "author": "getabako"
-    },
-    {
-      "id": 3354,
-      "title": "若者チャレンジ交流会に参加しました",
-      "filename": "3354.json",
-      "date": "2024-03-05",
-      "author": "getabako"
-    },
-    {
-      "id": 3347,
-      "title": "秋田若者チャレンジに採択されました",
-      "filename": "3347.json",
-      "date": "2023-12-30",
-      "author": "getabako"
+      "excerpt": "Minecraftのコマンドでよく使われるスコアボードの使い方ついて解説します。",
+      "filename": "2705.json"
     },
     {
       "id": 1509,
       "title": "塾頭 高崎翔太",
-      "filename": "1509.json",
       "date": "2023-10-26",
-      "author": "akitaclark0731-02@gmail.com"
+      "excerpt": "プロフィール出身:埼玉県越谷市経歴:株式会社LITALICOにてカウンセラー、 コンテンツ開発等を経て、2019年秋田に移住肩書き:ゲタバコ倶楽部代表・臨床心理士・ITエンジニア・ITコンサルタント・IT教育家現在の活動:2020年1月-2021年1月 テレビ朝日「会心の1ゲー」番組内ゲームコンテンツ開発県内企業を中心に200社以上の経営、ITコンサルタントを実施 Web、ゲーム、アプリ、DX化を...",
+      "filename": "1509.json"
     },
     {
       "id": 1513,
       "title": "塾長 加賀屋結眞",
-      "filename": "1513.json",
       "date": "2023-10-26",
-      "author": "akitaclark0731-02@gmail.com"
+      "excerpt": "プロフィール出身:秋田県秋田市経歴:秋田クラーク高等学院に入学し、15歳でif-ITを開業肩書き:・現役高校生・if-IT代表現在までの活動:高校1年で個人事業主としてHPを作成し、二年生になり現在はif(塾)の計画を立てながらプログラミングなどの技術修得中。目標は、高校在学中にif-ITを法人化。facebook",
+      "filename": "1513.json"
     },
     {
       "id": 1517,
       "title": "塾長 山﨑琢己",
-      "filename": "1517.json",
       "date": "2023-10-26",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 1454,
-      "title": "Minecraft if鬼ごっこ紹介",
-      "filename": "1454.json",
-      "date": "2023-10-13",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 1335,
-      "title": "Minecraft Java版　便利操作",
-      "filename": "1335.json",
-      "date": "2023-09-05",
-      "author": "akitaclark0731-02@gmail.com"
-    },
-    {
-      "id": 1339,
-      "title": "Minecraft clearコマンド使い方",
-      "filename": "1339.json",
-      "date": "2023-09-05",
-      "author": "akitaclark0731-03@gmail.com"
-    },
-    {
-      "id": 1350,
-      "title": "Minecraft gameruleコマンド一覧と使い方(JE1.20.1)",
-      "filename": "1350.json",
-      "date": "2023-09-05",
-      "author": "akitaclark0731-03@gmail.com"
-    },
-    {
-      "id": 1369,
-      "title": "Minecraft tellrawコマンド使い方",
-      "filename": "1369.json",
-      "date": "2023-09-05",
-      "author": "akitaclark0731-03@gmail.com"
-    },
-    {
-      "id": 1195,
-      "title": "Minecraft fillコマンドの使い方(おまけsetblock)(java1.20.1)",
-      "filename": "1195.json",
-      "date": "2023-09-01",
-      "author": "akitaclark0731-03@gmail.com"
-    },
-    {
-      "id": 1249,
-      "title": "Minecraft summonコマンド使い方",
-      "filename": "1249.json",
-      "date": "2023-09-01",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 1300,
-      "title": "Minecraft effectコマンドの使い方(java1.20.1)",
-      "filename": "1300.json",
-      "date": "2023-09-01",
-      "author": "akitaclark0731-03@gmail.com"
-    },
-    {
-      "id": 1235,
-      "title": "Minecraft giveコマンド使い方（最強の防具）",
-      "filename": "1235.json",
-      "date": "2023-08-31",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 1159,
-      "title": "Minecraft gamemodeコマンドの使い方",
-      "filename": "1159.json",
-      "date": "2023-08-30",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 1166,
-      "title": "コマンドを実行する対象、ターゲットセレクター(java1.20.1)",
-      "filename": "1166.json",
-      "date": "2023-08-30",
-      "author": "akitaclark0731-03@gmail.com"
-    },
-    {
-      "id": 1202,
-      "title": "Minecracft tpコマンドの使い方",
-      "filename": "1202.json",
-      "date": "2023-08-30",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 1064,
-      "title": "コマンドブロックの基礎知識(java1.20)",
-      "filename": "1064.json",
-      "date": "2023-08-29",
-      "author": "akitaclark0731-03@gmail.com"
-    },
-    {
-      "id": 1171,
-      "title": "Minecraft killコマンド使い方",
-      "filename": "1171.json",
-      "date": "2023-08-29",
-      "author": "akitaclark0731-02@gmail.com"
-    },
-    {
-      "id": 1040,
-      "title": "Minecraft Java版 サバイバルでのウィザーの倒し方",
-      "filename": "1040.json",
-      "date": "2023-07-05",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 1016,
-      "title": "Minecraft Java版 操作方法①",
-      "filename": "1016.json",
-      "date": "2023-06-30",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 1025,
-      "title": "Minecraft Java版 操作方法②",
-      "filename": "1025.json",
-      "date": "2023-06-30",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 971,
-      "title": "Minecraftで音の出る斧を作ろう！",
-      "filename": "971.json",
-      "date": "2023-05-19",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 975,
-      "title": "Minecraftでボスバーデスタイマーを作ろう！（上級編）",
-      "filename": "975.json",
-      "date": "2023-05-13",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 962,
-      "title": "Minecraftでタイマーを作ろう！！",
-      "filename": "962.json",
-      "date": "2023-05-09",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 951,
-      "title": "Minecraftで爆弾弓を作ろう！",
-      "filename": "951.json",
-      "date": "2023-04-18",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 954,
-      "title": "Minecraftで強力な雪玉爆弾を作ろう！",
-      "filename": "954.json",
-      "date": "2023-04-18",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 936,
-      "title": "Minecraftで超簡単なPVPゲームを作ろう！",
-      "filename": "936.json",
-      "date": "2023-04-17",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 912,
-      "title": "Minecraftでジップラインを作ろう！",
-      "filename": "912.json",
-      "date": "2023-04-07",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 899,
-      "title": "Minecraftで最強の武器を作ろう！",
-      "filename": "899.json",
-      "date": "2023-03-19",
-      "author": "akitaclark0731-01@gmail.com"
-    },
-    {
-      "id": 1,
-      "title": "Minecraft タイトルコマンド出し方マニュアル",
-      "filename": "1.json",
-      "date": "2022-11-08",
-      "author": "getabako"
+      "excerpt": "プロフィール 出身: 奈良県生駒市育ち: 大阪府寝屋川市,秋田県秋田市座右の銘: 一歩動けば世界は変わる, 行き当たりバッチリ趣味: 乗り鉄、パソコン、野球観戦（特に大リーグ）経歴: 秋田クラーク高等学院入学（皆勤賞継続中）好きなゲーム: マインクラフト秋田への関わり: 2012年4月から秋田へ移住好きなこと: 人と話す考えて欲しいこと: 「普通」ってなんですか？持っているもの: ASD(自閉スペ...",
+      "filename": "1517.json"
     }
-  ],
-  "total": 46,
-  "updated_at": "2025-07-11T20:31:05.532498"
+  ]
 }

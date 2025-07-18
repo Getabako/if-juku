@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { theme } from '../../styles/theme';
 
 const MaterialsContainer = styled.section`
@@ -231,7 +232,29 @@ const PlaceholderText = styled.div`
 `;
 
 const Materials = () => {
-  const [visibleCount, setVisibleCount] = useState(6);
+  const navigate = useNavigate();
+  const [visibleCount, setVisibleCount] = useState(3);
+  const [minecraftPosts, setMinecraftPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadMinecraftPosts = async () => {
+      try {
+        // minecraftカテゴリーのインデックスを読み込み
+        const indexModule = await import('../../data/posts/minecraft/index.json');
+        const posts = indexModule.default.posts;
+        
+        // 最新の投稿を取得（日付順にソート済み）
+        setMinecraftPosts(posts);
+      } catch (error) {
+        console.error('Error loading minecraft posts:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadMinecraftPosts();
+  }, []);
 
   // プレースホルダーデータ（実際のデータがない場合の表示用）
   const placeholderMaterials = [
@@ -280,7 +303,21 @@ const Materials = () => {
   ];
 
   const handleShowMore = () => {
-    setVisibleCount(prev => prev + 3);
+    navigate('/blog/minecraft');
+  };
+
+  const handleCardClick = (postId) => {
+    navigate(`/post/${postId}`);
+  };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('ja-JP', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric'
+    });
   };
 
   const containerVariants = {
@@ -318,10 +355,11 @@ const Materials = () => {
           オンライン教材
         </SectionTitle>
         
-        <PlaceholderText>
-          📚 充実した学習コンテンツを準備中です<br />
-          実際のWordPressデータと連携して最新の教材を表示します
-        </PlaceholderText>
+        {loading && (
+          <PlaceholderText>
+            📚 Minecraft教材を読み込み中...
+          </PlaceholderText>
+        )}
         
         <motion.div
           initial="hidden"
@@ -330,32 +368,52 @@ const Materials = () => {
           variants={containerVariants}
         >
           <MaterialsGrid variants={containerVariants}>
-            {placeholderMaterials.slice(0, visibleCount).map((material) => (
-              <MaterialCard
-                key={material.id}
-                variants={itemVariants}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="cyber-frame"
-              >
-                <MaterialImage>
-                  {material.icon}
-                </MaterialImage>
-                <MaterialTitle>{material.title}</MaterialTitle>
-                <MaterialDescription>{material.description}</MaterialDescription>
-                <MaterialDate>{material.date}</MaterialDate>
-              </MaterialCard>
-            ))}
+            {minecraftPosts.length > 0 ? (
+              minecraftPosts.slice(0, visibleCount).map((post) => (
+                <MaterialCard
+                  key={post.id}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="cyber-frame"
+                  onClick={() => handleCardClick(post.id)}
+                >
+                  <MaterialImage>
+                    🎮
+                  </MaterialImage>
+                  <MaterialTitle>{post.title}</MaterialTitle>
+                  <MaterialDescription>{post.excerpt}</MaterialDescription>
+                  <MaterialDate>{formatDate(post.date)}</MaterialDate>
+                </MaterialCard>
+              ))
+            ) : (
+              !loading && placeholderMaterials.slice(0, visibleCount).map((material) => (
+                <MaterialCard
+                  key={material.id}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="cyber-frame"
+                >
+                  <MaterialImage>
+                    {material.icon}
+                  </MaterialImage>
+                  <MaterialTitle>{material.title}</MaterialTitle>
+                  <MaterialDescription>{material.description}</MaterialDescription>
+                  <MaterialDate>{material.date}</MaterialDate>
+                </MaterialCard>
+              ))
+            )}
           </MaterialsGrid>
           
-          {visibleCount < placeholderMaterials.length && (
+          {(minecraftPosts.length > visibleCount || (!loading && minecraftPosts.length === 0)) && (
             <ShowMoreButton
               onClick={handleShowMore}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="glitch-effect"
             >
-              もっと見る
+              Minecraft記事をもっと見る
             </ShowMoreButton>
           )}
         </motion.div>

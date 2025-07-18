@@ -1,0 +1,15 @@
+{
+  "id": 1393,
+  "title": "Minecraft 鬼ごっこの作り方③（死亡検知編）＃古いコマンド",
+  "excerpt": "ここでは、ミニゲーム「鬼ごっこ」内で使われている逃走者の死亡検知の仕組み・コマンドを解説していきます。 ※イメージ 逃走者視点 鬼視点 死亡検知のコマンド一覧 tag @a[scores={shi=1..},tag=toso] add shinda execute if entity @a[tag=shinda] run gamemode spectator @a[tag=shinda] exec...",
+  "content": "ここでは、ミニゲーム「鬼ごっこ」内で使われている逃走者の死亡検知の仕組み・コマンドを解説していきます。 ※イメージ 逃走者視点 鬼視点 死亡検知のコマンド一覧 tag @a[scores={shi=1..},tag=toso] add shinda execute if entity @a[tag=shinda] run gamemode spectator @a[tag=shinda] execute if entity @a[tag=shinda] run scoreboard players set @a[tag=shinda] we 0 execute if entity @a[tag=shinda] run give @r[tag=oni] minecraft:splash_potion{CustomPotionColor:6196456,display:{Name:\"\\\"イリュージョン\\\"\",Lore:[\"\\\"スピード\\\"\"]},CustomPotionEffects:[{Id:1,Amplifier:5,Duration:100}]} tag @a[tag=shinda] remove shinda scoreboard players set @a shi 0 コマンドの行ごとの解説 １行目 tag @a[scores={shi=1..},tag=toso] add shinda 上記は「shi」のスコアが1以上の逃走者に「shinda」というタグをつけるコマンドです。簡単に言うと、死んだ逃走者に死亡のあかしを与えるということです。 ２行目 execute if entity @a[tag=shinda] run gamemode spectator @a[tag=shinda] 上記はワールド内に「shinda」のタグを持っている人がいたら、その人をスペクテイターモードにするコマンドです。簡単に言うと、死亡のあかしを持っている人が観戦者(スペクテイターモード)になるということです。 ３行目 execute if entity @a[tag=shinda] run scoreboard players set @a[tag=shinda] we 0 上記はワールド内に「shinda」のタグを持っている人がいたら、その人の「we」というスコアを0にするコマンドです。簡単に言うと、死亡のあかしを持っている人が人数検知からのがれられるようになるということです。こうして逃走者の人数が減っていき、人数検知によってそれが反映されます。 ４行目 execute if entity @a[tag=shinda] run give @r[tag=oni] minecraft:splash_potion{CustomPotionColor:6196456,display:{Name:\"\\\"イリュージョン\\\"\",Lore:[\"\\\"スピード\\\"\"]},CustomPotionEffects:[{Id:1,Amplifier:5,Duration:100}]} 上記はワールド内に「shinda」のタグを持っている人がいたら、鬼の中からランダム1人に「イリュージョン」という名前の効果レベル6、効果時間5秒(100ティック)のスピードポーションを与えるコマンドです。簡単に言うと、鬼が逃走者1人を倒したら鬼の誰か1人にスピードポーションが与えられるということです。逃走者を倒した鬼にポーションがくるとは限りません。ですが、鬼の誰かにはポーションがきているので鬼チームのプラスにはなっていますね。 ５行目 tag @a[tag=shinda] remove shinda 上記はタグ「shinda」を持っている人(全員)からタグ「shinda」を消すコマンドです。簡単に言うと、死亡のあかしを持っている人がいない状態にするということです。この操作をしないと観戦者がもう1度ゲームに参加できなくなったり、鬼にポーションが何個も与えられたりとゲームに不都合なことが起こるので忘れないようにしましょう。 ６行目 scoreboard players set @a shi 0 上記は全員の「shi」スコアを0にするコマンドです。簡単に言うと、逃走者が死亡して1になった死亡検知のスコアを0に戻すということです。この操作によって、次に他の逃走者が死んだとき、また同じようにこの死亡検知コマンドが作動するようになります。 まとめ これらのコマンドによって、逃走者は死亡するとスペクテイターモードになって観戦側にまわり、鬼の誰か1人には逃走者を捕まえた報酬としてスピードポーションが与えられます。今回はこれで終わりです。",
+  "featuredImage": "/2023/09/スクリーンショット-2023-09-14-181653.png",
+  "link": "https://if-juku.net/?p=1393",
+  "date": "2024-04-16",
+  "author": "akitaclark0731-03@gmail.com",
+  "categories": [
+    "Minecraft",
+    "Minecraft Java",
+    "鬼ごっこ"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": 899,
+  "title": "Minecraftで最強の武器を作ろう！",
+  "excerpt": "Minecraftでサバイバルでは作れない最強の武器の作り方を紹介します。ver1.19.4 ※イメージ ①最強の剣を作ろう！ まずは最強の剣を作ります！コマンドの構成は / /give @誰 minecraft:剣{Enchantments:[{id:〇〇,lvl:〇〇}]} /give @誰 minecraft:剣{Enchantments:[{id:〇〇,lvl:〇〇}]} です 例えばダメ...",
+  "content": "Minecraftでサバイバルでは作れない最強の武器の作り方を紹介します。ver1.19.4 ※イメージ ①最強の剣を作ろう！ まずは最強の剣を作ります！コマンドの構成は / /give @誰 minecraft:剣{Enchantments:[{id:〇〇,lvl:〇〇}]} /give @誰 minecraft:剣{Enchantments:[{id:〇〇,lvl:〇〇}]} です 例えばダメージ増加10000のネザライトの剣を作りたい場合 /give @p minecraft:netherite_sword{Enchantments:[{id:sharpness,lvl:10000}]} となります これをチャット欄に入力するとダメージ増加10000のネザライト剣が手に入ります※ver1.17.1からエンチャント最大のレベルが255までとなりました ②最強の弓を作ろう！ 先ほどの最強の剣と作り方はほぼ変わりませんが、ここでは追加で絶対に壊れないようにするコマンドを紹介しますコマンドの構成は /give @誰 minecraft:bow{Unbreakable:1,Enchantments:[{id:〇〇,lvl:〇〇} 例えば射撃ダメージ増加10000と無限,不可壊を付ける場合 /give @p minecraft:bow{Unbreakable:1,Enchantments:[{id:power,lvl:10000},{id:infinity,lvl:1}]} となります、Enchantmentsの前にUnbreakable:1と入力すると不可壊になります。 応用編 好きな名前を付けよう！ 次に最強の武器に好きな名前を付けよう！※ここでは最強のネザライト斧を作りますコマンドは以下のようになります。※256文字以上の場合コマンドブロックを使用してください /give @p minecraft:netherite_axe{display:{Name:\"\\\"斬れるぜぇ\\\"\"},Unbreakable:1,Enchantments:[{id:sharpness,lvl:10000},{id:smite,lvl:10000},{id:bane_of_arthropods,lvl:10000},{id:efficiency,lvl:10000},{id:silk_touch,lvl:1},{id:unbreaking,lvl:10},{id:mending,lvl:1}]} Unbreakable:1の前に{display:{Name:\"\\\"〇〇\\\"\"}と入力すると自分の好きな名前になります。 オリジナル最強武器を作りたいときはこちら→【マイクラ】エンチャントコマンド生成ツール【1.16以降】で作るのがおすすめです。",
+  "featuredImage": "/2023/03/Minecraft-1.19.4-シングルプレイ-2023_03_19-9_47_41-1024x538.png",
+  "link": "https://if-juku.net/2023/03/19/minecraft%e3%81%a7%e6%9c%80%e5%bc%b7%e3%81%ae%e6%ad%a6%e5%99%a8%e3%82%92%e4%bd%9c%e3%82%8d%e3%81%86%ef%bc%81/",
+  "date": "2023-03-19",
+  "author": "akitaclark0731-01@gmail.com",
+  "categories": [
+    "Minecraft"
+  ]
+}

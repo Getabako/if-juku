@@ -1,0 +1,15 @@
+{
+  "id": 1437,
+  "title": "Minecraft if鬼ごっこの作り方①(Minecraft java 1.20.1)",
+  "excerpt": "ここでは、ミニゲーム「if鬼ごっこ」を作り始める前に必要な下準備の仕方を紹介していきます。 コマンドブロックだけしか使ってないと、処理の数の分だけコマンドブロックを置かなければならないので、処理が多いと大変になってきます。そこで、ファンクションというものを使って楽をします。ファンクションとはデータパックというものの機能の1つで、複数のコマンドを記憶させて、必要な時に実行させたり、常に実行させたりす...",
+  "content": "ここでは、ミニゲーム「if鬼ごっこ」を作り始める前に必要な下準備の仕方を紹介していきます。 コマンドブロックだけしか使ってないと、処理の数の分だけコマンドブロックを置かなければならないので、処理が多いと大変になってきます。そこで、ファンクションというものを使って楽をします。ファンクションとはデータパックというものの機能の1つで、複数のコマンドを記憶させて、必要な時に実行させたり、常に実行させたりすることができるものです。これを使うためには、まず、データパックを作らなければなりません。ここから解説することは、マインクラフトのゲーム内でやることではなく、ゲーム外での操作となります。 下準備① アプリのダウンロード まず、「Visual Studio Code」というアプリをインストールしてください。（このアプリを使うととても楽です。）ダウンロードはこちら 下準備② フォルダー作成・フォルダーのセット 次に、デスクトップで右クリック、「新規作成」、「フォルダー」を選んでクリック。すると、「新しいフォルダー」ができるのでそれを「onigokko-datapack」という名前に変更します。 次に、「Visual Studio Code」を開き、「onigokko-datapack」をセットします。 下準備③ 「pack.mcmeta」ファイル 次に、「onigokko-datapack」フォルダーの中に「data」という名前のフォルダーと「pack.mcmeta」という名前のファイルを追加します。 「pack.mcmeta」ファイルに以下のものを打ち込みます。 { \"pack\": { \"pack_format\": 15, \"description\": \"Onigokko Data Pack\" } } 打ち込んだら「Ctrl＋S」で保存を忘れないようにしましょう。 下準備④ 「data」フォルダー 次に、「data」フォルダーの中に「minecraft」と「namespace」という名前のフォルダーを追加します。「namespace」は半角英数字だったら他の名前でもいいです。ただし、ファンクションをコマンドで実行するときに毎回使うので分かりやすい名前にしましょう。動画では「if_oni_func」に変更しています。 下準備⑤ 「.mcfunction」ファイル 次に、「namespace(動画ではif_oni_func)」フォルダーの中に「functions」という名前のフォルダーを追加します。その「functions」フォルダーの中に以下の名前のファイルを追加します。 bigmain.mcfunction cd1cd2.mcfunction com97.mcfunction com98.mcfunction ender.mcfunction firsta.mcfunction goal99.mcfunction goal100.mcfunction housyu.mcfunction jointeam.mcfunction main.mcfunction reload.mcfunction start.mcfunction teamname-a.mcfunction teamname-n.mcfunction teamname-t.mcfunction 見てわかる通り、最後に「.mcfunction」をつけるのが重要です。※実際は最初の部分が必ずこの名前でなければならないわけではありません。適当な名前を付けてしまっているのでわかりやすい名前に変えることをおすすめします。私はこれが自分的に分かりやすいのでこの状態で説明していきます。 下準備⑥ 「.json」ファイル 次に、「minecraft」フォルダーの中に「tags」という名前のフォルダーを追加し、その「tags」フォルダーの中に「functions」フォルダーを追加します。※下準備⑤の「functions」フォルダーとは別のフォルダーです。この「functions」フォルダーの中に以下の名前のファイルを追加します。 load.json tick.json 次に、「load.json」ファイルに以下のものを打ち込みます。ここで注意ですが、先ほどの工程で「namespace」フォルダーの名前を変えている場合は以下の「namespace」の部分を「namespace」フォルダーの名前と同じにしてください。※動画ではif_oni_funcに変更しています。 { \"values\": [\"namespace:reload\"] } 次に、「tick.json」ファイルに以下のものを打ち込みます。こちらも先ほどと同様に「namespace」の部分を「namespace」フォルダーの名前と同じにしてください。 { \"values\": [\"namespace:main\"] } まとめ 上の画像はフォルダーの構造を簡単に表したものです。 以上で、ミニゲーム「if鬼ごっこ」を作り始める前に必要な下準備ができました。次回からは「.mcfunction」で終わるファイルの中身について細かく説明していきます。",
+  "featuredImage": "/2023/10/作ってみた！-1024x576.png",
+  "link": "https://if-juku.net/?p=1437",
+  "date": "2024-04-17",
+  "author": "akitaclark0731-03@gmail.com",
+  "categories": [
+    "Minecraft",
+    "Minecraft Java",
+    "鬼ごっこ"
+  ]
+}

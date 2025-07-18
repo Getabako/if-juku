@@ -1,0 +1,15 @@
+{
+  "id": 1406,
+  "title": "Minecraft 鬼ごっこの作り方④（人数検知・終了検知編）",
+  "excerpt": "ここでは、ミニゲーム「鬼ごっこ」内で使われている逃走者の人数検知・ゲーム終了検知の仕組み・コマンドを解説していきます。 人数検知コマンド一覧 scoreboard players set @a we2 0 scoreboard players operation @a we2 += @a[tag=toso] we １行目 scoreboard players set @a we2 0 上記は全員の...",
+  "content": "ここでは、ミニゲーム「鬼ごっこ」内で使われている逃走者の人数検知・ゲーム終了検知の仕組み・コマンドを解説していきます。 人数検知コマンド一覧 scoreboard players set @a we2 0 scoreboard players operation @a we2 += @a[tag=toso] we １行目 scoreboard players set @a we2 0 上記は全員の「we2」というスコアを0にするコマンドです。簡単に言うと、逃走者の合計人数をリセットするということです。この操作をしないと合計人数が無限に増えていってしまいます。 ２行目 scoreboard players operation @a we2 += @a[tag=toso] we 上記は｛全員の「we2」スコア｝を｛逃走者全員の「we」スコアの合計｝と同じにするコマンドです。簡単に言うと、｛生きている逃走者の合計人数｝を｛表示する用のスコア｝に代入するということです。 ゲーム終了検知コマンド一覧 execute if score @e[name=\"nokori\",limit=1] cd2 matches 0 unless entity @a[tag=fsh] run function imuzen127x2:com99 execute if score @e[name=\"nokori\",limit=1] cd2 matches 0 run gamemode adventure @a[scores={cd2=0}] execute if score @e[name=\"nokori\",limit=1] cd2 matches 0 run tag @a add stop execute if entity @a[tag=fsh] run function imuzen127x2:com100 １行目 execute if score @e[name=\"nokori\",limit=1] cd2 matches 0 unless entity @a[tag=fsh] run function imuzen127x2:com99 上記は｛「nokori」という名前のエンティティ1体の「cd2」スコアが0｝であり、さらに｛ワールド内に「fsh」というタグを持っている人がいなかった｝場合にファンクション「com99」を実行するコマンドです。簡単に言うと、残り時間が0秒になって逃走者が1人でも生き残っていたとき、｛逃走者の勝利｝のファンクションを実行するということです。 ２行目 execute if score @e[name=\"nokori\",limit=1] cd2 matches 0 run gamemode adventure @a[scores={cd2=0}] 上記は｛「nokori」という名前のエンティティ1体の「cd2」スコアが0｝の場合に「cd2」スコアが0の人、全員をアドベンチャーモードにするコマンドです。簡単に言うと、残り時間が0秒になったとき、全員のゲームモードをアドベンチャーモードに変えるということです。 ３行目 execute if score @e[name=\"nokori\",limit=1] cd2 matches 0 run tag @a add stop 上記は｛「nokori」という名前のエンティティ1体の「cd2」スコアが0｝の場合に「stop」というタグを全員につけるコマンドです。この操作により、下の画像のメッセージが無限に出続けることを防ぎます。 ４行目 execute if entity @a[tag=fsh] run function imuzen127x2:com100 上記はワールド内に「fsh」のタグを持っている人がいたら、ファンクション「com100」を実行するコマンドです。簡単に言うと、逃走者が時間内に全員倒されたとき、｛鬼の勝利｝のファンクションを実行するということです。 まとめ これらのコマンドによって、逃走者の残りの人数の検知とゲームの終了検知(逃走者が勝ったのか、鬼が勝ったのか)がされます。今回はこれで終わりです。",
+  "featuredImage": "/2023/09/スクリーンショット-2023-09-14-200335-1024x801.png",
+  "link": "https://if-juku.net/?p=1406",
+  "date": "2023-09-14",
+  "author": "akitaclark0731-03@gmail.com",
+  "categories": [
+    "Minecraft",
+    "Minecraft Java",
+    "鬼ごっこ"
+  ]
+}

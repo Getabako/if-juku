@@ -1,0 +1,14 @@
+{
+  "id": 1249,
+  "title": "Minecraft summonコマンド使い方",
+  "excerpt": "Minecraftでよく使われる、summonコマンドの使い方について説明します。ここではsummonコマンドを使って、様々な物を出したいと思います。 ※イメージ ①自分の好きなMobを出してみよう！ ここでは例として、ゾンビを出したいと思います。コマンドの構成は以下の通りです。 /summon minecraft:zombie ~ ~ ~ このzombieの部分をいろんなモブに変えると他のモブを...",
+  "content": "Minecraftでよく使われる、summonコマンドの使い方について説明します。ここではsummonコマンドを使って、様々な物を出したいと思います。 ※イメージ ①自分の好きなMobを出してみよう！ ここでは例として、ゾンビを出したいと思います。コマンドの構成は以下の通りです。 /summon minecraft:zombie ~ ~ ~ このzombieの部分をいろんなモブに変えると他のモブを召喚できます。とても便利なので、早速やってみましょう。 ②腕付きの防具立てを出してみよう！ Minecraft統合版では最初から防具立てに腕がついていますが、Javaだとデフォルトではついていません。なのでsummonコマンドを使って腕付きの防具立てを出してみましょうコマンドの構成は以下の通りです。 /summon armor_stand ~ ~ ~ {ShowArms:1b} ③村人を高いところから落としてみよう！ 次に村人を高いところから落としてみましょう！コマンドの構成は以下の通りです。 /summon minecraft:villager ~ 100 ~ 音量注意！ 先ほどと同じでvillagerの部分を他のモブやエンティティに変えることができます。楽しいので早速やってみましょう！ ➃ウィザーを召喚して最強の武器で倒そう！ まずはウィザーを召喚しましょう！コマンドの構成は以下の通りです。 /summon minecraft:wither 戦いをご覧下さい！ この防具はgiveコマンドの使い方の最後に紹介した最強の防具です。こちらをご参照ください→Minecraft giveコマンド使い方（最強の防具） 今回はこれで終わりです！ありがとうございました！",
+  "featuredImage": "/2023/09/image-1024x626.png",
+  "link": "https://if-juku.net/2023/09/01/minecraft-summon%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e4%bd%bf%e3%81%84%e6%96%b9/",
+  "date": "2023-09-01",
+  "author": "akitaclark0731-01@gmail.com",
+  "categories": [
+    "Minecraft",
+    "Minecraft Java"
+  ]
+}

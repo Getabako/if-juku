@@ -1,0 +1,14 @@
+{
+  "id": 1235,
+  "title": "Minecraft giveコマンド使い方（最強の防具）",
+  "excerpt": "Minecraftですごく使われる、giveコマンドについて説明します。ここではgiveコマンドを使った最強の防具の作り方も説明します。 ①自分に何かを64個(本)与えよう！ 今回は例として自分に木の棒を64本与えて見ます。コマンドの構成は以下の通りです。 /give @p minecraft:stick 64 早速やってみましょう！ ②自分にエンチャントした物を与えよう！ 今回は例として鉄の剣に...",
+  "content": "Minecraftですごく使われる、giveコマンドについて説明します。ここではgiveコマンドを使った最強の防具の作り方も説明します。 ①自分に何かを64個(本)与えよう！ 今回は例として自分に木の棒を64本与えて見ます。コマンドの構成は以下の通りです。 /give @p minecraft:stick 64 早速やってみましょう！ ②自分にエンチャントした物を与えよう！ 今回は例として鉄の剣にアンデット特攻X(10)が付与されたものを与えてみます。コマンドの構成は以下の通りです。 /give @p minecraft:iron_sword{Enchantments:[{id:smite,lvl:10}]} 様々な場所で使えるのでやってみましょう！ ③超吹き飛ばしクワを作って見よう！ 作り方は先ほどと似ています。今回はネザライトのクワにノックバック255を付与した物を作ります。 /give @p minecraft:netherite_hoe{Enchantments:[{id:knockback,lvl:255}]} いろんなモブを吹き飛ばしてみましょう！ ④応用編 最強の防具を作って見よう！ こちらも作り方は先ほどと似ています。ただコマンドがとても長いです！なのでコマンドブロックを使用してください /give @p minecraft:netherite_chestplate{display:{Name:\"\\\"硬ーいEXチェスト\\\"\"},Unbreakable:1,Enchantments:[{id:protection,lvl:300},{id:fire_protection,lvl:300},{id:blast_protection,lvl:300},{id:projectile_protection,lvl:300},{id:thorns,lvl:10},{id:unbreaking,lvl:10},{id:mending,lvl:1}],AttributeModifiers:[{AttributeName:\"generic.knockback_resistance\",Amount:10000000,Operation:0,Slot:\"chest\",UUID:[I;297934022,424137630,159327868,874659968]},{AttributeName:\"generic.armor\",Amount:100000000,Operation:0,Slot:\"chest\",UUID:[I;-256974500,-789329013,-539574267,-389066117]},{AttributeName:\"generic.armor_toughness\",Amount:100000000,Operation:0,Slot:\"chest\",UUID:[I;-632615720,-679947546,657657105,-408875057]}]} 最強の防具を作って強くなりましょう！ ⑤番外編 最強の武器シリーズ 最強の武器シリーズはこちらMinecraftで最強の武器を作ろう！",
+  "featuredImage": "/2023/08/image-4-1024x141.png",
+  "link": "https://if-juku.net/2023/08/31/minecraft-give%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e4%bd%bf%e3%81%84%e6%96%b9%ef%bc%88%e6%9c%80%e5%bc%b7%e3%81%ae%e9%98%b2%e5%85%b7%ef%bc%89/",
+  "date": "2023-08-31",
+  "author": "akitaclark0731-01@gmail.com",
+  "categories": [
+    "Minecraft",
+    "Minecraft Java"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "id": 1339,
+  "title": "Minecraft clearコマンド使い方",
+  "excerpt": "Minecraftのclearコマンドの使い方を説明します。※Minecraft 1.20.1でのやり方です。 ①自分のアイテムを全て消してみよう！ まずは自分の手持ちのアイテムを全て消してみましょう！コマンドの構文は以下の通りです。 /clear 早速やってみましょう！ ②特定のアイテムを消してみよう！ 次に特定のアテイムを消してみよう！今回は例としてエメラルドブロックを消してみます。コマンドの...",
+  "content": "Minecraftのclearコマンドの使い方を説明します。※Minecraft 1.20.1でのやり方です。 ①自分のアイテムを全て消してみよう！ まずは自分の手持ちのアイテムを全て消してみましょう！コマンドの構文は以下の通りです。 /clear 早速やってみましょう！ ②特定のアイテムを消してみよう！ 次に特定のアテイムを消してみよう！今回は例としてエメラルドブロックを消してみます。コマンドの構文は以下の通りです。 /clear @p minecraft:emerald_block minecraft:emerald_blockの部分を違うアイテムにすると違うアイテムを消すことができます。 ③特定のアイテムの個数を指定して消してみよう！ 次に特定のアイテムの個数を指定して消してみよう！今回はダイヤモンドブロックを1152個消してみます。コマンドの構文は以下の通りです /clear uzmkyama minecraft:diamond_block 1152 この1152の部分を他の数字に変えるとその個数分消えます。",
+  "featuredImage": null,
+  "link": "https://if-juku.net/2023/09/05/minecraft-clear%e3%82%b3%e3%83%9e%e3%83%b3%e3%83%89%e4%bd%bf%e3%81%84%e6%96%b9/",
+  "date": "2023-09-05",
+  "author": "akitaclark0731-03@gmail.com",
+  "categories": [
+    "Minecraft",
+    "Minecraft Java"
+  ]
+}

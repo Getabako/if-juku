@@ -28,15 +28,15 @@ export interface CategoryIndex {
 }
 
 export interface MainIndex {
-  categories: {
-    [key: string]: {
-      name: string;
-      count: number;
-      latest_post: string | null;
-    };
-  };
-  total_posts: number;
-  updated_at: string;
+  posts: {
+    id: number;
+    title: string;
+    date: string;
+    category: string;
+    excerpt: string;
+  }[];
+  categories: string[];
+  total: number;
 }
 
 // 動的インポート用の関数
@@ -62,9 +62,9 @@ export const loadMainIndex = async (): Promise<MainIndex> => {
   } catch (error) {
     console.error('Failed to load main index:', error);
     return {
-      categories: {},
-      total_posts: 0,
-      updated_at: new Date().toISOString()
+      posts: [],
+      categories: [],
+      total: 0
     };
   }
 };
@@ -210,7 +210,7 @@ export const loadAllPosts = async (limit?: number): Promise<Post[]> => {
     const allPosts: Post[] = [];
     
     // 全カテゴリから記事を取得
-    for (const categoryName of Object.keys(mainIndex.categories)) {
+    for (const categoryName of mainIndex.categories) {
       const categoryIndex = await loadCategoryIndex(categoryName);
       
       for (const post of categoryIndex.posts) {
