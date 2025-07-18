@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { theme } from '../../styles/theme';
@@ -117,43 +117,60 @@ const CharacterName = styled.div`
   text-shadow: ${theme.colors.glow.blue};
 `;
 
+const QuestionButtonsContainer = styled.div`
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin: 1rem;
+    width: calc(100% - 2rem);
+  }
+  
+  @media (min-width: ${theme.breakpoints.mobile}) {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+`;
+
 const QuestionButtonsLeft = styled.div`
-  position: absolute;
-  left: 2rem;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 280px;
+  @media (min-width: ${theme.breakpoints.mobile}) {
+    position: absolute;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 280px;
+    z-index: 10;
+  }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    position: static;
-    transform: none;
-    max-width: 100%;
-    margin: 1rem 0;
+    display: contents;
   }
 `;
 
 const QuestionButtonsRight = styled.div`
-  position: absolute;
-  right: 2rem;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  max-width: 280px;
+  @media (min-width: ${theme.breakpoints.mobile}) {
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 280px;
+    z-index: 10;
+  }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    position: static;
-    transform: none;
-    max-width: 100%;
-    margin: 1rem 0;
+    display: contents;
   }
 `;
 
-const QuestionButton = styled(motion.button)`
+const QuestionButton = styled.button`
   background: rgba(0, 0, 0, 0.8);
   border: 2px solid ${theme.colors.primary.main};
   color: ${theme.colors.text.primary};
@@ -161,46 +178,65 @@ const QuestionButton = styled(motion.button)`
   border-radius: 10px;
   font-size: 0.9rem;
   cursor: pointer;
-  text-align: left;
-  transition: all ${theme.animations.duration.normal};
+  text-align: center;
+  transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 100;
   
   &:hover {
-    background: rgba(0, 255, 255, 0.1);
-    transform: translateX(5px);
+    background: rgba(0, 255, 255, 0.2);
+    transform: scale(1.05);
     box-shadow: 0 0 15px ${theme.colors.primary.main};
   }
   
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  &:active {
+    transform: scale(0.95);
   }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    font-size: 0.8rem;
-    padding: 0.8rem;
+    font-size: 0.7rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.2;
+  }
+  
+  @media (min-width: ${theme.breakpoints.mobile}) {
+    text-align: left;
+    &:hover {
+      transform: translateX(5px);
+    }
   }
 `;
 
-const MessageWindow = styled(motion.div)`
+const MessageWindow = styled.div`
   position: fixed;
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
   max-width: 800px;
-  height: 200px;
-  background: rgba(0, 0, 0, 0.9);
+  min-height: 150px;
+  background: rgba(0, 0, 0, 0.95);
   border: 3px solid ${theme.colors.primary.main};
   border-radius: 15px;
   padding: 1.5rem;
   backdrop-filter: blur(10px);
-  box-shadow: 0 0 30px ${theme.colors.primary.main};
-  z-index: 10;
+  box-shadow: 
+    0 0 30px ${theme.colors.primary.main},
+    inset 0 0 20px rgba(0, 255, 255, 0.1);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     width: 95%;
-    height: 150px;
+    min-height: 120px;
     padding: 1rem;
     bottom: 1rem;
   }
@@ -252,9 +288,10 @@ const FAQ = () => {
   const [currentMessage, setCurrentMessage] = useState('');
   const [displayedText, setDisplayedText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [showContinue, setShowContinue] = useState(false);
   const [isTalking, setIsTalking] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const typingIntervalRef = useRef(null);
+  const mouthAnimationIntervalRef = useRef(null);
 
   const faqs = [
     {
@@ -289,64 +326,54 @@ const FAQ = () => {
     }
   ];
 
-  // 口パクアニメーション用の画像切り替え
+  // 口パクアニメーション
   useEffect(() => {
-    let interval;
+    if (mouthAnimationIntervalRef.current) {
+      clearInterval(mouthAnimationIntervalRef.current);
+    }
+    
     if (isTalking) {
-      interval = setInterval(() => {
+      mouthAnimationIntervalRef.current = setInterval(() => {
         setCurrentImageIndex(prev => prev === 0 ? 1 : 0);
-      }, 200); // 200msごとに切り替え
+      }, 150);
     } else {
-      setCurrentImageIndex(0); // 話していない時は口を閉じた状態
+      setCurrentImageIndex(0);
     }
     
     return () => {
-      if (interval) clearInterval(interval);
+      if (mouthAnimationIntervalRef.current) {
+        clearInterval(mouthAnimationIntervalRef.current);
+      }
     };
   }, [isTalking]);
 
-  // タイピングアニメーション
-  useEffect(() => {
-    if (!currentMessage || !isTyping) {
-      console.log('Typing effect skipped:', { currentMessage, isTyping });
-      return;
+  // タイピング効果
+  const startTyping = (message) => {
+    // 既存のタイピングをクリア
+    if (typingIntervalRef.current) {
+      clearInterval(typingIntervalRef.current);
     }
-
-    console.log('Starting typing animation for:', currentMessage);
-    let index = 0;
+    
     setDisplayedText('');
+    setIsTyping(true);
     setIsTalking(true);
     
-    const typingInterval = setInterval(() => {
-      if (index < currentMessage.length) {
-        setDisplayedText(prev => prev + currentMessage[index]);
+    let index = 0;
+    typingIntervalRef.current = setInterval(() => {
+      if (index < message.length) {
+        setDisplayedText(message.substring(0, index + 1));
         index++;
       } else {
-        console.log('Typing completed');
-        clearInterval(typingInterval);
+        clearInterval(typingIntervalRef.current);
         setIsTyping(false);
         setIsTalking(false);
-        setShowContinue(true);
       }
-    }, 50); // 50msごとに1文字追加
-
-    return () => clearInterval(typingInterval);
-  }, [currentMessage, isTyping]);
-
-  const handleQuestionClick = (faq) => {
-    if (isTyping) return; // タイピング中は無効
-    
-    console.log('Question clicked:', faq.question); // デバッグログ
-    setShowContinue(false);
-    setCurrentMessage(faq.answer);
-    setDisplayedText(''); // 表示テキストをクリア
-    setIsTyping(true);
+    }, 50);
   };
 
-  const handleContinue = () => {
-    setShowContinue(false);
-    setCurrentMessage('');
-    setDisplayedText('');
+  const handleQuestionClick = (faq) => {
+    setCurrentMessage(faq.answer);
+    startTyping(faq.answer);
   };
 
   const getCharacterImage = () => {
@@ -368,33 +395,29 @@ const FAQ = () => {
       </SectionTitle>
 
       <GameArea>
-        <QuestionButtonsLeft>
-          {faqs.slice(0, 3).map((faq) => (
-            <QuestionButton
-              key={faq.id}
-              onClick={() => handleQuestionClick(faq)}
-              disabled={isTyping}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              {faq.question}
-            </QuestionButton>
-          ))}
-        </QuestionButtonsLeft>
+        <QuestionButtonsContainer>
+          <QuestionButtonsLeft>
+            {faqs.slice(0, 3).map((faq) => (
+              <QuestionButton
+                key={faq.id}
+                onClick={() => handleQuestionClick(faq)}
+              >
+                {faq.question}
+              </QuestionButton>
+            ))}
+          </QuestionButtonsLeft>
 
-        <QuestionButtonsRight>
-          {faqs.slice(3, 6).map((faq) => (
-            <QuestionButton
-              key={faq.id}
-              onClick={() => handleQuestionClick(faq)}
-              disabled={isTyping}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              {faq.question}
-            </QuestionButton>
-          ))}
-        </QuestionButtonsRight>
+          <QuestionButtonsRight>
+            {faqs.slice(3, 6).map((faq) => (
+              <QuestionButton
+                key={faq.id}
+                onClick={() => handleQuestionClick(faq)}
+              >
+                {faq.question}
+              </QuestionButton>
+            ))}
+          </QuestionButtonsRight>
+        </QuestionButtonsContainer>
 
         <CharacterArea>
           <CharacterContainer>
@@ -414,29 +437,13 @@ const FAQ = () => {
         </CharacterArea>
       </GameArea>
 
-      <AnimatePresence>
-        {(currentMessage || displayedText) && (
-          <MessageWindow
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <MessageText>
-              {displayedText}
-            </MessageText>
-            
-            {showContinue && (
-              <ContinuePrompt
-                onClick={handleContinue}
-                style={{ cursor: 'pointer' }}
-              >
-                ▼ クリックして続ける
-              </ContinuePrompt>
-            )}
-          </MessageWindow>
-        )}
-      </AnimatePresence>
+      {currentMessage && (
+        <MessageWindow>
+          <MessageText>
+            {displayedText}
+          </MessageText>
+        </MessageWindow>
+      )}
     </FAQContainer>
   );
 };
