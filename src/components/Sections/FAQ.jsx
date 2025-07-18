@@ -105,17 +105,6 @@ const CharacterImage = styled(motion.img)`
   }
 `;
 
-const CharacterName = styled.div`
-  background: rgba(0, 0, 0, 0.8);
-  color: ${theme.colors.primary.main};
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
-  margin-top: 1rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border: 2px solid ${theme.colors.primary.main};
-  text-shadow: ${theme.colors.glow.blue};
-`;
 
 const QuestionButtonsContainer = styled.div`
   @media (max-width: ${theme.breakpoints.mobile}) {
@@ -372,6 +361,8 @@ const FAQ = () => {
   };
 
   const handleQuestionClick = (faq) => {
+    console.log('Button clicked:', faq.question);
+    console.log('Setting message:', faq.answer);
     setCurrentMessage(faq.answer);
     startTyping(faq.answer);
   };
@@ -432,7 +423,6 @@ const FAQ = () => {
                 repeat: isTalking ? Infinity : 0 
               }}
             />
-            <CharacterName>げたばこ</CharacterName>
           </CharacterContainer>
         </CharacterArea>
       </GameArea>
@@ -440,10 +430,18 @@ const FAQ = () => {
       {currentMessage && (
         <MessageWindow>
           <MessageText>
-            {displayedText}
+            {displayedText || "メッセージを読み込み中..."}
           </MessageText>
         </MessageWindow>
       )}
+      
+      {/* デバッグ用の情報表示 */}
+      <div style={{position: 'fixed', top: '10px', left: '10px', background: 'rgba(0,0,0,0.8)', color: 'white', padding: '10px', fontSize: '12px', zIndex: 20000}}>
+        <div>currentMessage: {currentMessage ? 'あり' : 'なし'}</div>
+        <div>displayedText: {displayedText || 'なし'}</div>
+        <div>isTyping: {isTyping ? 'はい' : 'いいえ'}</div>
+        <div>isTalking: {isTalking ? 'はい' : 'いいえ'}</div>
+      </div>
     </FAQContainer>
   );
 };
