@@ -117,7 +117,7 @@ const CharacterName = styled.div`
   text-shadow: ${theme.colors.glow.blue};
 `;
 
-const QuestionButtons = styled.div`
+const QuestionButtonsLeft = styled.div`
   position: absolute;
   left: 2rem;
   top: 50%;
@@ -125,13 +125,31 @@ const QuestionButtons = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 300px;
+  max-width: 280px;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     position: static;
     transform: none;
     max-width: 100%;
-    margin: 2rem 0;
+    margin: 1rem 0;
+  }
+`;
+
+const QuestionButtonsRight = styled.div`
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 280px;
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    position: static;
+    transform: none;
+    max-width: 100%;
+    margin: 1rem 0;
   }
 `;
 
@@ -289,8 +307,12 @@ const FAQ = () => {
 
   // タイピングアニメーション
   useEffect(() => {
-    if (!currentMessage || !isTyping) return;
+    if (!currentMessage || !isTyping) {
+      console.log('Typing effect skipped:', { currentMessage, isTyping });
+      return;
+    }
 
+    console.log('Starting typing animation for:', currentMessage);
     let index = 0;
     setDisplayedText('');
     setIsTalking(true);
@@ -300,6 +322,7 @@ const FAQ = () => {
         setDisplayedText(prev => prev + currentMessage[index]);
         index++;
       } else {
+        console.log('Typing completed');
         clearInterval(typingInterval);
         setIsTyping(false);
         setIsTalking(false);
@@ -313,8 +336,10 @@ const FAQ = () => {
   const handleQuestionClick = (faq) => {
     if (isTyping) return; // タイピング中は無効
     
+    console.log('Question clicked:', faq.question); // デバッグログ
     setShowContinue(false);
     setCurrentMessage(faq.answer);
+    setDisplayedText(''); // 表示テキストをクリア
     setIsTyping(true);
   };
 
@@ -343,8 +368,8 @@ const FAQ = () => {
       </SectionTitle>
 
       <GameArea>
-        <QuestionButtons>
-          {faqs.map((faq) => (
+        <QuestionButtonsLeft>
+          {faqs.slice(0, 3).map((faq) => (
             <QuestionButton
               key={faq.id}
               onClick={() => handleQuestionClick(faq)}
@@ -355,7 +380,21 @@ const FAQ = () => {
               {faq.question}
             </QuestionButton>
           ))}
-        </QuestionButtons>
+        </QuestionButtonsLeft>
+
+        <QuestionButtonsRight>
+          {faqs.slice(3, 6).map((faq) => (
+            <QuestionButton
+              key={faq.id}
+              onClick={() => handleQuestionClick(faq)}
+              disabled={isTyping}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {faq.question}
+            </QuestionButton>
+          ))}
+        </QuestionButtonsRight>
 
         <CharacterArea>
           <CharacterContainer>
@@ -376,7 +415,7 @@ const FAQ = () => {
       </GameArea>
 
       <AnimatePresence>
-        {currentMessage && (
+        {(currentMessage || displayedText) && (
           <MessageWindow
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
