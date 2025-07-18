@@ -244,6 +244,7 @@ const Materials = () => {
         const indexModule = await import('../../data/posts/minecraft/index.json');
         const posts = indexModule.default.posts;
         
+        console.log('Loaded minecraft posts:', posts); // デバッグログ
         // 最新の投稿を取得（日付順にソート済み）
         setMinecraftPosts(posts);
       } catch (error) {
@@ -307,6 +308,7 @@ const Materials = () => {
   };
 
   const handleCardClick = (postId) => {
+    console.log('Card clicked, navigating to:', `/post/${postId}`); // デバッグログ
     navigate(`/post/${postId}`);
   };
 

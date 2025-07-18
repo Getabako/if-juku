@@ -283,6 +283,7 @@ const News = () => {
         const indexModule = await import('../../data/posts/news/index.json');
         const posts = indexModule.default.posts;
         
+        console.log('Loaded news posts:', posts); // デバッグログ
         // 最新の投稿を取得（日付順にソート済み）
         setNewsPosts(posts);
       } catch (error) {
@@ -352,6 +353,7 @@ const News = () => {
   };
 
   const handleCardClick = (postId) => {
+    console.log('News card clicked, navigating to:', `/post/${postId}`); // デバッグログ
     navigate(`/post/${postId}`);
   };
 
