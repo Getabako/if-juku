@@ -203,6 +203,49 @@ export const loadNewsPosts = async (limit: number = 12): Promise<Post[]> => {
   }
 };
 
+// 記事IDからカテゴリーを特定する関数
+export const findPostCategory = async (postId: number): Promise<string | null> => {
+  const categories = ['minecraft', 'news', 'blog', 'ai-lectures', 'others'];
+  
+  for (const category of categories) {
+    try {
+      const categoryIndex = await loadCategoryIndex(category);
+      const post = categoryIndex.posts.find(p => p.id === postId);
+      if (post) {
+        return category;
+      }
+    } catch (error) {
+      console.error(`Failed to check category ${category}:`, error);
+    }
+  }
+  
+  return null;
+};
+
+// 記事IDから詳細データを取得する関数
+export const loadPostById = async (postId: number): Promise<Post | null> => {
+  try {
+    const category = await findPostCategory(postId);
+    if (!category) {
+      console.error(`Post with ID ${postId} not found in any category`);
+      return null;
+    }
+    
+    const categoryIndex = await loadCategoryIndex(category);
+    const postMeta = categoryIndex.posts.find(p => p.id === postId);
+    if (!postMeta) {
+      console.error(`Post metadata for ID ${postId} not found`);
+      return null;
+    }
+    
+    const module = await import(`../data/posts/${category}/${postMeta.filename}`);
+    return module.default;
+  } catch (error) {
+    console.error(`Failed to load post with ID ${postId}:`, error);
+    return null;
+  }
+};
+
 // 全カテゴリの記事を取得
 export const loadAllPosts = async (limit?: number): Promise<Post[]> => {
   try {

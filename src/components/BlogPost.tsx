@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import type { Post } from '../utils/postLoader';
+import { loadPostById, type Post } from '../utils/postLoader';
 import './BlogPost.css';
 
 const BlogPost: React.FC = () => {
@@ -16,34 +16,18 @@ const BlogPost: React.FC = () => {
       
       try {
         setLoading(true);
+        setError(null);
         
-        // カテゴリ別フォルダから記事を検索
-        const categories = ['ai-lectures', 'blog', 'others'];
-        let foundPost: Post | null = null;
-        
-        for (const category of categories) {
-          try {
-            // カテゴリのindexを読み込み
-            const indexModule = await import(`../data/posts/${category}/index.json`);
-            const index = indexModule.default;
-            
-            // 該当する記事を検索
-            const postInfo = index.posts.find((p: any) => p.id === parseInt(id));
-            
-            if (postInfo) {
-              // 記事詳細を読み込み
-              const postModule = await import(`../data/posts/${category}/${postInfo.filename}`);
-              foundPost = postModule.default;
-              break;
-            }
-          } catch (err) {
-            console.log(`Category ${category} not found or empty`);
-          }
+        const postId = parseInt(id);
+        if (isNaN(postId)) {
+          setError('無効な記事IDです');
+          return;
         }
+        
+        const foundPost = await loadPostById(postId);
         
         if (foundPost) {
           setPost(foundPost);
-          setError(null);
         } else {
           setError('記事が見つかりませんでした');
         }
