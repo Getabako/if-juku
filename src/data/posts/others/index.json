@@ -5,28 +5,28 @@
       "id": 4078,
       "title": "怖い話を書いてみた",
       "date": "2024-10-23",
-      "excerpt": "自分が体験した怖い話を綴りたくなったので書いてみます。 話の概要 これは、今から12、3年前、私が大学院生から社会人一年目にかけて体験した出来事です。当時住んでいたアパートでの話になります。 アパートに住むまでの経緯 大学を卒業し、大学院進学を控えていた私は、学業に集中したくて大学の近くで物件を探していました。私は大学生の頃からサークルの代表を務めていて、大学の近くの後輩の家でしょっちゅう飲み会を...",
+      "excerpt": "大学院生時代に体験した本当に怖い話を紹介。\n12、3年前のアパートでの不可思議な出来事です。",
       "filename": "4078.json"
     },
     {
       "id": 3020,
       "title": "Minecraft if鬼ごっこの作り方③(Minecraft java 1.20.1)",
       "date": "2024-05-07",
-      "excerpt": "if鬼ごっこの作り方②のほうでは鬼と逃走者をチームとタグで管理するのをしましたが、今回は逃走者が鬼に捕まった時の処理と人数を数える処理を紹介していきます。 firsta.mcfunction 「firsta.mcfunction」の中に以下のコマンドを追加します。 scoreboard objectives add gaming1 dummy \"\" scoreboard objectives ad...",
+      "excerpt": "if鬼ごっこの作り方第3弾。逃走者が捕まった時の処理を解説。\nゲーム進行に必要な人数カウント機能を学べます。",
       "filename": "3020.json"
     },
     {
       "id": 3414,
       "title": "GSAPに関する備忘録",
       "date": "2024-04-25",
-      "excerpt": "環境構築(WordPressの場合) https://gsap.comのGet GSAPよりダウンロードし、\"WordPressのテーマ名\"/jsに保存する。※jsフォルダが無い場合は作成する。 以下スクリプトをfunction.phpに追記し、GSAPを適用 function add_gsap_to_wordpress() { // GSAPのパスを指定 wp_register_script('...",
+      "excerpt": "Webアニメーションライブラリ・GSAPの備忘録。\nWordPressでの環境構築や基本的な使い方を記録しました。",
       "filename": "3414.json"
     },
     {
       "id": 2705,
       "title": "スコアボード,下書き",
       "date": "2024-03-06",
-      "excerpt": "Minecraftのコマンドでよく使われるスコアボードの使い方ついて解説します。",
+      "excerpt": "Minecraftコマンドの基本・スコアボードの使い方を解説。\nゲーム制作に欠かせないスコア管理の基礎を学べます。",
       "filename": "2705.json"
     },
     {
