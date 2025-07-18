@@ -1,8 +1,8 @@
 .blog-post-container {
-  min-height: 100vh;
   background: linear-gradient(135deg, #0a0a23 0%, #1a1a3a 50%, #2a2a5a 100%);
   color: #fff;
   padding: 0;
+  overflow-y: auto;
 }
 
 .blog-post-loading {
