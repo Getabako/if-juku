@@ -42,7 +42,7 @@ const VideoOverlay = styled.div`
 const ContentWrapper = styled.div`
   position: relative;
   z-index: 2;
-  max-width: 900px;
+  max-width: 1200px;
   width: 100%;
   padding: 2rem;
   display: flex;
@@ -331,7 +331,12 @@ const Kitazuna = () => {
           
           <GameDescription variants={itemVariants} className="cyber-frame">
             <DescriptionText>
-              <HighlightText>未来の森を守る壮大なアドベンチャーゲーム</HighlightText>が、ついに開発開始！
+              <HighlightText>🎮 目的: 学んだスキルを作品として形にする</HighlightText>
+            </DescriptionText>
+            <DescriptionText>
+              ▶ <HighlightText>地域IP活用</HighlightText>のゲーム作成ツール<br/>
+              ▶ 秋田の伝統文化をテーマに<br/>
+              ▶ <HighlightText>収益化体験</HighlightText>も可能
             </DescriptionText>
             <DescriptionText>
               プレイヤーは森の守護者として、絆（きずな）の力で仲間と協力し、美しい自然を脅かす謎の敵に立ち向かいます。戦略とアクションが融合した新感覚のゲーム体験をお届けします。

@@ -42,7 +42,7 @@ const VideoOverlay = styled.div`
 const ContentWrapper = styled.div`
   position: relative;
   z-index: 2;
-  max-width: 800px;
+  max-width: 1200px;
   width: 100%;
   padding: 2rem;
   display: flex;
@@ -173,13 +173,14 @@ const CTAButton = styled(motion.button)`
 `;
 
 const FeatureList = styled(motion.div)`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
   margin-bottom: 3rem;
+  flex-wrap: wrap;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 1rem;
     margin-bottom: 2rem;
   }
@@ -189,9 +190,11 @@ const FeatureItem = styled(motion.div)`
   background: rgba(0, 255, 255, 0.1);
   border: 1px solid ${theme.colors.primary.main};
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 1rem 1.5rem;
   text-align: center;
   transition: all ${theme.animations.duration.normal};
+  min-width: 180px;
+  flex: 0 0 auto;
   
   &:hover {
     transform: translateY(-5px);
@@ -201,6 +204,8 @@ const FeatureItem = styled(motion.div)`
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     padding: 1rem;
+    min-width: auto;
+    flex: 1;
   }
 `;
 

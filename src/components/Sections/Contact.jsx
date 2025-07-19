@@ -80,36 +80,36 @@ const SectionTitle = styled(motion.h2)`
 `;
 
 const ContactGrid = styled(motion.div)`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin-bottom: 3rem;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
 `;
 
 const ContactCard = styled(motion.a)`
-  background: rgba(26, 26, 26, 0.9);
-  border: 2px solid ${theme.colors.primary.main};
-  border-radius: 12px;
-  padding: 2rem;
+  background: transparent;
+  border: none;
+  border-radius: 50px;
+  padding: 0;
   text-decoration: none;
   color: inherit;
   position: relative;
   overflow: hidden;
   transition: all ${theme.animations.duration.normal};
-  backdrop-filter: blur(10px);
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
   cursor: pointer;
+  height: 80px;
   
+  /* Neon tube effect */
   &::before {
     content: '';
     position: absolute;
@@ -117,168 +117,85 @@ const ContactCard = styled(motion.a)`
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      135deg,
-      transparent 40%,
-      rgba(0, 255, 255, 0.1) 50%,
-      transparent 60%
+    background: linear-gradient(90deg, 
+      #ff0080, #7928ca, #0070f3, #00dfd8, #ff0080
     );
-    transform: translateX(-100%);
-    transition: transform 0.6s;
+    background-size: 400% 100%;
+    border-radius: 50px;
+    z-index: -1;
+    animation: neon-flow 3s linear infinite;
+  }
+  
+  /* Inner background */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    right: 3px;
+    bottom: 3px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 47px;
+    z-index: 0;
   }
   
   &:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
-    
-    &::before {
-      transform: translateX(100%);
-    }
+    transform: scale(1.02);
+    box-shadow: 
+      0 0 30px rgba(255, 0, 128, 0.6),
+      0 0 60px rgba(121, 40, 202, 0.4),
+      0 0 90px rgba(0, 112, 243, 0.3);
+  }
+  
+  @keyframes neon-flow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
   }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    padding: 1.5rem;
+    height: 70px;
+  }
+`;
+
+const ContactContent = styled.div`
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 2rem;
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    padding: 0 1rem;
   }
 `;
 
 const ContactIcon = styled.div`
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, ${theme.colors.primary.main}, ${theme.colors.secondary.main});
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 2rem;
-  margin-bottom: 1rem;
-  position: relative;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(circle, transparent 30%, rgba(255, 255, 255, 0.2) 70%);
-    transform: translate(-50%, -50%);
-    animation: pulse-glow 2s ease-in-out infinite;
-  }
-  
-  @keyframes pulse-glow {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
-  }
+  margin-right: 1rem;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    width: 60px;
-    height: 60px;
     font-size: 1.5rem;
+    margin-right: 0.5rem;
   }
 `;
 
 const ContactTitle = styled.h3`
   font-size: 1.3rem;
-  color: ${theme.colors.primary.main};
-  margin-bottom: 0.5rem;
+  color: white;
+  margin: 0;
   font-family: ${theme.fonts.secondary};
   font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 1.1rem;
   }
 `;
 
-const ContactDescription = styled.p`
-  font-size: 0.9rem;
-  color: ${theme.colors.text.secondary};
-  line-height: 1.5;
-  margin-bottom: 1rem;
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    font-size: 0.8rem;
-    margin-bottom: 0.5rem;
-  }
-`;
-
-const ContactButton = styled.div`
-  position: relative;
-  background: transparent;
-  border: 2px solid;
-  border-image: linear-gradient(90deg, #ff0080, #7928ca, #0070f3, #00dfd8, #ff0080) 1;
-  color: white;
-  padding: 0.8rem 2rem;
-  border-radius: 25px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  overflow: hidden;
-  transition: all ${theme.animations.duration.normal};
-  
-  /* Neon glow effect */
-  box-shadow: 
-    0 0 10px rgba(255, 0, 128, 0.3),
-    0 0 20px rgba(121, 40, 202, 0.2),
-    0 0 30px rgba(0, 112, 243, 0.1),
-    inset 0 0 10px rgba(0, 223, 216, 0.1);
-  
-  /* Animated border */
-  &::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(90deg, 
-      #ff0080, #7928ca, #0070f3, #00dfd8, #ff0080
-    );
-    background-size: 400% 100%;
-    border-radius: 25px;
-    z-index: -1;
-    animation: neon-border 3s linear infinite;
-  }
-  
-  /* Inner glow */
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, 
-      rgba(255, 0, 128, 0.1), 
-      rgba(121, 40, 202, 0.1), 
-      rgba(0, 112, 243, 0.1), 
-      rgba(0, 223, 216, 0.1)
-    );
-    border-radius: 23px;
-    z-index: -1;
-  }
-  
-  &:hover {
-    transform: scale(1.05) translateY(-2px);
-    box-shadow: 
-      0 0 20px rgba(255, 0, 128, 0.6),
-      0 0 40px rgba(121, 40, 202, 0.4),
-      0 0 60px rgba(0, 112, 243, 0.3),
-      0 10px 20px rgba(0, 0, 0, 0.3);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-  }
-  
-  @keyframes neon-border {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 400% 50%; }
-  }
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    padding: 0.6rem 1.5rem;
-    font-size: 0.8rem;
-  }
-`;
+// ContactButton component removed as it's now integrated into ContactCard
 
 const FooterInfo = styled(motion.div)`
   text-align: center;
@@ -390,18 +307,13 @@ const Contact = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="cyber-frame"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <ContactIcon>
-                  <span style={{ position: 'relative', zIndex: 1 }}>
-                    {contact.icon}
-                  </span>
-                </ContactIcon>
-                <ContactTitle>{contact.title}</ContactTitle>
-                <ContactDescription>{contact.description}</ContactDescription>
-                <ContactButton>{contact.buttonText}</ContactButton>
+                <ContactContent>
+                  <ContactIcon>{contact.icon}</ContactIcon>
+                  <ContactTitle>{contact.title}</ContactTitle>
+                </ContactContent>
               </ContactCard>
             ))}
           </ContactGrid>

@@ -198,6 +198,12 @@ const MessageContent = styled.div`
     margin-bottom: 1.8rem;
     font-weight: 500;
     letter-spacing: 0.05em;
+    text-shadow: 
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000,
+      0 0 10px rgba(0, 0, 0, 0.5);
     
     &:last-child {
       margin-bottom: 0;

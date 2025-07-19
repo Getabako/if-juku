@@ -123,26 +123,11 @@ const VideoCard = styled(motion.div)`
   }
 `;
 
-const VideoThumbnail = styled.div`
-  position: relative;
+const VideoEmbed = styled.iframe`
   width: 100%;
   height: 200px;
-  background: linear-gradient(135deg, ${theme.colors.primary.main}, ${theme.colors.secondary.main});
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 1;
-  }
+  border: none;
+  border-radius: 8px 8px 0 0;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     height: 150px;
@@ -274,33 +259,27 @@ const PlaceholderText = styled.div`
 `;
 
 const YouTube = () => {
-  // 最新の3つの動画を表示
+  // 実際のYouTube動画（埋め込み形式）
   const latestVideos = [
     {
       id: 1,
-      title: "【最新】if(塾)の革新的な学習メソッド - AIとプログラミングの融合",
-      description: "if(塾)の最新カリキュラムを紹介！AIを活用した効率的な学習方法と、実践的なプログラミングスキルの習得法を解説します。",
-      views: "5,432",
-      date: "2025/01/15",
-      thumbnail: "🚀",
+      title: "if(塾)チャンネル動画1",
+      description: "if(塾)の最新動画をお楽しみください。",
+      embedId: "dQw4w9WgXcQ", // 実際の動画IDに置き換える必要があります
       url: "https://www.youtube.com/@if-juku"
     },
     {
       id: 2,
-      title: "生徒作品紹介 - MinecraftでつくるAI都市計画",
-      description: "if(塾)の生徒が制作した驚きの作品！MinecraftとAIを組み合わせた未来都市の設計プロジェクトをご覧ください。",
-      views: "3,876",
-      date: "2025/01/12",
-      thumbnail: "🏙️",
+      title: "if(塾)チャンネル動画2", 
+      description: "if(塾)の学習内容や活動を紹介しています。",
+      embedId: "dQw4w9WgXcQ", // 実際の動画IDに置き換える必要があります
       url: "https://www.youtube.com/@if-juku"
     },
     {
       id: 3,
-      title: "初心者でも分かる！ChatGPTプログラミング入門",
-      description: "プログラミング未経験でも大丈夫！ChatGPTを使った効率的なコーディング手法を、if(塾)講師が分かりやすく解説します。",
-      views: "7,234",
-      date: "2025/01/08",
-      thumbnail: "🤖",
+      title: "if(塾)チャンネル動画3",
+      description: "if(塾)での学びの様子をご覧いただけます。",
+      embedId: "dQw4w9WgXcQ", // 実際の動画IDに置き換える必要があります
       url: "https://www.youtube.com/@if-juku"
     }
   ];
@@ -364,27 +343,16 @@ const YouTube = () => {
                 className="cyber-frame"
                 onClick={() => handleVideoClick(video.url)}
               >
-                <VideoThumbnail>
-                  <motion.div
-                    style={{ fontSize: '4rem', zIndex: 1 }}
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    {video.thumbnail}
-                  </motion.div>
-                  <PlayButton
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  />
-                </VideoThumbnail>
+                <VideoEmbed
+                  src={`https://www.youtube.com/embed/${video.embedId}`}
+                  title={video.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
                 
                 <VideoInfo>
                   <VideoTitle>{video.title}</VideoTitle>
                   <VideoDescription>{video.description}</VideoDescription>
-                  <VideoMeta>
-                    <ViewCount>{video.views}</ViewCount>
-                    <PublishDate>{video.date}</PublishDate>
-                  </VideoMeta>
                 </VideoInfo>
               </VideoCard>
             ))}
