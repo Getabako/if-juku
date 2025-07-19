@@ -203,21 +203,79 @@ const ContactDescription = styled.p`
 `;
 
 const ContactButton = styled.div`
-  background: linear-gradient(45deg, ${theme.colors.secondary.main}, ${theme.colors.secondary.dark});
-  color: ${theme.colors.background.primary};
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+  position: relative;
+  background: transparent;
+  border: 2px solid;
+  border-image: linear-gradient(90deg, #ff0080, #7928ca, #0070f3, #00dfd8, #ff0080) 1;
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
   font-size: 0.9rem;
   font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  overflow: hidden;
   transition: all ${theme.animations.duration.normal};
   
+  /* Neon glow effect */
+  box-shadow: 
+    0 0 10px rgba(255, 0, 128, 0.3),
+    0 0 20px rgba(121, 40, 202, 0.2),
+    0 0 30px rgba(0, 112, 243, 0.1),
+    inset 0 0 10px rgba(0, 223, 216, 0.1);
+  
+  /* Animated border */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(90deg, 
+      #ff0080, #7928ca, #0070f3, #00dfd8, #ff0080
+    );
+    background-size: 400% 100%;
+    border-radius: 25px;
+    z-index: -1;
+    animation: neon-border 3s linear infinite;
+  }
+  
+  /* Inner glow */
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+      rgba(255, 0, 128, 0.1), 
+      rgba(121, 40, 202, 0.1), 
+      rgba(0, 112, 243, 0.1), 
+      rgba(0, 223, 216, 0.1)
+    );
+    border-radius: 23px;
+    z-index: -1;
+  }
+  
   &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px ${theme.colors.secondary.main};
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 
+      0 0 20px rgba(255, 0, 128, 0.6),
+      0 0 40px rgba(121, 40, 202, 0.4),
+      0 0 60px rgba(0, 112, 243, 0.3),
+      0 10px 20px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+  
+  @keyframes neon-border {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
   }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    padding: 0.4rem 0.8rem;
+    padding: 0.6rem 1.5rem;
     font-size: 0.8rem;
   }
 `;

@@ -14,35 +14,107 @@ const MessageContainer = styled.section`
   background: ${theme.colors.background.primary};
 `;
 
-const LetterBackground = styled.div`
+const FireworksBackground = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
   overflow: hidden;
   z-index: 0;
-  opacity: 0.1;
+  
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: ${theme.colors.primary.main};
+    box-shadow:
+      0 0 20px ${theme.colors.primary.main},
+      0 0 40px ${theme.colors.primary.light};
+    animation: firework 4s ease-out infinite;
+  }
   
   &::before {
-    content: '✉️';
-    position: absolute;
-    top: 10%;
-    left: 15%;
-    font-size: 4rem;
-    animation: float-letter 6s ease-in-out infinite;
+    left: 20%;
+    animation-delay: 0s;
   }
   
   &::after {
-    content: '💌';
-    position: absolute;
-    bottom: 10%;
-    right: 15%;
-    font-size: 3rem;
-    animation: float-letter 6s ease-in-out infinite 3s;
+    right: 20%;
+    animation-delay: 2s;
   }
   
-  @keyframes float-letter {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-15px) rotate(10deg); }
+  @keyframes firework {
+    0% {
+      bottom: 0;
+      opacity: 1;
+      transform: scale(0);
+    }
+    10% {
+      bottom: 50%;
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      bottom: 100%;
+      opacity: 0;
+      transform: scale(30);
+      filter: blur(20px);
+    }
+  }
+`;
+
+const FireworkSpark = styled.div`
+  position: absolute;
+  pointer-events: none;
+  
+  &:nth-child(1) {
+    left: 30%;
+    animation: spark 3s ease-out infinite 0.5s;
+  }
+  
+  &:nth-child(2) {
+    left: 50%;
+    animation: spark 3s ease-out infinite 1.5s;
+  }
+  
+  &:nth-child(3) {
+    left: 70%;
+    animation: spark 3s ease-out infinite 2.5s;
+  }
+  
+  &::before {
+    content: '✨';
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0;
+    animation: sparkle 3s ease-out infinite;
+  }
+  
+  @keyframes spark {
+    0% {
+      bottom: 20%;
+      opacity: 0;
+    }
+    50% {
+      bottom: 60%;
+      opacity: 1;
+    }
+    100% {
+      bottom: 80%;
+      opacity: 0;
+    }
+  }
+  
+  @keyframes sparkle {
+    0%, 100% {
+      transform: scale(0) rotate(0deg);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1) rotate(180deg);
+      opacity: 1;
+    }
   }
 `;
 
@@ -116,14 +188,16 @@ const MessageCard = styled(motion.div)`
 `;
 
 const MessageContent = styled.div`
-  text-align: center;
+  text-align: left;
   color: ${theme.colors.text.primary};
-  line-height: 1.8;
-  font-size: 1.1rem;
+  line-height: 2;
+  font-size: 1.2rem;
   margin-bottom: 3rem;
   
   p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
     
     &:last-child {
       margin-bottom: 0;
@@ -131,9 +205,13 @@ const MessageContent = styled.div`
   }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    font-size: 1rem;
-    line-height: 1.6;
+    font-size: 1.1rem;
+    line-height: 1.8;
     margin-bottom: 2rem;
+    
+    p {
+      margin-bottom: 1.5rem;
+    }
   }
 `;
 
@@ -141,6 +219,13 @@ const HighlightText = styled.span`
   color: ${theme.colors.secondary.main};
   font-weight: bold;
   text-shadow: 0 0 10px ${theme.colors.secondary.main};
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(255, 107, 0, 0.1) 50%,
+    transparent 100%
+  );
+  padding: 0 0.5rem;
+  border-radius: 4px;
   animation: glow-pulse 2s ease-in-out infinite alternate;
   
   @keyframes glow-pulse {
@@ -254,7 +339,10 @@ const Message = () => {
 
   return (
     <MessageContainer id="message">
-      <LetterBackground />
+      <FireworksBackground />
+      <FireworkSpark />
+      <FireworkSpark />
+      <FireworkSpark />
       <FloatingParticles />
       
       <ContentWrapper>

@@ -56,7 +56,7 @@ const ComicBackground = styled.div`
 const ContentWrapper = styled.div`
   position: relative;
   z-index: 1;
-  max-width: 1200px;
+  max-width: 1400px;
   width: 100%;
   padding: 2rem;
   display: flex;
@@ -104,8 +104,8 @@ const SectionTitle = styled(motion.h2)`
 const ComicSlider = styled.div`
   position: relative;
   width: 100%;
-  max-width: 800px;
-  height: 600px;
+  max-width: 1200px;
+  height: 800px;
   background: rgba(26, 26, 26, 0.9);
   border: 2px solid ${theme.colors.primary.main};
   border-radius: 12px;
@@ -114,7 +114,8 @@ const ComicSlider = styled.div`
   box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    height: 500px;
+    max-width: 100%;
+    height: 600px;
   }
 `;
 

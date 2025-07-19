@@ -24,6 +24,8 @@ import FAQ from '../components/Sections/FAQ';
 import YouTube from '../components/Sections/YouTube';
 import PowerUp from '../components/Sections/PowerUp';
 import Message from '../components/Sections/Message';
+import BusinessInquiry from '../components/Sections/BusinessInquiry';
+import Kitazuna from '../components/Sections/Kitazuna';
 import Contact from '../components/Sections/Contact';
 
 // ナビゲーション
@@ -47,6 +49,8 @@ const sections = [
   { id: 'youtube', component: YouTube },
   { id: 'powerup', component: PowerUp },
   { id: 'message', component: Message },
+  { id: 'business-inquiry', component: BusinessInquiry },
+  { id: 'kitazuna', component: Kitazuna },
   { id: 'contact', component: Contact }
 ];
 

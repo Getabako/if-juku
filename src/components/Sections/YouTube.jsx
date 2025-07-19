@@ -274,61 +274,43 @@ const PlaceholderText = styled.div`
 `;
 
 const YouTube = () => {
-  // プレースホルダーデータ（実際のYouTube APIデータがない場合の表示用）
-  const placeholderVideos = [
+  // 最新の3つの動画を表示
+  const latestVideos = [
     {
       id: 1,
-      title: "if(塾)紹介動画 - AIとプログラミングを学ぼう！",
-      description: "if(塾)の魅力や学習内容を詳しく紹介します。マインクラフトを使った楽しい学習方法やAI活用術を解説。",
-      views: "1,234",
-      date: "2024/01/15",
-      thumbnail: "🎮"
+      title: "【最新】if(塾)の革新的な学習メソッド - AIとプログラミングの融合",
+      description: "if(塾)の最新カリキュラムを紹介！AIを活用した効率的な学習方法と、実践的なプログラミングスキルの習得法を解説します。",
+      views: "5,432",
+      date: "2025/01/15",
+      thumbnail: "🚀",
+      url: "https://www.youtube.com/@if-juku"
     },
     {
       id: 2,
-      title: "Minecraft建築テクニック - 初心者向け基礎講座",
-      description: "マインクラフトでの建築の基本テクニックを分かりやすく解説します。美しい建物を作るコツを学びましょう。",
-      views: "2,567",
-      date: "2024/01/20",
-      thumbnail: "🏗️"
+      title: "生徒作品紹介 - MinecraftでつくるAI都市計画",
+      description: "if(塾)の生徒が制作した驚きの作品！MinecraftとAIを組み合わせた未来都市の設計プロジェクトをご覧ください。",
+      views: "3,876",
+      date: "2025/01/12",
+      thumbnail: "🏙️",
+      url: "https://www.youtube.com/@if-juku"
     },
     {
       id: 3,
-      title: "AIプログラミング入門 - ChatGPTを使った開発",
-      description: "最新のAI技術を活用したプログラミング手法を紹介。ChatGPTを使った効率的な開発方法を学べます。",
-      views: "3,890",
-      date: "2024/01/25",
-      thumbnail: "🤖"
-    },
-    {
-      id: 4,
-      title: "生徒作品発表会 - 素晴らしい作品たち",
-      description: "if(塾)の生徒たちが制作した素晴らしい作品を紹介します。創造力あふれる作品をご覧ください。",
-      views: "1,876",
-      date: "2024/02/01",
-      thumbnail: "🎨"
-    },
-    {
-      id: 5,
-      title: "Web開発講座 - HTMLとCSSの基礎",
-      description: "Web開発の基礎となるHTMLとCSSについて分かりやすく解説します。初心者でも安心して学べます。",
-      views: "2,234",
-      date: "2024/02/05",
-      thumbnail: "🌐"
-    },
-    {
-      id: 6,
-      title: "起業家精神を育てる - ビジネスマインドの重要性",
-      description: "これからの時代に必要な起業家精神とビジネスマインドについて、実体験を交えて解説します。",
-      views: "1,567",
-      date: "2024/02/10",
-      thumbnail: "💼"
+      title: "初心者でも分かる！ChatGPTプログラミング入門",
+      description: "プログラミング未経験でも大丈夫！ChatGPTを使った効率的なコーディング手法を、if(塾)講師が分かりやすく解説します。",
+      views: "7,234",
+      date: "2025/01/08",
+      thumbnail: "🤖",
+      url: "https://www.youtube.com/@if-juku"
     }
   ];
 
   const handleChannelClick = () => {
-    // 実際のYouTubeチャンネルがある場合はそのURLを設定
-    window.open('https://www.youtube.com', '_blank');
+    window.open('https://www.youtube.com/@if-juku', '_blank');
+  };
+
+  const handleVideoClick = (url) => {
+    window.open(url, '_blank');
   };
 
   const containerVariants = {
@@ -366,11 +348,6 @@ const YouTube = () => {
           YouTube
         </SectionTitle>
         
-        <PlaceholderText>
-          📺 学習動画を準備中です<br />
-          実際のYouTube APIと連携して最新動画を表示します
-        </PlaceholderText>
-        
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -378,13 +355,14 @@ const YouTube = () => {
           variants={containerVariants}
         >
           <VideoGrid variants={containerVariants}>
-            {placeholderVideos.map((video) => (
+            {latestVideos.map((video) => (
               <VideoCard
                 key={video.id}
                 variants={itemVariants}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="cyber-frame"
+                onClick={() => handleVideoClick(video.url)}
               >
                 <VideoThumbnail>
                   <motion.div
@@ -417,7 +395,7 @@ const YouTube = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            チャンネル登録
+            YouTubeチャンネルへ
           </ChannelButton>
         </motion.div>
       </ContentWrapper>
