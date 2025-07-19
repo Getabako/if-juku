@@ -61,10 +61,13 @@ const HomePage: React.FC = () => {
     direction: 'vertical' as const,
     slidesPerView: 1,
     spaceBetween: 0,
-    mousewheel: true,
+    mousewheel: {
+      enabled: true,
+      forceToAxis: true,
+    },
     keyboard: {
       enabled: true,
-      onlyInViewport: true,
+      onlyInViewport: false,
     },
     pagination: {
       el: '.swiper-pagination',
@@ -72,14 +75,22 @@ const HomePage: React.FC = () => {
     },
     allowTouchMove: true,
     speed: 600,
+    touchStartPreventDefault: false,
     modules: [Mousewheel, Pagination, Keyboard],
     onSlideChange: handleSlideChange,
+    onInit: (swiper) => {
+      // Swiper初期化後にキーボードを再有効化
+      setTimeout(() => {
+        swiper.keyboard.enable();
+        swiper.mousewheel.enable();
+      }, 100);
+    },
   };
 
   return (
     <>
-      <CyberNav />
-      <MobileNav />
+      <CyberNav swiperRef={swiperRef} sections={sections} />
+      <MobileNav swiperRef={swiperRef} sections={sections} />
       <Swiper {...swiperConfig} ref={swiperRef}>
         {sections.map((section) => {
           const SectionComponent = section.component;

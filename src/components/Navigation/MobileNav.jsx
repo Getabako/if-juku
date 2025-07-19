@@ -156,7 +156,7 @@ const SubMenuItem = styled.a`
   }
 `;
 
-const MobileNav = () => {
+const MobileNav = ({ swiperRef, sections }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSubmenu, setActiveSubmenu] = useState(null);
   const isMobile = useMediaQuery({ maxWidth: theme.breakpoints.mobile });
@@ -207,9 +207,30 @@ const MobileNav = () => {
 
   const handleScrollTo = (href) => {
     const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    
+    // セクションIDからスライドインデックスを取得
+    const slideIndex = sections.findIndex(section => section.id === targetId);
+    
+    if (slideIndex !== -1 && swiperRef.current) {
+      // Swiperのインスタンスを取得してslideTo()を使用
+      const swiper = swiperRef.current.swiper;
+      if (swiper) {
+        swiper.slideTo(slideIndex, 600); // 600msでスムーズにスライド
+        
+        // スライド完了後にSwiperの機能を再有効化
+        setTimeout(() => {
+          swiper.keyboard.enable();
+          swiper.mousewheel.enable();
+          swiper.allowTouchMove = true;
+          swiper.update(); // Swiperの状態を更新
+        }, 650); // スライド時間 + 少しのマージン
+      }
+    } else {
+      // フォールバック: 通常のスクロール
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
     setIsMenuOpen(false);
     setActiveSubmenu(null);

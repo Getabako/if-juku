@@ -331,15 +331,13 @@ const Kitazuna = () => {
           
           <GameDescription variants={itemVariants} className="cyber-frame">
             <DescriptionText>
-              <HighlightText>🎮 目的: 学んだスキルを作品として形にする</HighlightText>
+              <HighlightText>🎮 目的: 学んだスキルを作品として形にする</HighlightText> - 秋田県全域を舞台にしたRPG（HD2D形式）で、地域の伝統文化をテーマにしたゲーム作成ツールです。
             </DescriptionText>
             <DescriptionText>
-              ▶ <HighlightText>地域IP活用</HighlightText>のゲーム作成ツール<br/>
-              ▶ 秋田の伝統文化をテーマに<br/>
-              ▶ <HighlightText>収益化体験</HighlightText>も可能
+              プレイヤーは<HighlightText>杉野健太</HighlightText>として秋田各地を巡り、ナマハゲや稲庭うどん、竿燈祭りなどの伝統文化に触れながら、過度な真面目さが生んだ化身「スギノオウ」を封印する冒険を繰り広げます。
             </DescriptionText>
             <DescriptionText>
-              プレイヤーは森の守護者として、絆（きずな）の力で仲間と協力し、美しい自然を脅かす謎の敵に立ち向かいます。戦略とアクションが融合した新感覚のゲーム体験をお届けします。
+              <HighlightText>地域IP活用</HighlightText>のゲーム開発を通じて、伝統と現代の融合を学び、実際の<HighlightText>収益化体験</HighlightText>まで可能な教育プラットフォームとして設計されています。
             </DescriptionText>
           </GameDescription>
 

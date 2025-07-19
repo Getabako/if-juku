@@ -123,15 +123,66 @@ const VideoCard = styled(motion.div)`
   }
 `;
 
-const VideoEmbed = styled.iframe`
+const VideoThumbnail = styled.div`
+  position: relative;
   width: 100%;
   height: 200px;
-  border: none;
+  background: linear-gradient(135deg, ${theme.colors.primary.main}, ${theme.colors.secondary.main});
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   border-radius: 8px 8px 0 0;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+  }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     height: 150px;
   }
+`;
+
+const ChannelInfo = styled(motion.div)`
+  background: rgba(26, 26, 26, 0.95);
+  border: 2px solid ${theme.colors.primary.main};
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  backdrop-filter: blur(15px);
+  box-shadow: 
+    0 0 30px rgba(0, 255, 255, 0.3),
+    inset 0 0 20px rgba(0, 255, 255, 0.1);
+`;
+
+const ChannelName = styled.h3`
+  font-size: 2rem;
+  color: ${theme.colors.primary.main};
+  margin-bottom: 0.5rem;
+  font-family: ${theme.fonts.secondary};
+  text-shadow: ${theme.colors.glow.blue};
+`;
+
+const ChannelHandle = styled.div`
+  font-size: 1.2rem;
+  color: ${theme.colors.secondary.main};
+  margin-bottom: 1rem;
+  font-weight: 500;
+`;
+
+const ChannelDescription = styled.p`
+  font-size: 1.1rem;
+  color: ${theme.colors.text.primary};
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
 `;
 
 const PlayButton = styled(motion.div)`
@@ -259,28 +310,33 @@ const PlaceholderText = styled.div`
 `;
 
 const YouTube = () => {
-  // 実際のYouTube動画（埋め込み形式）
-  const latestVideos = [
+  // if(塾)チャンネルの動画情報
+  const channelInfo = {
+    name: "if(塾)",
+    handle: "@if-juku", 
+    url: "https://www.youtube.com/@if-juku",
+    description: "AIとプログラミングを学ぶオンライン塾",
+    subscribers: "最新の学習動画を配信中"
+  };
+
+  const videoPlaceholders = [
     {
       id: 1,
-      title: "if(塾)チャンネル動画1",
-      description: "if(塾)の最新動画をお楽しみください。",
-      embedId: "dQw4w9WgXcQ", // 実際の動画IDに置き換える必要があります
-      url: "https://www.youtube.com/@if-juku"
+      title: "if(塾)の学習方法紹介",
+      description: "AIを活用した効率的な学習方法をご紹介します。",
+      thumbnail: "🎓"
     },
     {
       id: 2,
-      title: "if(塾)チャンネル動画2", 
-      description: "if(塾)の学習内容や活動を紹介しています。",
-      embedId: "dQw4w9WgXcQ", // 実際の動画IDに置き換える必要があります
-      url: "https://www.youtube.com/@if-juku"
+      title: "生徒作品発表会",
+      description: "if(塾)の生徒が制作した素晴らしい作品をご覧ください。",
+      thumbnail: "🎨"
     },
     {
       id: 3,
-      title: "if(塾)チャンネル動画3",
-      description: "if(塾)での学びの様子をご覧いただけます。",
-      embedId: "dQw4w9WgXcQ", // 実際の動画IDに置き換える必要があります
-      url: "https://www.youtube.com/@if-juku"
+      title: "プログラミング入門講座",
+      description: "初心者でも分かりやすいプログラミングの基礎を解説。",
+      thumbnail: "💻"
     }
   ];
 
@@ -288,8 +344,8 @@ const YouTube = () => {
     window.open('https://www.youtube.com/@if-juku', '_blank');
   };
 
-  const handleVideoClick = (url) => {
-    window.open(url, '_blank');
+  const handleVideoClick = () => {
+    window.open(channelInfo.url, '_blank');
   };
 
   const containerVariants = {
@@ -333,22 +389,36 @@ const YouTube = () => {
           viewport={{ once: true }}
           variants={containerVariants}
         >
+          <ChannelInfo variants={itemVariants} className="cyber-frame">
+            <ChannelName>{channelInfo.name}</ChannelName>
+            <ChannelHandle>{channelInfo.handle}</ChannelHandle>
+            <ChannelDescription>{channelInfo.description}</ChannelDescription>
+            <ChannelDescription>{channelInfo.subscribers}</ChannelDescription>
+          </ChannelInfo>
+
           <VideoGrid variants={containerVariants}>
-            {latestVideos.map((video) => (
+            {videoPlaceholders.map((video) => (
               <VideoCard
                 key={video.id}
                 variants={itemVariants}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className="cyber-frame"
-                onClick={() => handleVideoClick(video.url)}
+                onClick={handleVideoClick}
               >
-                <VideoEmbed
-                  src={`https://www.youtube.com/embed/${video.embedId}`}
-                  title={video.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
+                <VideoThumbnail>
+                  <motion.div
+                    style={{ fontSize: '4rem', zIndex: 2, position: 'relative' }}
+                    animate={{ scale: [1, 1.1, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    {video.thumbnail}
+                  </motion.div>
+                  <PlayButton
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  />
+                </VideoThumbnail>
                 
                 <VideoInfo>
                   <VideoTitle>{video.title}</VideoTitle>
