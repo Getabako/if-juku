@@ -20,46 +20,46 @@ const FireworksBackground = styled.div`
   height: 100%;
   overflow: hidden;
   z-index: 0;
+  opacity: 0.3;
   
   &::before,
   &::after {
     content: '';
     position: absolute;
-    width: 4px;
-    height: 4px;
+    width: 3px;
+    height: 3px;
     background: ${theme.colors.primary.main};
     box-shadow:
-      0 0 20px ${theme.colors.primary.main},
-      0 0 40px ${theme.colors.primary.light};
-    animation: firework 4s ease-out infinite;
+      0 0 10px ${theme.colors.primary.main};
+    animation: firework 6s ease-out infinite;
   }
   
   &::before {
-    left: 20%;
+    left: 25%;
     animation-delay: 0s;
   }
   
   &::after {
-    right: 20%;
-    animation-delay: 2s;
+    right: 25%;
+    animation-delay: 3s;
   }
   
   @keyframes firework {
     0% {
-      bottom: 0;
-      opacity: 1;
+      bottom: 10%;
+      opacity: 0;
       transform: scale(0);
     }
-    10% {
-      bottom: 50%;
-      opacity: 1;
+    15% {
+      bottom: 60%;
+      opacity: 0.8;
       transform: scale(1);
     }
     100% {
-      bottom: 100%;
+      bottom: 90%;
       opacity: 0;
-      transform: scale(30);
-      filter: blur(20px);
+      transform: scale(15);
+      filter: blur(10px);
     }
   }
 `;
@@ -67,41 +67,42 @@ const FireworksBackground = styled.div`
 const FireworkSpark = styled.div`
   position: absolute;
   pointer-events: none;
+  opacity: 0.2;
   
   &:nth-child(1) {
     left: 30%;
-    animation: spark 3s ease-out infinite 0.5s;
+    animation: spark 5s ease-out infinite 1s;
   }
   
   &:nth-child(2) {
     left: 50%;
-    animation: spark 3s ease-out infinite 1.5s;
+    animation: spark 5s ease-out infinite 2.5s;
   }
   
   &:nth-child(3) {
     left: 70%;
-    animation: spark 3s ease-out infinite 2.5s;
+    animation: spark 5s ease-out infinite 4s;
   }
   
   &::before {
     content: '✨';
     position: absolute;
-    font-size: 2rem;
+    font-size: 1.5rem;
     opacity: 0;
-    animation: sparkle 3s ease-out infinite;
+    animation: sparkle 5s ease-out infinite;
   }
   
   @keyframes spark {
     0% {
-      bottom: 20%;
+      bottom: 30%;
       opacity: 0;
     }
     50% {
-      bottom: 60%;
-      opacity: 1;
+      bottom: 70%;
+      opacity: 0.5;
     }
     100% {
-      bottom: 80%;
+      bottom: 90%;
       opacity: 0;
     }
   }
@@ -113,7 +114,7 @@ const FireworkSpark = styled.div`
     }
     50% {
       transform: scale(1) rotate(180deg);
-      opacity: 1;
+      opacity: 0.3;
     }
   }
 `;
@@ -121,7 +122,7 @@ const FireworkSpark = styled.div`
 const ContentWrapper = styled.div`
   position: relative;
   z-index: 1;
-  max-width: 900px;
+  max-width: 1200px;
   width: 100%;
   padding: 2rem;
   display: flex;
@@ -224,19 +225,38 @@ const MessageContent = styled.div`
 const HighlightText = styled.span`
   color: ${theme.colors.secondary.main};
   font-weight: bold;
-  text-shadow: 0 0 10px ${theme.colors.secondary.main};
+  text-shadow: 
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000,
+    0 0 10px ${theme.colors.secondary.main};
   background: linear-gradient(90deg, 
     transparent 0%,
-    rgba(255, 107, 0, 0.1) 50%,
+    rgba(255, 107, 0, 0.15) 50%,
     transparent 100%
   );
   padding: 0 0.5rem;
   border-radius: 4px;
-  animation: glow-pulse 2s ease-in-out infinite alternate;
+  animation: glow-pulse 3s ease-in-out infinite alternate;
   
   @keyframes glow-pulse {
-    0% { text-shadow: 0 0 10px ${theme.colors.secondary.main}; }
-    100% { text-shadow: 0 0 20px ${theme.colors.secondary.main}; }
+    0% { 
+      text-shadow: 
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000,
+        0 0 10px ${theme.colors.secondary.main};
+    }
+    100% { 
+      text-shadow: 
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000,
+        0 0 15px ${theme.colors.secondary.main};
+    }
   }
 `;
 

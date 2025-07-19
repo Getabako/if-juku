@@ -177,21 +177,26 @@ const CyberNav = () => {
         { label: "if(チャレンジ)", href: "#challenge" },
         { label: "if(チャレンジ)forビギナー", href: "#challenge-beginner" },
         { label: "if(塾)が取り組む課題", href: "#issues" },
-        { label: "入塾までの流れ", href: "#flow" }
+        { label: "入塾までの流れ", href: "#flow" },
+        { label: "運営メンバー", href: "#members" },
+        { label: "仕事の依頼はこちら", href: "#business-inquiry" }
       ]
     },
     {
-      label: "運営メンバー",
-      href: "#members"
+      label: "オンライン教材",
+      href: "#materials"
     },
     {
-      label: "学習コンテンツ",
-      href: "#contents",
-      submenu: [
-        { label: "オンライン教材", href: "#materials" },
-        { label: "お知らせ", href: "#news" },
-        { label: "YouTube", href: "#youtube" }
-      ]
+      label: "お知らせ",
+      href: "#news"
+    },
+    {
+      label: "YouTube",
+      href: "#youtube"
+    },
+    {
+      label: "Kitazuna開発中",
+      href: "#kitazuna"
     },
     {
       label: "よくある質問",
