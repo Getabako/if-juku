@@ -228,10 +228,35 @@ const MessageWindow = styled.div`
 `;
 
 const MessageText = styled.div`
-  color: white !important;
-  font-size: 1.2rem !important;
-  line-height: 1.6 !important;
-  font-weight: bold !important;
+  color: white;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  font-weight: bold;
+  margin-bottom: 1rem;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: transparent;
+  border: 2px solid #00ffff;
+  color: #00ffff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  
+  &:hover {
+    background: #00ffff;
+    color: #000;
+  }
 `;
 
 const ContinuePrompt = styled(motion.div)`
@@ -334,12 +359,28 @@ const FAQ = () => {
       }
     }, 50);
   };
+  
+  // メッセージを閉じる関数
+  const closeMessage = () => {
+    setCurrentMessage('');
+    setDisplayedText('');
+    
+    // Swiperを再有効化
+    if (window.swiper && window.swiper.allowTouchMove !== undefined) {
+      window.swiper.allowTouchMove = true;
+    }
+  };
 
   const handleQuestionClick = (faq) => {
     console.log('Button clicked:', faq.question);
     console.log('Setting message:', faq.answer);
     setCurrentMessage(faq.answer);
     startTyping(faq.answer);
+    
+    // Swiperを無効化
+    if (window.swiper && window.swiper.allowTouchMove !== undefined) {
+      window.swiper.allowTouchMove = false;
+    }
   };
 
   const getCharacterImage = () => {
@@ -404,6 +445,7 @@ const FAQ = () => {
 
       {currentMessage && ReactDOM.createPortal(
         <MessageWindow>
+          <CloseButton onClick={closeMessage}>×</CloseButton>
           <MessageText>
             {displayedText || "メッセージを読み込み中..."}
           </MessageText>
