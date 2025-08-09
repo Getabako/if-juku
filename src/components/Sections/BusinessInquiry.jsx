@@ -67,15 +67,15 @@ const SectionTitle = styled(motion.h2)`
 `;
 
 const MessageContainer = styled(motion.div)`
-  background: rgba(26, 26, 26, 0.9);
-  border: 2px solid ${theme.colors.primary.main};
+  background: rgba(20, 20, 20, 0.95);
+  border: 2px solid rgba(0, 255, 255, 0.6);
   border-radius: 16px;
   padding: 3rem;
   margin-bottom: 3rem;
   backdrop-filter: blur(15px);
   box-shadow: 
-    0 0 40px rgba(0, 255, 255, 0.4),
-    inset 0 0 30px rgba(0, 255, 255, 0.1);
+    0 0 30px rgba(0, 255, 255, 0.2),
+    inset 0 0 20px rgba(0, 255, 255, 0.05);
     
   @media (max-width: ${theme.breakpoints.mobile}) {
     padding: 2rem;
@@ -85,11 +85,11 @@ const MessageContainer = styled(motion.div)`
 
 const MessageText = styled.p`
   font-size: 1.3rem;
-  color: ${theme.colors.text.primary};
+  color: rgba(255, 255, 255, 0.95);
   line-height: 1.8;
   margin-bottom: 1.5rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  font-weight: 400;
+  letter-spacing: 0.03em;
   
   &:last-child {
     margin-bottom: 0;
@@ -102,12 +102,12 @@ const MessageText = styled.p`
 `;
 
 const HighlightText = styled.span`
-  color: ${theme.colors.secondary.main};
-  font-weight: bold;
-  text-shadow: 0 0 10px ${theme.colors.secondary.main};
+  color: #ff9d4d;
+  font-weight: 600;
+  text-shadow: 0 0 6px rgba(255, 157, 77, 0.4);
   background: linear-gradient(90deg, 
     transparent 0%,
-    rgba(255, 107, 0, 0.15) 50%,
+    rgba(255, 157, 77, 0.08) 50%,
     transparent 100%
   );
   padding: 0 0.5rem;
@@ -187,8 +187,8 @@ const FeatureList = styled(motion.div)`
 `;
 
 const FeatureItem = styled(motion.div)`
-  background: rgba(0, 255, 255, 0.1);
-  border: 1px solid ${theme.colors.primary.main};
+  background: rgba(20, 20, 20, 0.85);
+  border: 1px solid rgba(0, 255, 255, 0.6);
   border-radius: 12px;
   padding: 1rem 1.5rem;
   text-align: center;
@@ -198,6 +198,8 @@ const FeatureItem = styled(motion.div)`
   
   &:hover {
     transform: translateY(-5px);
+    background: rgba(25, 25, 25, 0.9);
+    border-color: rgba(0, 255, 255, 0.9);
     box-shadow: 0 10px 25px rgba(0, 255, 255, 0.2);
     border-color: ${theme.colors.secondary.main};
   }

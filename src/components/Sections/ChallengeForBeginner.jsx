@@ -207,7 +207,6 @@ const ModalDescription = styled.p`
 
 const ChallengeForBeginner = () => {
   const [selectedQuest, setSelectedQuest] = useState(null);
-  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
 
   const quests = [
     {
@@ -295,14 +294,7 @@ const ChallengeForBeginner = () => {
                 variants={itemVariants}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  const centerX = rect.left + rect.width / 2 - window.innerWidth / 2;
-                  const centerY = rect.top + rect.height / 2 - window.innerHeight / 2;
-                  setModalPosition({
-                    x: centerX,
-                    y: centerY
-                  });
+                onClick={() => {
                   setSelectedQuest(quest);
                 }}
                 className="cyber-frame"
@@ -325,9 +317,9 @@ const ChallengeForBeginner = () => {
             onClick={() => setSelectedQuest(null)}
           >
             <ModalContent
-              initial={{ scale: 0.1, opacity: 0, x: modalPosition.x, y: modalPosition.y }}
-              animate={{ scale: 1, opacity: 1, x: 0, y: 0 }}
-              exit={{ scale: 0.1, opacity: 0, x: modalPosition.x, y: modalPosition.y }}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
               className="cyber-frame"
             >

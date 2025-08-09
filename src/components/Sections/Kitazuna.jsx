@@ -32,9 +32,9 @@ const VideoOverlay = styled.div`
   width: 100%;
   height: 100%;
   background: linear-gradient(135deg, 
-    rgba(0, 50, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.6) 50%,
-    rgba(0, 50, 0, 0.8) 100%
+    rgba(10, 10, 10, 0.85) 0%,
+    rgba(0, 0, 0, 0.75) 50%,
+    rgba(10, 10, 10, 0.85) 100%
   );
   z-index: 1;
 `;
@@ -68,10 +68,10 @@ const SectionTitle = styled(motion.h2)`
 
 const SubTitle = styled(motion.h3)`
   font-size: 1.5rem;
-  color: #4ade80;
+  color: #86efac;
   margin-bottom: 2.5rem;
   font-weight: 600;
-  text-shadow: 0 0 10px #4ade80;
+  text-shadow: 0 0 8px rgba(134, 239, 172, 0.6);
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 1.2rem;
@@ -104,15 +104,15 @@ const DevelopmentBadge = styled(motion.div)`
 `;
 
 const GameDescription = styled(motion.div)`
-  background: rgba(26, 26, 26, 0.9);
-  border: 2px solid #4ade80;
+  background: rgba(20, 20, 20, 0.95);
+  border: 2px solid rgba(134, 239, 172, 0.8);
   border-radius: 16px;
   padding: 3rem;
   margin-bottom: 3rem;
   backdrop-filter: blur(15px);
   box-shadow: 
-    0 0 40px rgba(74, 222, 128, 0.3),
-    inset 0 0 30px rgba(74, 222, 128, 0.1);
+    0 0 30px rgba(134, 239, 172, 0.2),
+    inset 0 0 20px rgba(134, 239, 172, 0.05);
     
   @media (max-width: ${theme.breakpoints.mobile}) {
     padding: 2rem;
@@ -122,11 +122,11 @@ const GameDescription = styled(motion.div)`
 
 const DescriptionText = styled.p`
   font-size: 1.2rem;
-  color: ${theme.colors.text.primary};
+  color: rgba(255, 255, 255, 0.95);
   line-height: 1.8;
   margin-bottom: 1.5rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  font-weight: 400;
+  letter-spacing: 0.03em;
   
   &:last-child {
     margin-bottom: 0;
@@ -139,12 +139,12 @@ const DescriptionText = styled.p`
 `;
 
 const HighlightText = styled.span`
-  color: #4ade80;
-  font-weight: bold;
-  text-shadow: 0 0 10px #4ade80;
+  color: #86efac;
+  font-weight: 600;
+  text-shadow: 0 0 6px rgba(134, 239, 172, 0.4);
   background: linear-gradient(90deg, 
     transparent 0%,
-    rgba(74, 222, 128, 0.15) 50%,
+    rgba(134, 239, 172, 0.08) 50%,
     transparent 100%
   );
   padding: 0 0.5rem;
@@ -165,8 +165,8 @@ const FeatureGrid = styled(motion.div)`
 `;
 
 const FeatureCard = styled(motion.div)`
-  background: rgba(74, 222, 128, 0.1);
-  border: 1px solid #4ade80;
+  background: rgba(20, 20, 20, 0.85);
+  border: 1px solid rgba(134, 239, 172, 0.6);
   border-radius: 12px;
   padding: 1.5rem;
   text-align: center;
@@ -174,8 +174,9 @@ const FeatureCard = styled(motion.div)`
   
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(74, 222, 128, 0.2);
-    border-color: #22d3ee;
+    box-shadow: 0 10px 25px rgba(134, 239, 172, 0.15);
+    border-color: rgba(134, 239, 172, 0.9);
+    background: rgba(25, 25, 25, 0.9);
   }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
@@ -194,9 +195,9 @@ const FeatureIcon = styled.div`
 `;
 
 const FeatureTitle = styled.div`
-  color: #4ade80;
+  color: #86efac;
   font-size: 1.1rem;
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 0.5rem;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
@@ -205,7 +206,7 @@ const FeatureTitle = styled.div`
 `;
 
 const FeatureText = styled.div`
-  color: ${theme.colors.text.secondary};
+  color: rgba(255, 255, 255, 0.8);
   font-size: 0.9rem;
   line-height: 1.4;
   
