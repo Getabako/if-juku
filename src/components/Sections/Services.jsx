@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { theme } from '../../styles/theme';
+import { useModal } from '../../hooks/useModal';
 
 const ServicesContainer = styled.section`
   position: relative;
@@ -269,6 +269,7 @@ const ModalDescription = styled.p`
 
 const Services = () => {
   const [selectedService, setSelectedService] = useState(null);
+  const { isOpen, openModal, closeModal, Modal } = useModal();
 
   const services = [
     {
@@ -366,8 +367,9 @@ const Services = () => {
                 variants={itemVariants}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => {
+                onClick={(e) => {
                   setSelectedService(service);
+                  openModal(e);
                 }}
                 className="cyber-frame"
               >
@@ -382,29 +384,24 @@ const Services = () => {
         </motion.div>
       </ContentWrapper>
       
-      <AnimatePresence>
-        {selectedService && ReactDOM.createPortal(
-          <Modal
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedService(null)}
+      <Modal className="cyber-frame">
+        {selectedService && (
+          <ModalContent
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            as={motion.div}
+            className="cyber-frame"
           >
-            <ModalContent
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="cyber-frame"
-            >
-              <CloseButton onClick={() => setSelectedService(null)}>×</CloseButton>
-              <ModalTitle>{selectedService.title}</ModalTitle>
-              <ModalDescription>{selectedService.fullDesc}</ModalDescription>
-            </ModalContent>
-          </Modal>,
-          document.body
+            <CloseButton onClick={() => {
+              setSelectedService(null);
+              closeModal();
+            }}>×</CloseButton>
+            <ModalTitle>{selectedService.title}</ModalTitle>
+            <ModalDescription>{selectedService.fullDesc}</ModalDescription>
+          </ModalContent>
         )}
-      </AnimatePresence>
+      </Modal>
     </ServicesContainer>
   );
 };

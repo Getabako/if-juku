@@ -205,27 +205,25 @@ const QuestionButton = styled.button`
 `;
 
 const MessageWindow = styled.div`
-  position: fixed !important;
-  bottom: 2rem !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 90% !important;
-  max-width: 800px !important;
-  min-height: 150px !important;
-  background: rgba(255, 0, 0, 0.9) !important;
-  border: 5px solid #00ffff !important;
-  border-radius: 15px !important;
-  padding: 1.5rem !important;
-  z-index: 999999 !important;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 800px;
+  min-height: 150px;
+  background: rgba(255, 0, 0, 0.9);
+  border: 5px solid #00ffff;
+  border-radius: 15px;
+  padding: 1.5rem;
+  z-index: 10002;
+  pointer-events: auto;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    width: 95% !important;
-    min-height: 120px !important;
-    padding: 1rem !important;
-    bottom: 1rem !important;
+    width: 95%;
+    min-height: 120px;
+    padding: 1rem;
+    bottom: 1rem;
   }
 `;
 
@@ -410,7 +408,7 @@ const FAQ = () => {
             {displayedText || "メッセージを読み込み中..."}
           </MessageText>
         </MessageWindow>,
-        document.body
+        document.getElementById('modal-root') || document.body
       )}
       
       {/* デバッグ用の情報表示 */}

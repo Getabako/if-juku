@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { theme } from '../../styles/theme';
+import { useModal } from '../../hooks/useModal';
 
 const BeginnerContainer = styled.section`
   position: relative;
@@ -208,6 +208,7 @@ const ModalDescription = styled.p`
 
 const ChallengeForBeginner = () => {
   const [selectedQuest, setSelectedQuest] = useState(null);
+  const { isOpen, openModal, closeModal, Modal } = useModal();
 
   const quests = [
     {
@@ -295,8 +296,9 @@ const ChallengeForBeginner = () => {
                 variants={itemVariants}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => {
+                onClick={(e) => {
                   setSelectedQuest(quest);
+                  openModal(e);
                 }}
                 className="cyber-frame"
               >
@@ -309,29 +311,24 @@ const ChallengeForBeginner = () => {
         </motion.div>
       </ContentWrapper>
       
-      <AnimatePresence>
-        {selectedQuest && ReactDOM.createPortal(
-          <Modal
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedQuest(null)}
+      <Modal className="cyber-frame">
+        {selectedQuest && (
+          <ModalContent
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            as={motion.div}
+            className="cyber-frame"
           >
-            <ModalContent
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="cyber-frame"
-            >
-              <CloseButton onClick={() => setSelectedQuest(null)}>×</CloseButton>
-              <ModalTitle>{selectedQuest.title}</ModalTitle>
-              <ModalDescription>{selectedQuest.fullDesc}</ModalDescription>
-            </ModalContent>
-          </Modal>,
-          document.body
+            <CloseButton onClick={() => {
+              setSelectedQuest(null);
+              closeModal();
+            }}>×</CloseButton>
+            <ModalTitle>{selectedQuest.title}</ModalTitle>
+            <ModalDescription>{selectedQuest.fullDesc}</ModalDescription>
+          </ModalContent>
         )}
-      </AnimatePresence>
+      </Modal>
     </BeginnerContainer>
   );
 };
