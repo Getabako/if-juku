@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { theme } from '../../styles/theme';
@@ -403,12 +404,13 @@ const FAQ = () => {
         </CharacterArea>
       </GameArea>
 
-      {currentMessage && (
+      {currentMessage && ReactDOM.createPortal(
         <MessageWindow>
           <MessageText>
             {displayedText || "メッセージを読み込み中..."}
           </MessageText>
-        </MessageWindow>
+        </MessageWindow>,
+        document.body
       )}
       
       {/* デバッグ用の情報表示 */}

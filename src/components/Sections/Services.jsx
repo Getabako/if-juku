@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { theme } from '../../styles/theme';
@@ -382,7 +383,7 @@ const Services = () => {
       </ContentWrapper>
       
       <AnimatePresence>
-        {selectedService && (
+        {selectedService && ReactDOM.createPortal(
           <Modal
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -400,7 +401,8 @@ const Services = () => {
               <ModalTitle>{selectedService.title}</ModalTitle>
               <ModalDescription>{selectedService.fullDesc}</ModalDescription>
             </ModalContent>
-          </Modal>
+          </Modal>,
+          document.body
         )}
       </AnimatePresence>
     </ServicesContainer>

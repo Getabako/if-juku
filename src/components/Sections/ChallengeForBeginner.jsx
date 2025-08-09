@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { theme } from '../../styles/theme';
@@ -309,7 +310,7 @@ const ChallengeForBeginner = () => {
       </ContentWrapper>
       
       <AnimatePresence>
-        {selectedQuest && (
+        {selectedQuest && ReactDOM.createPortal(
           <Modal
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -327,7 +328,8 @@ const ChallengeForBeginner = () => {
               <ModalTitle>{selectedQuest.title}</ModalTitle>
               <ModalDescription>{selectedQuest.fullDesc}</ModalDescription>
             </ModalContent>
-          </Modal>
+          </Modal>,
+          document.body
         )}
       </AnimatePresence>
     </BeginnerContainer>
