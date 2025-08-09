@@ -251,16 +251,11 @@ const Flow = () => {
           
           <FlowImageWrapper variants={itemVariants} className="cyber-frame">
             <FlowImage
-              src={isMobile ? "/2025/04/名称未設定のデザイン-34.png" : "/2025/04/if塾横スクロールPC.png"}
+              src={isMobile ? "/2025/04/flow_sp.png" : "/2025/04/flow_pc.png"}
               alt="入塾までの流れ"
             />
             
             <FlowDescription variants={itemVariants}>
-              <FlowText>
-                まずは無料体験授業にお申し込みください。
-                お子様の興味や現在のスキルレベルに合わせて、
-                最適な学習プランをご提案いたします。
-              </FlowText>
               
               <ContactButton
                 onClick={handleContactClick}

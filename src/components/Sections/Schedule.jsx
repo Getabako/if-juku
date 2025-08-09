@@ -128,11 +128,17 @@ const CalendarContainer = styled.div`
   position: relative;
   z-index: 1;
   width: 100%;
-  height: 500px;
+  height: 600px;
   background: rgba(0, 0, 0, 0.5);
   border: 1px solid ${theme.colors.primary.main};
   border-radius: 8px;
   overflow: hidden;
+  
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     height: 400px;
@@ -246,14 +252,14 @@ const Schedule = () => {
             </CalendarHeader>
             
             <CalendarContainer>
-              <CalendarPlaceholder>
-                <div>
-                  <p>Google カレンダーがここに表示されます</p>
-                  <p style={{ marginTop: '1rem', fontSize: '0.9rem' }}>
-                    {isMobile ? 'アジェンダ表示' : 'カレンダー表示'}
-                  </p>
-                </div>
-              </CalendarPlaceholder>
+              <iframe 
+                src="https://calendar.google.com/calendar/embed?src=174aa31d4668c641c1effc41bfc289a6fc9d351d9ab822ade65d1d4c2621732d%40group.calendar.google.com&ctz=Asia%2FTokyo" 
+                width="800" 
+                height="600" 
+                frameBorder="0" 
+                scrolling="no"
+                title="if(塾) 授業カレンダー"
+              />
             </CalendarContainer>
           </CalendarFrame>
           

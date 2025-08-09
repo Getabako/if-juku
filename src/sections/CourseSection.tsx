@@ -33,16 +33,12 @@ const CourseSection: React.FC = () => {
         <div className="tab-content-container">
           {activeTab === 'liberal' && (
             <div className="tab-content active">
-              <div className="course-card cyber-card">
+              <div className="course-card cyber-card liberal-course">
                 <div className="course-header">
                   <div className="course-header-title">リベラルコース</div>
                   <div className="cyber-line"></div>
                 </div>
                 <div className="course-body">
-                  <div className="course-description">
-                    マインクラフトで学ぶ創造力・基礎ITスキルコース<br />
-                    マインクラフトを活用して、創造力と基礎的なITスキルを楽しみながら身につけます。
-                  </div>
                   <div className="course-details">
                     <div className="detail-item">
                       <div className="detail-icon">📅</div>
@@ -68,16 +64,12 @@ const CourseSection: React.FC = () => {
 
           {activeTab === 'self-realization' && (
             <div className="tab-content active">
-              <div className="course-card cyber-card">
+              <div className="course-card cyber-card ideal-course">
                 <div className="course-header">
                   <div className="course-header-title">自己実現コース</div>
                   <div className="cyber-line"></div>
                 </div>
                 <div className="course-body">
-                  <div className="course-description">
-                    AIと起業を学ぶ自己実現コース<br />
-                    AIを活用したプログラミングやビジネスモデルの構築を学び、実践的なスキルを身につけます。
-                  </div>
                   <div className="course-details">
                     <div className="detail-item">
                       <div className="detail-icon">📅</div>

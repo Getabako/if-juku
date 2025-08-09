@@ -29,7 +29,7 @@ const ScheduleSection: React.FC = () => {
           <div className="calendar-wrapper">
             {!isMobile ? (
               <iframe 
-                src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&bgcolor=%23F09300&title=if(%E5%A1%BE)%20%E6%8E%88%E6%A5%AD%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB&src=MTc0YWEzMWQ0NjY4YzY0MWMxZWZmYzQxYmZjMjg5YTZmYzlkMzUxZDlhYjgyMmFkZTY1ZDFkNGMyNjIxNzMyZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23E4C441"
+                src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&bgcolor=%23F09300&title=%E6%8E%88%E6%A5%AD%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB&src=MTc0YWEzMWQ0NjY4YzY0MWMxZWZmYzQxYmZjMjg5YTZmYzlkMzUxZDlhYjgyMmFkZTY1ZDFkNGMyNjIxNzMyZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23E4C441"
                 style={{ border: "solid 1px #777", width: "100%", height: "100%" }}
                 frameBorder="0"
                 scrolling="no"
@@ -37,7 +37,7 @@ const ScheduleSection: React.FC = () => {
               />
             ) : (
               <iframe 
-                src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&bgcolor=%23F09300&mode=AGENDA&title=if(%E5%A1%BE)%20%E6%8E%88%E6%A5%AD%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB&src=MTc0YWEzMWQ0NjY4YzY0MWMxZWZmYzQxYmZjMjg5YTZmYzlkMzUxZDlhYjgyMmFkZTY1ZDFkNGMyNjIxNzMyZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23E4C441"
+                src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTokyo&bgcolor=%23F09300&mode=AGENDA&title=%E6%8E%88%E6%A5%AD%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB&src=MTc0YWEzMWQ0NjY4YzY0MWMxZWZmYzQxYmZjMjg5YTZmYzlkMzUxZDlhYjgyMmFkZTY1ZDFkNGMyNjIxNzMyZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23E4C441"
                 style={{ border: "solid 1px #777", width: "100%", height: "100%" }}
                 frameBorder="0"
                 scrolling="no"

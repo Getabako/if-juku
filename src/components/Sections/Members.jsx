@@ -83,14 +83,14 @@ const MemberSlider = styled.div`
 
 const MemberCard = styled(motion.div)`
   position: relative;
-  background: rgba(26, 26, 26, 0.9);
-  border: 2px solid ${theme.colors.primary.main};
+  background: rgba(20, 20, 20, 0.95);
+  border: 2px solid rgba(0, 255, 255, 0.6);
   border-radius: 12px;
   padding: 2rem;
   backdrop-filter: blur(10px);
   box-shadow: 
-    0 0 30px rgba(0, 255, 255, 0.3),
-    inset 0 0 20px rgba(0, 255, 255, 0.1);
+    0 0 25px rgba(0, 255, 255, 0.2),
+    inset 0 0 15px rgba(0, 255, 255, 0.05);
   margin-bottom: 2rem;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
@@ -153,7 +153,7 @@ const MemberRole = styled.p`
 `;
 
 const MemberDescription = styled.p`
-  color: ${theme.colors.text.primary};
+  color: rgba(255, 255, 255, 0.9);
   line-height: 1.8;
   font-size: 1rem;
   

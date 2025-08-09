@@ -34,5 +34,15 @@ yarn-error.log*
 
 # Text files
 *.txt
-# Video files
-public/*.mp4
+# Large media files (consider using Git LFS for these)
+# *.mp4
+# *.mov
+# *.avi
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Static build folder
+/static

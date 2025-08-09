@@ -132,6 +132,46 @@
   overflow: hidden;
 }
 
+.cyber-card.liberal-course {
+  background-image: url('/2025/08/liberal.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 20, 40, 0.2);
+}
+
+.cyber-card.liberal-course::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 20, 40, 0.3);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.cyber-card.ideal-course {
+  background-image: url('/2025/08/ideal.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 20, 40, 0.2);
+}
+
+.cyber-card.ideal-course::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 20, 40, 0.3);
+  z-index: 1;
+  pointer-events: none;
+}
+
 .cyber-card::before {
   content: '';
   position: absolute;
@@ -140,7 +180,7 @@
   right: -2px;
   bottom: -2px;
   background: linear-gradient(45deg, #00f2ff, #0078ff, #5a00ff, #ff00c8, #ff002f);
-  z-index: -1;
+  z-index: -2;
   animation: glowingBorder 10s linear infinite;
   background-size: 400%;
   border-radius: 10px;
@@ -163,6 +203,7 @@
 .course-header {
   margin-bottom: 20px;
   position: relative;
+  z-index: 2;
 }
 
 .course-header-title {
@@ -182,6 +223,8 @@
 .course-body {
   font-size: 20px;
   line-height: 1.6;
+  position: relative;
+  z-index: 2;
 }
 
 .course-description {

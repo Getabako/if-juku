@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { theme } from '../../styles/theme';
@@ -204,35 +205,58 @@ const QuestionButton = styled.button`
 `;
 
 const MessageWindow = styled.div`
-  position: fixed !important;
-  bottom: 2rem !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 90% !important;
-  max-width: 800px !important;
-  min-height: 150px !important;
-  background: rgba(255, 0, 0, 0.9) !important;
-  border: 5px solid #00ffff !important;
-  border-radius: 15px !important;
-  padding: 1.5rem !important;
-  z-index: 999999 !important;
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 800px;
+  min-height: 150px;
+  background: rgba(255, 0, 0, 0.9);
+  border: 5px solid #00ffff;
+  border-radius: 15px;
+  padding: 1.5rem;
+  z-index: 10;
+  pointer-events: auto;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    width: 95% !important;
-    min-height: 120px !important;
-    padding: 1rem !important;
-    bottom: 1rem !important;
+    width: 95%;
+    min-height: 120px;
+    padding: 1rem;
+    bottom: 1rem;
   }
 `;
 
 const MessageText = styled.div`
-  color: white !important;
-  font-size: 1.2rem !important;
-  line-height: 1.6 !important;
-  font-weight: bold !important;
+  color: white;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  font-weight: bold;
+  margin-bottom: 1rem;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: transparent;
+  border: 2px solid #00ffff;
+  color: #00ffff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  
+  &:hover {
+    background: #00ffff;
+    color: #000;
+  }
 `;
 
 const ContinuePrompt = styled(motion.div)`
@@ -335,12 +359,28 @@ const FAQ = () => {
       }
     }, 50);
   };
+  
+  // メッセージを閉じる関数
+  const closeMessage = () => {
+    setCurrentMessage('');
+    setDisplayedText('');
+    
+    // Swiperを再有効化
+    if (window.swiper && window.swiper.allowTouchMove !== undefined) {
+      window.swiper.allowTouchMove = true;
+    }
+  };
 
   const handleQuestionClick = (faq) => {
     console.log('Button clicked:', faq.question);
     console.log('Setting message:', faq.answer);
     setCurrentMessage(faq.answer);
     startTyping(faq.answer);
+    
+    // Swiperを無効化
+    if (window.swiper && window.swiper.allowTouchMove !== undefined) {
+      window.swiper.allowTouchMove = false;
+    }
   };
 
   const getCharacterImage = () => {
@@ -405,6 +445,7 @@ const FAQ = () => {
 
       {currentMessage && (
         <MessageWindow>
+          <CloseButton onClick={closeMessage}>×</CloseButton>
           <MessageText>
             {displayedText || "メッセージを読み込み中..."}
           </MessageText>

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { theme } from '../../styles/theme';
 
 const BeginnerContainer = styled.section`
@@ -65,6 +65,9 @@ const QuestCard = styled(motion.div)`
   overflow: hidden;
   transition: all ${theme.animations.duration.normal};
   backdrop-filter: blur(10px);
+  height: 280px;
+  display: flex;
+  flex-direction: column;
   
   &::before {
     content: '';
@@ -83,7 +86,7 @@ const QuestCard = styled(motion.div)`
     transition: transform 0.6s;
   }
   
-  &:hover {
+  &:hover, &:active {
     transform: translateY(-5px) scale(1.02);
     box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
     
@@ -94,6 +97,7 @@ const QuestCard = styled(motion.div)`
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     padding: 0.8rem;
+    height: 240px;
   }
 `;
 
@@ -139,75 +143,43 @@ const QuestDescription = styled.p`
   }
 `;
 
-const Modal = styled(motion.div)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(5px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: ${theme.zIndex.modal};
-  padding: 2rem;
-`;
-
-const ModalContent = styled(motion.div)`
-  background: ${theme.colors.background.secondary};
-  border: 2px solid ${theme.colors.primary.main};
-  border-radius: 12px;
-  padding: 2rem;
-  max-width: 600px;
-  width: 100%;
-  max-height: 80vh;
-  overflow-y: auto;
-  position: relative;
-  box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
-`;
-
-const CloseButton = styled.button`
+const QuestDetails = styled(motion.div)`
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: transparent;
-  border: 1px solid ${theme.colors.primary.main};
-  color: ${theme.colors.primary.main};
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  transition: all ${theme.animations.duration.fast};
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.95);
+  border: 2px solid ${theme.colors.primary.main};
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 1.5rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-out;
+  z-index: 2;
   
-  &:hover {
-    background: ${theme.colors.primary.main};
-    color: ${theme.colors.background.primary};
-    transform: rotate(90deg);
+  ${QuestCard}:hover &, ${QuestCard}:active & {
+    transform: translateY(0);
+  }
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    padding: 1rem;
   }
 `;
 
-const ModalTitle = styled.h3`
-  font-size: 1.8rem;
-  color: ${theme.colors.primary.main};
-  margin-bottom: 1rem;
-  font-family: ${theme.fonts.secondary};
-  text-shadow: ${theme.colors.glow.blue};
+const DetailText = styled.p`
+  color: ${theme.colors.text.primary};
+  font-size: 0.95rem;
+  line-height: 1.6;
+  text-align: left;
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
 `;
 
-const ModalDescription = styled.p`
-  color: ${theme.colors.text.primary};
-  line-height: 1.8;
-  margin-bottom: 1rem;
-`;
 
 const ChallengeForBeginner = () => {
-  const [selectedQuest, setSelectedQuest] = useState(null);
-  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
 
   const quests = [
     {
@@ -293,51 +265,20 @@ const ChallengeForBeginner = () => {
               <QuestCard
                 key={quest.id}
                 variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={(e) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  const centerX = rect.left + rect.width / 2 - window.innerWidth / 2;
-                  const centerY = rect.top + rect.height / 2 - window.innerHeight / 2;
-                  setModalPosition({
-                    x: centerX,
-                    y: centerY
-                  });
-                  setSelectedQuest(quest);
-                }}
                 className="cyber-frame"
               >
                 <QuestImage src={quest.image} alt={quest.title} />
                 <QuestTitle>{quest.title}</QuestTitle>
                 <QuestDescription>{quest.shortDesc}</QuestDescription>
+                <QuestDetails>
+                  <DetailText>{quest.fullDesc}</DetailText>
+                </QuestDetails>
               </QuestCard>
             ))}
           </QuestGrid>
         </motion.div>
       </ContentWrapper>
       
-      <AnimatePresence>
-        {selectedQuest && (
-          <Modal
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedQuest(null)}
-          >
-            <ModalContent
-              initial={{ scale: 0.1, opacity: 0, x: modalPosition.x, y: modalPosition.y }}
-              animate={{ scale: 1, opacity: 1, x: 0, y: 0 }}
-              exit={{ scale: 0.1, opacity: 0, x: modalPosition.x, y: modalPosition.y }}
-              onClick={(e) => e.stopPropagation()}
-              className="cyber-frame"
-            >
-              <CloseButton onClick={() => setSelectedQuest(null)}>×</CloseButton>
-              <ModalTitle>{selectedQuest.title}</ModalTitle>
-              <ModalDescription>{selectedQuest.fullDesc}</ModalDescription>
-            </ModalContent>
-          </Modal>
-        )}
-      </AnimatePresence>
     </BeginnerContainer>
   );
 };
