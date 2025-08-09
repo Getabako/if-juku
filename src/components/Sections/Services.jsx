@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { theme } from '../../styles/theme';
-import { useModal } from '../../hooks/useModal';
 
 const ServicesContainer = styled.section`
   position: relative;
@@ -269,7 +269,7 @@ const ModalDescription = styled.p`
 
 const Services = () => {
   const [selectedService, setSelectedService] = useState(null);
-  const { isOpen, openModal, closeModal, Modal } = useModal();
+  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
 
   const services = [
     {
@@ -368,8 +368,16 @@ const Services = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const modalX = rect.left + rect.width / 2;
+                  const modalY = rect.bottom + 10;
+                  setModalPosition({ x: modalX, y: modalY });
                   setSelectedService(service);
-                  openModal(e);
+                  
+                  // Swiper無効化
+                  if (window.swiper && window.swiper.allowTouchMove !== undefined) {
+                    window.swiper.allowTouchMove = false;
+                  }
                 }}
                 className="cyber-frame"
               >
@@ -384,24 +392,51 @@ const Services = () => {
         </motion.div>
       </ContentWrapper>
       
-      <Modal className="cyber-frame">
+      <AnimatePresence>
         {selectedService && (
-          <ModalContent
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            as={motion.div}
-            className="cyber-frame"
-          >
-            <CloseButton onClick={() => {
-              setSelectedService(null);
-              closeModal();
-            }}>×</CloseButton>
-            <ModalTitle>{selectedService.title}</ModalTitle>
-            <ModalDescription>{selectedService.fullDesc}</ModalDescription>
-          </ModalContent>
+          ReactDOM.createPortal(
+            <div
+              style={{
+                position: 'fixed',
+                inset: 0,
+                background: 'rgba(0, 0, 0, 0.8)',
+                zIndex: 10000,
+                pointerEvents: 'auto'
+              }}
+              onClick={() => {
+                setSelectedService(null);
+                if (window.swiper && window.swiper.allowTouchMove !== undefined) {
+                  window.swiper.allowTouchMove = true;
+                }
+              }}
+            >
+              <ModalContent
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}
+                className="cyber-frame"
+                style={{
+                  position: 'fixed',
+                  left: `${Math.min(modalPosition.x - 300, window.innerWidth - 620)}px`,
+                  top: `${Math.min(modalPosition.y, window.innerHeight - 300)}px`,
+                  transform: modalPosition.x > window.innerWidth / 2 ? 'translateX(-100%)' : 'none'
+                }}
+              >
+                <CloseButton onClick={() => {
+                  setSelectedService(null);
+                  if (window.swiper && window.swiper.allowTouchMove !== undefined) {
+                    window.swiper.allowTouchMove = true;
+                  }
+                }}>×</CloseButton>
+                <ModalTitle>{selectedService.title}</ModalTitle>
+                <ModalDescription>{selectedService.fullDesc}</ModalDescription>
+              </ModalContent>
+            </div>,
+            document.body
+          )
         )}
-      </Modal>
+      </AnimatePresence>
     </ServicesContainer>
   );
 };

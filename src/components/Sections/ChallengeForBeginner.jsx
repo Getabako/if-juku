@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { theme } from '../../styles/theme';
-import { useModal } from '../../hooks/useModal';
 
 const BeginnerContainer = styled.section`
   position: relative;
@@ -208,7 +208,7 @@ const ModalDescription = styled.p`
 
 const ChallengeForBeginner = () => {
   const [selectedQuest, setSelectedQuest] = useState(null);
-  const { isOpen, openModal, closeModal, Modal } = useModal();
+  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
 
   const quests = [
     {
@@ -297,8 +297,16 @@ const ChallengeForBeginner = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  const modalX = rect.left + rect.width / 2;
+                  const modalY = rect.bottom + 10;
+                  setModalPosition({ x: modalX, y: modalY });
                   setSelectedQuest(quest);
-                  openModal(e);
+                  
+                  // Swiper無効化
+                  if (window.swiper && window.swiper.allowTouchMove !== undefined) {
+                    window.swiper.allowTouchMove = false;
+                  }
                 }}
                 className="cyber-frame"
               >
@@ -311,24 +319,51 @@ const ChallengeForBeginner = () => {
         </motion.div>
       </ContentWrapper>
       
-      <Modal className="cyber-frame">
+      <AnimatePresence>
         {selectedQuest && (
-          <ModalContent
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            as={motion.div}
-            className="cyber-frame"
-          >
-            <CloseButton onClick={() => {
-              setSelectedQuest(null);
-              closeModal();
-            }}>×</CloseButton>
-            <ModalTitle>{selectedQuest.title}</ModalTitle>
-            <ModalDescription>{selectedQuest.fullDesc}</ModalDescription>
-          </ModalContent>
+          ReactDOM.createPortal(
+            <div
+              style={{
+                position: 'fixed',
+                inset: 0,
+                background: 'rgba(0, 0, 0, 0.8)',
+                zIndex: 10000,
+                pointerEvents: 'auto'
+              }}
+              onClick={() => {
+                setSelectedQuest(null);
+                if (window.swiper && window.swiper.allowTouchMove !== undefined) {
+                  window.swiper.allowTouchMove = true;
+                }
+              }}
+            >
+              <ModalContent
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}
+                className="cyber-frame"
+                style={{
+                  position: 'fixed',
+                  left: `${Math.min(modalPosition.x - 300, window.innerWidth - 620)}px`,
+                  top: `${Math.min(modalPosition.y, window.innerHeight - 300)}px`,
+                  transform: modalPosition.x > window.innerWidth / 2 ? 'translateX(-100%)' : 'none'
+                }}
+              >
+                <CloseButton onClick={() => {
+                  setSelectedQuest(null);
+                  if (window.swiper && window.swiper.allowTouchMove !== undefined) {
+                    window.swiper.allowTouchMove = true;
+                  }
+                }}>×</CloseButton>
+                <ModalTitle>{selectedQuest.title}</ModalTitle>
+                <ModalDescription>{selectedQuest.fullDesc}</ModalDescription>
+              </ModalContent>
+            </div>,
+            document.body
+          )
         )}
-      </Modal>
+      </AnimatePresence>
     </BeginnerContainer>
   );
 };
