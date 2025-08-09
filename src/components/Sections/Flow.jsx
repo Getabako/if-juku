@@ -256,11 +256,6 @@ const Flow = () => {
             />
             
             <FlowDescription variants={itemVariants}>
-              <FlowText>
-                まずは無料体験授業にお申し込みください。
-                お子様の興味や現在のスキルレベルに合わせて、
-                最適な学習プランをご提案いたします。
-              </FlowText>
               
               <ContactButton
                 onClick={handleContactClick}
