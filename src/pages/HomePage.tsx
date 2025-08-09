@@ -78,7 +78,7 @@ const HomePage: React.FC = () => {
     touchStartPreventDefault: false,
     modules: [Mousewheel, Pagination, Keyboard],
     onSlideChange: handleSlideChange,
-    onInit: (swiper) => {
+    onInit: (swiper: any) => {
       // Swiper初期化後にキーボードを再有効化
       setTimeout(() => {
         swiper.keyboard.enable();
