@@ -209,6 +209,7 @@ const ModalDescription = styled.p`
 const ChallengeForBeginner = () => {
   const [selectedQuest, setSelectedQuest] = useState(null);
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
+  const [buttonElement, setButtonElement] = useState(null);
 
   const quests = [
     {
@@ -298,9 +299,14 @@ const ChallengeForBeginner = () => {
                 whileTap={{ scale: 0.95 }}
                 onClick={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
-                  const modalX = rect.left + rect.width / 2;
-                  const modalY = rect.bottom + 10;
+                  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                  const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+                  
+                  const modalX = rect.left + scrollLeft + rect.width / 2;
+                  const modalY = rect.bottom + scrollTop + 10;
+                  
                   setModalPosition({ x: modalX, y: modalY });
+                  setButtonElement(e.currentTarget);
                   setSelectedQuest(quest);
                   
                   // Swiper無効化
@@ -332,6 +338,7 @@ const ChallengeForBeginner = () => {
               }}
               onClick={() => {
                 setSelectedQuest(null);
+                setButtonElement(null);
                 if (window.swiper && window.swiper.allowTouchMove !== undefined) {
                   window.swiper.allowTouchMove = true;
                 }
@@ -344,14 +351,17 @@ const ChallengeForBeginner = () => {
                 onClick={(e) => e.stopPropagation()}
                 className="cyber-frame"
                 style={{
-                  position: 'fixed',
-                  left: `${Math.min(modalPosition.x - 300, window.innerWidth - 620)}px`,
-                  top: `${Math.min(modalPosition.y, window.innerHeight - 300)}px`,
-                  transform: modalPosition.x > window.innerWidth / 2 ? 'translateX(-100%)' : 'none'
+                  position: 'absolute',
+                  left: `${modalPosition.x - 300}px`,
+                  top: `${modalPosition.y}px`,
+                  transform: 'translateX(-50%)',
+                  maxWidth: '600px',
+                  width: '90vw'
                 }}
               >
                 <CloseButton onClick={() => {
                   setSelectedQuest(null);
+                  setButtonElement(null);
                   if (window.swiper && window.swiper.allowTouchMove !== undefined) {
                     window.swiper.allowTouchMove = true;
                   }
