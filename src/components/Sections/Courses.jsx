@@ -106,8 +106,8 @@ const TabButton = styled.button`
 
 const CourseCard = styled(motion.div)`
   background-image: ${props => props.$activeTab === 'liberal' ? 
-    "url('https://if-juku.net/wp-content/uploads/2025/08/liberal.png')" :
-    "url('https://if-juku.net/wp-content/uploads/2025/08/self-realization.png')"};
+    "url('/2025/08/liberal.png')" :
+    "url('/2025/08/ideal.png')"};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -116,7 +116,6 @@ const CourseCard = styled(motion.div)`
   padding: 3rem;
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(10px);
   
   &::before {
     content: '';
@@ -161,7 +160,7 @@ const CourseTitle = styled.h3`
   font-size: 2rem;
   color: ${theme.colors.primary.main};
   font-family: ${theme.fonts.secondary};
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.85);
   padding: 0.5rem 1rem;
   border-radius: 8px;
   display: inline-block;
@@ -192,7 +191,7 @@ const CourseDescription = styled.p`
   color: ${theme.colors.text.primary};
   line-height: 1.8;
   margin-bottom: 2rem;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.85);
   padding: 1rem;
   border-radius: 8px;
   
@@ -210,7 +209,7 @@ const CourseInfo = styled.div`
 `;
 
 const InfoItem = styled.div`
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   border: 1px solid ${theme.colors.primary.main};
   border-radius: 8px;
   padding: 1rem;
@@ -241,7 +240,7 @@ const FeatureItem = styled.li`
   margin-bottom: 1rem;
   color: ${theme.colors.text.primary};
   line-height: 1.6;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.85);
   padding: 0.8rem 0.8rem 0.8rem 2rem;
   border-radius: 6px;
   

@@ -254,7 +254,7 @@ const Schedule = () => {
                 height="600" 
                 frameBorder="0" 
                 scrolling="no"
-                title="if(塾) 授業カレンダー"
+                title="授業スケジュール"
               />
             </CalendarContainer>
           </CalendarFrame>
