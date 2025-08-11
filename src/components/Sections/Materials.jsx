@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { theme } from '../../styles/theme';
-import minecraftIndex from '../../data/posts/minecraft/index.json';
+import { MATERIALS_INDEX } from '../../data/staticData';
 
 const MaterialsContainer = styled.section`
   position: relative;
@@ -242,7 +242,7 @@ const Materials = () => {
     const loadMinecraftPosts = async () => {
       try {
         // minecraftカテゴリーのインデックスを読み込み
-        const posts = minecraftIndex.posts;
+        const posts = MATERIALS_INDEX.posts;
         
         console.log('Loaded minecraft posts:', posts); // デバッグログ
         // 最新の投稿を取得（日付順にソート済み）
