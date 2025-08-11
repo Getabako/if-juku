@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import './BlogList.css';
+import postsIndex from '../data/posts/index.json';
 
 interface PostSummary {
   id: number;
@@ -40,9 +41,8 @@ const BlogList: React.FC = () => {
       try {
         setLoading(true);
         
-        // 全体のインデックスを読み込み
-        const indexModule = await import('../data/posts/index.json');
-        const allPosts = indexModule.default.posts;
+        // 全体のインデックスを使用
+        const allPosts = postsIndex.posts;
         
         // カテゴリーでフィルタリング
         let filteredPosts = allPosts;
