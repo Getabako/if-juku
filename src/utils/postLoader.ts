@@ -4,6 +4,11 @@
 
 // Static imports for index files
 import mainIndexData from '../data/posts/index.json';
+import minecraftIndex from '../data/posts/minecraft/index.json';
+import newsIndex from '../data/posts/news/index.json';
+import blogIndex from '../data/posts/blog/index.json';
+import aiLecturesIndex from '../data/posts/ai-lectures/index.json';
+import othersIndex from '../data/posts/others/index.json';
 
 export interface Post {
   id: number;
@@ -24,10 +29,11 @@ export interface CategoryIndex {
     title: string;
     filename: string;
     date: string;
-    author: string;
+    author?: string;
+    excerpt?: string;
   }[];
-  total: number;
-  updated_at: string;
+  total?: number;
+  updated_at?: string;
 }
 
 export interface MainIndex {
@@ -42,11 +48,29 @@ export interface MainIndex {
   total: number;
 }
 
-// 動的インポート用の関数
+// カテゴリインデックスのマップ
+const categoryIndexMap: { [key: string]: any } = {
+  'minecraft': minecraftIndex,
+  'news': newsIndex,
+  'blog': blogIndex,
+  'ai-lectures': aiLecturesIndex,
+  'others': othersIndex
+};
+
+// カテゴリインデックスを取得する関数
 export const loadCategoryIndex = async (category: string): Promise<CategoryIndex> => {
   try {
-    const module = await import(`../data/posts/${category}/index.json`);
-    return module.default;
+    const index = categoryIndexMap[category];
+    if (index) {
+      return index;
+    }
+    console.error(`Category index not found for ${category}`);
+    return {
+      category,
+      posts: [],
+      total: 0,
+      updated_at: new Date().toISOString()
+    };
   } catch (error) {
     console.error(`Failed to load category index for ${category}:`, error);
     return {
