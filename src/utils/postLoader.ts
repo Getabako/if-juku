@@ -2,6 +2,9 @@
  * カテゴリ別記事データの読み込みユーティリティ
  */
 
+// Static imports for index files
+import mainIndexData from '../data/posts/index.json';
+
 export interface Post {
   id: number;
   title: string;
@@ -57,8 +60,7 @@ export const loadCategoryIndex = async (category: string): Promise<CategoryIndex
 
 export const loadMainIndex = async (): Promise<MainIndex> => {
   try {
-    const module = await import('../data/posts/index.json');
-    return module.default;
+    return mainIndexData as MainIndex;
   } catch (error) {
     console.error('Failed to load main index:', error);
     return {
