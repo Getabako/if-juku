@@ -247,10 +247,6 @@ const Schedule = () => {
           </SectionTitle>
           
           <CalendarFrame variants={itemVariants} className="cyber-frame">
-            <CalendarHeader>
-              if(塾) 授業カレンダー
-            </CalendarHeader>
-            
             <CalendarContainer>
               <iframe 
                 src="https://calendar.google.com/calendar/embed?src=174aa31d4668c641c1effc41bfc289a6fc9d351d9ab822ade65d1d4c2621732d%40group.calendar.google.com&ctz=Asia%2FTokyo" 
