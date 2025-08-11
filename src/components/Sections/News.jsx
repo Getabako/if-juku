@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { theme } from '../../styles/theme';
+import newsIndex from '../../data/posts/news/index.json';
 
 const NewsContainer = styled.section`
   position: relative;
@@ -279,9 +280,8 @@ const News = () => {
   useEffect(() => {
     const loadNewsPosts = async () => {
       try {
-        // newsカテゴリーのインデックスを読み込み
-        const indexModule = await import('../../data/posts/news/index.json');
-        const posts = indexModule.default.posts;
+        // newsカテゴリーのインデックスを使用
+        const posts = newsIndex.posts;
         
         console.log('Loaded news posts:', posts); // デバッグログ
         // 最新の投稿を取得（日付順にソート済み）
