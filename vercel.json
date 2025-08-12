@@ -1,5 +1,19 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "build",
-  "framework": "create-react-app"
+  "outputDirectory": "build", 
+  "framework": "create-react-app",
+  "functions": {
+    "app/api/**/*.js": {
+      "runtime": "nodejs20.x"
+    }
+  },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ]
 }

@@ -1,3 +1,4 @@
+// Staff images updated 2025/08
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -231,54 +232,55 @@ const NextButton = styled(NavigationButton)`
   }
 `;
 
-const Members = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const isMobile = useMediaQuery({ maxWidth: theme.breakpoints.mobile });
-
-  const members = [
+// Staff member data - Updated 2025/08
+const STAFF_MEMBERS = [
     {
       name: "高崎翔太",
       role: "塾頭",
-      pcImage: "/2025/02/IMG_9646-scaled.jpg",
-      mobileImage: "/2025/02/1-1.png",
+      pcImage: "/2025/08/staff0.png", // Updated path
+      mobileImage: "/2025/08/staff0.png",
       description: "元々は実は臨床心理士。ICTものづくりを通して、言葉による表現が難しかった子が自分の思いを伝えられるようになったり、学習に意欲を持てなかった子が目標を見つけて難関大学へ進学したり…多くの子どもたちが持つ可能性の扉を開くお手伝いをしてきた、経験豊富なメンターだよ！"
     },
     {
       name: "山﨑琢己",
       role: "塾長",
-      pcImage: "/2025/02/takumi.png",
-      mobileImage: "/2025/02/2-1.png",
+      pcImage: "/2025/08/staff1.png", // Updated path
+      mobileImage: "/2025/08/staff1.png",
       description: "高校1年でIT会社を起業！Web開発やPCコンサルタントとして活躍後、if(塾)を開業。塾長としてみんなをまとめ、授業もメインで回す頼れるリーダーだよ！AI開発や講演も行う、AI活用の最前線に立つ若きイノベーター！中学時代は支援級で過ごした経験も力に、現役で国立大学合格！"
     },
     {
       name: "加賀屋結眞",
       role: "CFO",
-      pcImage: "/2025/02/IMG_9909-scaled.jpg",
-      mobileImage: "/2025/02/3-1.png",
+      pcImage: "/2025/08/staff2.png", // Updated path
+      mobileImage: "/2025/08/staff2.png",
       description: "高校1年でIT会社を起業！Web開発やマーケティングコンサルタントとして活躍後、if(塾)を開業。CFOとして、みんなにif(塾)の魅力を伝えるコミュニケーターだよ！年上の起業家たちとも積極的に交流し、ホリエモンにプレゼンした経験も持つチャレンジャー！パソコンを使った表現力で周りが驚くような発想力と行動力を発揮し、次の事業立ち上げを計画中！"
     },
     {
       name: "井上陽斗",
       role: "CTO",
-      pcImage: "/2025/02/120362.jpg",
-      mobileImage: "/2025/02/4-1.png",
+      pcImage: "/2025/08/staff3.png", // Updated path
+      mobileImage: "/2025/08/staff3.png",
       description: "高校1年からif(塾)に参加！プログラミング未経験からスタートし、if(塾)のマインクラフトワールドのシステムを全て開発した天才クリエイター！まるでドラえもんみたいに、お願いしたものをいつの間にか作ってくれる頼れる存在！集中して自分の世界に入り込み、周りがびっくりするような天才的なアイデアを次々と生み出している開発の達人だよ！"
     },
     {
       name: "Y君",
       role: "専属e-Sports Player",
-      pcImage: "/2024/12/IMG_20240825_151743-scaled.jpg",
-      mobileImage: "/2025/02/5-1.png",
+      pcImage: "/2025/08/staff4.png", // Updated path
+      mobileImage: "/2025/08/staff4.png",
       description: "高校生で格闘ゲームを始め、わずか数ヶ月でトップクラスの実力を獲得！県内大学の大会では最年少で優勝した期待のアスリート！抜群の集中力で塾頭をゲームで打ち負かす実力の持ち主！プロゲーマーを目指して本格始動し、YouTubeやTwitchでの配信も積極的に行っているよ！"
     }
-  ];
+];
+
+const Members = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const isMobile = useMediaQuery({ maxWidth: theme.breakpoints.mobile });
 
   const handlePrevious = () => {
-    setCurrentIndex((prev) => (prev === 0 ? members.length - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? STAFF_MEMBERS.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev === members.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) => (prev === STAFF_MEMBERS.length - 1 ? 0 : prev + 1));
   };
 
   const cardVariants = {
@@ -304,7 +306,7 @@ const Members = () => {
     })
   };
 
-  const currentMember = members[currentIndex];
+  const currentMember = STAFF_MEMBERS[currentIndex];
 
   return (
     <MembersContainer id="members">
@@ -365,7 +367,7 @@ const Members = () => {
           </NextButton>
           
           <NavigationDots>
-            {members.map((_, index) => (
+            {STAFF_MEMBERS.map((_, index) => (
               <NavDot
                 key={index}
                 active={index === currentIndex}

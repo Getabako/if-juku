@@ -2,6 +2,9 @@
  * カテゴリ別記事データの読み込みユーティリティ
  */
 
+// Static imports for index files
+import { POSTS_INDEX, NEWS_INDEX, MATERIALS_INDEX } from '../data/staticData';
+
 export interface Post {
   id: number;
   title: string;
@@ -21,10 +24,11 @@ export interface CategoryIndex {
     title: string;
     filename: string;
     date: string;
-    author: string;
+    author?: string;
+    excerpt?: string;
   }[];
-  total: number;
-  updated_at: string;
+  total?: number;
+  updated_at?: string;
 }
 
 export interface MainIndex {
@@ -39,11 +43,29 @@ export interface MainIndex {
   total: number;
 }
 
-// 動的インポート用の関数
+// カテゴリインデックスのマップ
+const categoryIndexMap: { [key: string]: any } = {
+  'minecraft': MATERIALS_INDEX,
+  'news': NEWS_INDEX,
+  'blog': { category: 'blog', posts: [] },
+  'ai-lectures': { category: 'ai-lectures', posts: [] },
+  'others': { category: 'others', posts: [] }
+};
+
+// カテゴリインデックスを取得する関数
 export const loadCategoryIndex = async (category: string): Promise<CategoryIndex> => {
   try {
-    const module = await import(`../data/posts/${category}/index.json`);
-    return module.default;
+    const index = categoryIndexMap[category];
+    if (index) {
+      return index;
+    }
+    console.error(`Category index not found for ${category}`);
+    return {
+      category,
+      posts: [],
+      total: 0,
+      updated_at: new Date().toISOString()
+    };
   } catch (error) {
     console.error(`Failed to load category index for ${category}:`, error);
     return {
@@ -57,8 +79,7 @@ export const loadCategoryIndex = async (category: string): Promise<CategoryIndex
 
 export const loadMainIndex = async (): Promise<MainIndex> => {
   try {
-    const module = await import('../data/posts/index.json');
-    return module.default;
+    return POSTS_INDEX as MainIndex;
   } catch (error) {
     console.error('Failed to load main index:', error);
     return {

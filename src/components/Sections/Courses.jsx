@@ -105,13 +105,17 @@ const TabButton = styled.button`
 `;
 
 const CourseCard = styled(motion.div)`
-  background: rgba(26, 26, 26, 0.9);
+  background-image: ${props => props.$activeTab === 'liberal' ? 
+    "url('/2025/08/liberal.png')" :
+    "url('/2025/08/ideal.png')"};
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border: 2px solid ${theme.colors.primary.main};
   border-radius: 12px;
   padding: 3rem;
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(10px);
   
   &::before {
     content: '';
@@ -156,6 +160,10 @@ const CourseTitle = styled.h3`
   font-size: 2rem;
   color: ${theme.colors.primary.main};
   font-family: ${theme.fonts.secondary};
+  background: rgba(0, 0, 0, 0.85);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  display: inline-block;
   text-shadow: 
     -1px -1px 0 #000,
     1px -1px 0 #000,
@@ -180,9 +188,12 @@ const CourseTag = styled.span`
 
 const CourseDescription = styled.p`
   font-size: 1.1rem;
-  color: ${theme.colors.text.secondary};
+  color: ${theme.colors.text.primary};
   line-height: 1.8;
   margin-bottom: 2rem;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 1rem;
+  border-radius: 8px;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 1rem;
@@ -198,7 +209,7 @@ const CourseInfo = styled.div`
 `;
 
 const InfoItem = styled.div`
-  background: rgba(0, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.9);
   border: 1px solid ${theme.colors.primary.main};
   border-radius: 8px;
   padding: 1rem;
@@ -229,6 +240,9 @@ const FeatureItem = styled.li`
   margin-bottom: 1rem;
   color: ${theme.colors.text.primary};
   line-height: 1.6;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 0.8rem 0.8rem 0.8rem 2rem;
+  border-radius: 6px;
   
   &::before {
     content: '▶';
@@ -326,6 +340,7 @@ const Courses = () => {
         <AnimatePresence mode="wait">
           <CourseCard
             key={activeTab}
+            $activeTab={activeTab}
             variants={cardVariants}
             initial="hidden"
             animate="visible"
