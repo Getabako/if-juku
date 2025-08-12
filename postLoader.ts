@@ -3,16 +3,7 @@
  */
 
 // Static imports for index files
-<<<<<<<< HEAD:src/utils/postLoader.ts.backup
 import { POSTS_INDEX, NEWS_INDEX, MATERIALS_INDEX } from '../data/staticData';
-========
-import mainIndexData from '../data/posts/index.json';
-import minecraftIndex from '../data/posts/minecraft/index.json';
-import newsIndex from '../data/posts/news/index.json';
-import blogIndex from '../data/posts/blog/index.json';
-import aiLecturesIndex from '../data/posts/ai-lectures/index.json';
-import othersIndex from '../data/posts/others/index.json';
->>>>>>>> 76e9da1dc60fc15c4c0c542cc6c86b581c41a76e:src/utils/postLoader.ts
 
 export interface Post {
   id: number;
@@ -54,19 +45,11 @@ export interface MainIndex {
 
 // カテゴリインデックスのマップ
 const categoryIndexMap: { [key: string]: any } = {
-<<<<<<<< HEAD:src/utils/postLoader.ts.backup
   'minecraft': MATERIALS_INDEX,
   'news': NEWS_INDEX,
   'blog': { category: 'blog', posts: [] },
   'ai-lectures': { category: 'ai-lectures', posts: [] },
   'others': { category: 'others', posts: [] }
-========
-  'minecraft': minecraftIndex,
-  'news': newsIndex,
-  'blog': blogIndex,
-  'ai-lectures': aiLecturesIndex,
-  'others': othersIndex
->>>>>>>> 76e9da1dc60fc15c4c0c542cc6c86b581c41a76e:src/utils/postLoader.ts
 };
 
 // カテゴリインデックスを取得する関数
@@ -96,11 +79,7 @@ export const loadCategoryIndex = async (category: string): Promise<CategoryIndex
 
 export const loadMainIndex = async (): Promise<MainIndex> => {
   try {
-<<<<<<<< HEAD:src/utils/postLoader.ts.backup
     return POSTS_INDEX as MainIndex;
-========
-    return mainIndexData as MainIndex;
->>>>>>>> 76e9da1dc60fc15c4c0c542cc6c86b581c41a76e:src/utils/postLoader.ts
   } catch (error) {
     console.error('Failed to load main index:', error);
     return {
