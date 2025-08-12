@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { loadPostById, type Post } from '../utils/postLoader';
 import './BlogPost.css';
+
+interface Post {
+  id: number;
+  title: string;
+  excerpt: string;
+  content: string;
+  featuredImage: string;
+  link: string;
+  date: string;
+  author: string;
+  categories: string[];
+}
 
 const BlogPost: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -24,12 +35,23 @@ const BlogPost: React.FC = () => {
           return;
         }
         
-        const foundPost = await loadPostById(postId);
+        // インデックスから記事を検索
+        const indexModule = await import('../../data/posts/index.json');
+        const allPosts = indexModule.default.posts;
+        const postMeta = allPosts.find((p: any) => p.id === postId);
         
-        if (foundPost) {
-          setPost(foundPost);
-        } else {
+        if (!postMeta) {
           setError('記事が見つかりませんでした');
+          return;
+        }
+        
+        // カテゴリ別の詳細データを読み込み
+        try {
+          const postModule = await import(`../../data/posts/${postMeta.category}/${postId}.json`);
+          setPost(postModule.default);
+        } catch (err) {
+          console.error(`Failed to load post details for ${postId}:`, err);
+          setError('記事の詳細データの読み込みに失敗しました');
         }
         
       } catch (err) {

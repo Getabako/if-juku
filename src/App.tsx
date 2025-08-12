@@ -6,8 +6,8 @@ import { theme } from './styles/theme';
 
 // ページコンポーネント
 import HomePage from './pages/HomePage';
-import BlogPost from './components/BlogPost';
-import BlogList from './components/BlogList';
+import BlogPost from './BlogPost';
+import BlogList from './BlogList';
 
 const App: React.FC = () => {
   return (

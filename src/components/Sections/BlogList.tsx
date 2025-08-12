@@ -41,7 +41,7 @@ const BlogList: React.FC = () => {
         setLoading(true);
         
         // 全体のインデックスを読み込み
-        const indexModule = await import('../data/posts/index.json');
+        const indexModule = await import('../../data/posts/index.json');
         const allPosts = indexModule.default.posts;
         
         // カテゴリーでフィルタリング
